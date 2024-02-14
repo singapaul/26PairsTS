@@ -5,7 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { auth } from "../../Firebase/Firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import {
   Form,
   FormControl,
@@ -49,6 +53,17 @@ export const RegisterForm = (props: Props) => {
 
   const handleRegisterClick = () => {
     navigate("/app/login");
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      // @ts-ignore
+      await signInWithPopup(auth, provider);
+      navigate(`/app/profile`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -106,6 +121,13 @@ export const RegisterForm = (props: Props) => {
 
             <Button type="submit" className="w-full" disabled={!isValid}>
               Register
+            </Button>
+            <Button
+              type="button"
+              className="w-full"
+              onClick={handleGoogleSignIn}
+            >
+              Login in with Google
             </Button>
           </form>
         </Form>

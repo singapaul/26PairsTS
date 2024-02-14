@@ -1,7 +1,11 @@
 import React from "react";
 import { z } from "zod";
-import {auth} from '../../Firebase/Firebase'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../Firebase/Firebase";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -33,6 +37,7 @@ export const LoginForm = (props: Props) => {
   const {
     formState: { isValid },
   } = form;
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -44,12 +49,23 @@ export const LoginForm = (props: Props) => {
       navigate(`/app/profile`);
     } catch (err) {
       // @ts-ignore
-     console.log(err)
+      console.log(err);
     }
   };
 
   const handleRegisterClick = () => {
     navigate("/app/register");
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      // @ts-ignore
+      await signInWithPopup(auth, provider);
+      navigate(`/app/profile`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -67,9 +83,6 @@ export const LoginForm = (props: Props) => {
                   <FormControl>
                     <Input placeholder="email address" {...field} />
                   </FormControl>
-                  {/* <FormDescription>
-                    This is your public display name.
-                  </FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}
@@ -90,6 +103,13 @@ export const LoginForm = (props: Props) => {
 
             <Button type="submit" className="w-full" disabled={!isValid}>
               Log in
+            </Button>
+            <Button
+              type="button"
+              className="w-full"
+              onClick={handleGoogleSignIn}
+            >
+              Sign in with Google
             </Button>
           </form>
         </Form>

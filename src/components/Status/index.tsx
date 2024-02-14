@@ -10,6 +10,11 @@ import { auth } from "../Firebase/Firebase";
 export default () => {
   const { currentUser } = useAuthValue();
 
+  const handleSignOut = () => {
+        /* @ts-ignore */
+    signOut(auth);
+    navigate('/app/');
+  }
   let details;
   if (!currentUser) {
     details = (
@@ -25,17 +30,8 @@ export default () => {
         {/* @ts-ignore */}
         Logged in as {currentUser.email}
         {` `}
-        <a
-          href="/"
-          onClick={(event) => {
-            event.preventDefault();
-            /* @ts-ignore */
-            signOut(auth);
-            navigate(`/app/login`);
-          }}
-        >
-          log out
-        </a>
+         
+        <button onClick={handleSignOut}>log out</button>
       </p>
     );
   }

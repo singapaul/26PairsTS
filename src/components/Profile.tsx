@@ -5,6 +5,8 @@ import { useAuthValue } from "./Auth/AuthContext";
 import { signOut } from "firebase/auth";
 // @ts-ignore
 import { auth, db } from "./Firebase/Firebase";
+import { navigate } from "gatsby";
+import { Button } from "./ui/button";
 const Profile = () => {
   const { currentUser } = useAuthValue();
 
@@ -19,6 +21,13 @@ const Profile = () => {
     // console.log(res)
   };
 
+
+  const handleSignOut = async () => {
+    // @ts-ignore
+    signOut(auth)
+    navigate('/app/')
+  }
+
   return (
     <View title="Your Profile">
       {/* @ts-ignore */}
@@ -28,9 +37,9 @@ const Profile = () => {
         about a user here.
       </p>
 
-      <button onClick={handleClick}>Press me</button>
-      {/* @ts-ignore */}
-      <span onClick={() => signOut(auth)}>Sign Out</span>
+      <Button onClick={
+        handleSignOut
+      }>Sign out</Button>
     </View>
   );
 };

@@ -2,7 +2,12 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 
-1. Swap in my login/register pages to the main app routes
+
 2. make layout for profile page 
-3. add github link 
-4. Add game modes dialog 
+3. Add game modes dialog 
+Display sonner after sign in?
+- use badges for marking comp
+archive
+
+2. add github link 
+1. Swap in my login/register pages to the main app routes
