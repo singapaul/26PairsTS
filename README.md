@@ -2,8 +2,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 
+
 4) Let's move as many functions as possible to global utils
-1) Create a routes folder/hooks folder of navigate to - needs implementing 
 3) Strip out local storage - and fix remiaining modals
 - Can we set our initial bestScores data from redux as well? 
 2) can we use index.db?
@@ -39,3 +39,4 @@ ARCHIVE:
 4) Prevent info modal being accidentally closed - DONE
 3) can we remove 'time' as useState completely from Board?  -DONE 
 7) set up routing - Actually have pages in the right place! 
+1) Create a routes folder/hooks folder of navigate to - needs implementing 
