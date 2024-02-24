@@ -4,21 +4,21 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 # todo 
 
 4) Let's move as many functions as possible to global utils
-5) fix remaining modals
-
-3) Strip out local storage - and fix remiaining modals
+3) fix local storage but lets tidy up a new line per game mode
 - Can we set our initial bestScores data from redux as well? 
-2) can we use index.db?
 4) fix header logo 
-1) Clean up accessing store selectors pattern - solved using two hooks - DONE
-today bonus: integrate the playedDailyShuffleToday? local storage thing 
-2. make layout for profile page 
- - Display sonner after sign in? 
-- use badges for marking comp
-
-5. Use python API and write Facts endpoint with chta gtp-3 
 1. Swap in my login/register pages to the main app routes
+2. make layout for profile page 
+3) tidy up game modes
+5) fix the basic UI so it fits immediately onto the screen
 
+
+ 
+# future work
+5. integrate full sign in flow and make app cohesive
+3. Save scores to online database 
+5. Use python API and write Facts endpoint with chta gtp-3 
+5. investigate how we could share a shuffle code
 
 ARCHIVE: 
 
@@ -36,3 +36,5 @@ ARCHIVE:
 2. add github link - DONE
 - can I trigger the modals using redux?? - DONE
 4. todo use folder structure from VP - DONE 
+5) fix remaining modals - done
+1) Clean up accessing store selectors pattern - solved using two hooks - DONE

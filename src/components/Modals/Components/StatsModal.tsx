@@ -3,7 +3,7 @@ import { startOfTomorrow } from "date-fns";
 import Countdown from "react-countdown";
 import { getGameTitle } from "../../../utils/getGameTitle";
 import { BaseModal } from "./BaseModal";
-import { formatTime } from "@/utils";
+import { formatTime, timeUntilTomorrow } from "@/utils";
 // @todo pass the difficulty in as a prop
 export const StatsModal = ({
   isOpen,
@@ -18,8 +18,7 @@ export const StatsModal = ({
   const [bestTime, setBestTime] = useState<string | number>("-");
   const [bestTurns, setBestTurns] = useState<string |number>("-");
   const [copySuccess, setCopySuccess] = useState<string>("Share");
-  const timeTillTommorow: any = startOfTomorrow() - new Date();
-
+ 
   const getHistoricStats = () => {
     const val = JSON.parse(localStorage.getItem("scoreHistory"));
 
@@ -99,7 +98,7 @@ export const StatsModal = ({
               <h5>{"Next shuffle in"}</h5>
               <Countdown
                 className="text-lg font-medium text-gray-900 dark:text-gray-100"
-                date={Date.now() + timeTillTommorow}
+                date={Date.now() + timeUntilTomorrow()}
                 daysInHours={true}
               />
             </div>
