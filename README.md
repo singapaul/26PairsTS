@@ -3,6 +3,18 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 
+
+
+1) Create a routes folder/hooks folder of navigate to: 
+2) Upgrade the share functionality to use the naviagtor API 
+3) Strip out local storage 
+4) code tidy up! 
+
+
+
+
+
+
 2. make layout for profile page 
 3. Add game modes dialog 
 4. todo use folder structure from VP 
