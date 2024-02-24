@@ -21,9 +21,12 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 4. Use python API and write Facts endpoint with chta gtp-3 
 5. investigate how we could share a shuffle code
 
-ARCHIVE: 
+## ARCHIVE: 
 
-24th feb: 
+
+### 25h feb
+
+ ### 24th feb
 1) lets create .styles.ts files and move our styled components to seperate files. - DONE 
 2) Tidy up the board and header components - DONE
 3) Upgrade the share functionality to use the naviagtor API - DONE neeeds testing
