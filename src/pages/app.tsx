@@ -7,7 +7,7 @@ import PrivateRoute from "../components/PrivateRoute"
 // import Status from "../components/Status"
 import Register from "../components/Register";
 import Reset from "../components/Reset";
-import Homescreen from "./playground/Homescreen"
+import Homescreen from "./Homescreen"
 
 const App = () => (
   <Layout>

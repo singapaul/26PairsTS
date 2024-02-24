@@ -31,7 +31,8 @@ export const InfoModal = ({ isOpen, handleClose, handleRevealCards }: { isOpen: 
     }
   }, [isOpen])
 
-  const toggleFlipCard = (index) => {
+  const toggleFlipCard = (index: number) => {
+
     setFlippedCards((prevFlippedCards) => {
       const newFlippedCards = [...prevFlippedCards]
       newFlippedCards[cardIndexes.indexOf(index)] =
@@ -41,7 +42,7 @@ export const InfoModal = ({ isOpen, handleClose, handleRevealCards }: { isOpen: 
   }
 
   return (
-    <BaseModal title="How to play" isOpen={isOpen} handleClose={handleClose}>
+    <BaseModal title="How to play" isOpen={isOpen} handleClose={() => {}} hideCloseButton={true}>
       <p className="text-sm text-gray-500 dark:text-gray-300">
         Match all of the pairs as fast as you can to win the game. Clubs match
         with Spades. Diamonds match with Hearts.

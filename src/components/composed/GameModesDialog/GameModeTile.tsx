@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { navigate } from "gatsby";
 
 type GameModeTileProps = {
   title: string;
@@ -28,7 +29,7 @@ export const GameModeTile = ({
           <p>Avg. {gameDetails.time} mins</p>
         </div>
       </div>
-      <Button>Play {title}</Button>
+      <Button onClick={() => navigate(link)}>Play {title}</Button>
     </div>
   );
 };

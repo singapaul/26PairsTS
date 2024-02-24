@@ -2,8 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card/Card";
 import { getNameById } from "@/utils";
-import styled from "styled-components";
-
+import { increment, stop, reset } from "@/store/slices/timer";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import {
   resetMoves,
@@ -14,35 +13,19 @@ import {
 import { Header } from "@/components/composed/Game/Header";
 import { ModalRegistry } from "@/components/Modals/Register/ModalRegistry";
 import { setModalConfig } from "@/store/slices/modals";
+import { BoardStyled } from "./styles";
 
-const BoardStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  gap: 0.3rem;
-  margin: auto 0;
-  padding: 0.25rem 0;
-  max-width: 1100px;
-  max-height: 600px;
-`;
-
-type BoardProps = { duplicatedCards: any; gameDifficulty: any };
+export type BoardProps = { duplicatedCards: any; gameDifficulty: any };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [cardPair, setCardPair] = useState<any>([]);
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
   const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
-  // redux stats
-  // @ts-ignore
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const dispatch = useAppDispatch();
-  const [time, setTime] = useState<number>(0);
-  const [isRunning, setIsRunning] = useState(false);
 
+  const [isRunning, setIsRunning] = useState(false);
+  const time = useAppSelector((state) => state.timer.timeInSeconds);
   const handleRevealCards = () => {
     const allCardIds = duplicatedCards.map((card: { id: any }) => card.id);
     setFlippedCardList(allCardIds);
@@ -63,11 +46,13 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     dispatch(updateScore(finalScore));
   };
 
+  // @here instead we are going to be dispatching a new time to the redux store instead!!
   useEffect(() => {
     let intervalId: string | number | NodeJS.Timeout | undefined;
     if (isRunning) {
-      //   @ts-ignore
-      intervalId = setInterval(() => setTime(time + 1), 10);
+      intervalId = setInterval(() => {
+        dispatch(increment()); // Dispatch the increment action every second
+      }, 1000);
     }
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
@@ -75,9 +60,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const resetCardPair = () => setCardPair([]);
 
   const handleCardClick = (id: string) => {
- 
-
-
     if (turnsCount == 0) {
       // start the timer
       setIsRunning(true);
@@ -110,7 +92,16 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
         setIsRunning(false);
         dispatch(updateFinalTime(time));
         // logLatestStats(finalScore, time, turnsCount, gameDifficulty);
-        setTimeout(() => setIsOpenScoreBoard(true), 1000);
+        setTimeout(
+          () =>
+            dispatch(
+              setModalConfig({
+                id: "score",
+                isOpen: true,
+              })
+            ),
+          1000
+        );
       }
     } else {
       window.cardFlipTimer = setTimeout(resetCardPair, 1000);
@@ -122,11 +113,20 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     setFlippedCardList([]);
     dispatch(resetMoves());
     dispatch(updateScore(0));
-    setTime(0);
+    dispatch(reset());
     setIsRunning(false);
-    // setIsOpenScoreBoard(false);
+    dispatch(
+      setModalConfig({
+        id: "info",
+        isOpen: true,
+        props: {
+          handleRevealCards,
+        },
+      })
+    );
   };
 
+  // @can I just default this true in redux instead??
   useEffect(() => {
     dispatch(
       setModalConfig({
@@ -142,7 +142,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   return (
     <>
       <div>
-        <Header turnsCount={turnsCount} resetGame={resetGame} time={time} />
+        <Header resetGame={resetGame} />
         <BoardStyled>
           {duplicatedCards.map(
             (card: {
@@ -165,7 +165,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
             }
           )}
         </BoardStyled>
-
         <ModalRegistry />
       </div>
     </>

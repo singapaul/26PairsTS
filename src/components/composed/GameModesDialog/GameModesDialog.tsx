@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { GameModeTile } from "./GameModeTile";
+import { classicShuffle, dailyShuffle, liteShuffle } from "@/routes/route_strings";
 
 type GameModesDialogProps = {
   children: any;
@@ -32,7 +33,7 @@ export const GameModesDialog = ({ children }: GameModesDialogProps) => {
             <div className="grid flex-1 gap-4">
               <GameModeTile
                 title="Daily Shuffle"
-                link="/26pairs"
+                link={dailyShuffle}
                 gameDetails={{
                   numCards: 26,
                   difficulty: "easy",
@@ -41,7 +42,7 @@ export const GameModesDialog = ({ children }: GameModesDialogProps) => {
               />
               <GameModeTile
                 title="Classic Mode"
-                link="/26pairs"
+                link={classicShuffle}
                 gameDetails={{
                   numCards: 26,
                   difficulty: "Challenging",
@@ -50,7 +51,7 @@ export const GameModesDialog = ({ children }: GameModesDialogProps) => {
               />
               <GameModeTile
                 title="Lite Mode"
-                link="/26pairs"
+                link={liteShuffle}
                 gameDetails={{
                   numCards: 26,
                   difficulty: "easy",

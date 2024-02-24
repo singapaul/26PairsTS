@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import { IoIosSettings } from "react-icons/io";
 import { IoIosInformationCircleOutline } from "react-icons/io";
@@ -12,108 +11,29 @@ import { IoMdMenu } from "react-icons/io";
 import { RiMenu4Fill } from "react-icons/ri";
 import { Disclosure } from "@headlessui/react";
 
-import { useNavigateToHomescreen } from "@/routes";
-import { formatTime } from "@/utils";
+import { useNavigateToHomescreen } from "@/routes/route_hooks";
 
 import { setModalConfig } from "@/store/slices/modals";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import {
+  BoardActionsWrapper,
+  BoardNav,
+  FlexGroup,
+  IconWrapper,
+  ImageObj,
+  ImageWrapper,
+  StatsStyled,
+  StyledButton,
+} from "./styles";
 
-const BoardNav = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background: #292975;
-  overflow: hidden;
-`;
-
-const BoardActionsWrapper = styled.div`
-  display: flex;
-  background-color: white;
-  align-items: center;
-  border-width: 2px;
-  border-color: grey;
-  border-radius: 0.25rem;
-  color: black;
-  padding: 0.5rem;
-  margin: 0.5rem;
-
-  @media (min-width: 500px) {
-    margin: 1rem;
-  }
-`;
-
-const IconWrapper = styled.p`
-  font-size: 1.5rem;
-  color: #eee;
-  margin: 0;
-
-  @media (min-width: 500px) {
-    font-size: 2rem;
-    display: flex;
-    align-content: flex-start;
-    align-items: flex-start;
-  }
-`;
-
-const ImageWrapper = styled.div`
-  padding: 5px;
-  cursor: pointer;
-`;
-
-const ImageObj = styled.img`
-  max-width: 3.5rem;
-  max-height: 3.5rem;
-`;
-
-const StyledButton = styled.button`
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  padding: 0.5rem;
-  border-radius: 9999px;
-`;
-
-const FlexGroup = styled.div`
-  display: flex;
-`;
-
-const StatsStyled = styled.div`
-  width: 100%;
-  display: block;
-  justify-content: space-around;
-  text-align: left;
-  color: black;
-  opacity: 0.6;
-  padding: 0;
-  margin: 6px;
-  font-size: 0.8rem;
-  font-weight: 900;
-  white-space: nowrap;
-
-  @media (min-width: 1000px) {
-    font-size: 1.5rem;
-    margin: 8px;
-  }
-`;
 type HeaderProps = {
-  turnsCount: any;
-  resetGame: any;
-  time: any;
+  resetGame: () => void;
 };
 
-export const Header = ({
-  turnsCount,
-  resetGame,
-  time,
-}: HeaderProps) => {
+export const Header = ({ resetGame }: HeaderProps) => {
   const [NavigateToHomescreen] = useNavigateToHomescreen();
-
+  const timeFromRedux = useAppSelector((state) => state.timer.formattedTime);
+  const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const handleImageClick = () => {
     // Set the page URL to the home URL
     window.location.href = "/";
@@ -175,7 +95,7 @@ export const Header = ({
             </FlexGroup>
             <BoardActionsWrapper>
               <StatsStyled>Turns: {turnsCount}</StatsStyled>
-              <StatsStyled>Time: {formatTime(time)}</StatsStyled>
+              <StatsStyled>Time: {timeFromRedux}</StatsStyled>
             </BoardActionsWrapper>
             <div className="flex items-center sm:hidden">
               <IconWrapper>
@@ -203,7 +123,7 @@ export const Header = ({
                   onClick={() =>
                     dispatch(
                       setModalConfig({
-                        id: "info",
+                        id: "about",
                         isOpen: true,
                       })
                     )

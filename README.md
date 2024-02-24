@@ -2,15 +2,13 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 
+4) Let's move as many functions as possible to global utils
+1) Create a routes folder/hooks folder of navigate to - needs implementing 
+3) Strip out local storage - and fix remiaining modals
+- Can we set our initial bestScores data from redux as well? 
+2) can we use index.db?
 
-1) Fully integrate a modal register - WIP - Need to swap all current now undefined set calls to instead call for the dispatch 
-2) Tidy up the board and header components
-3) can we track current game time using redux? 
-4) lets create .styles.ts files and move our styled components to seperate files.
-1) Create a routes folder/hooks folder of navigate to - DONE needs implementing 
-2) Upgrade the share functionality to use the naviagtor API - DONE neeeds testing
-3) Strip out local storage 
-7) set up routing - Actually have pages in the right place! 
+
 
  ARCHIVE today: 
 1) Clean up accessing store selectors pattern - solved using two hooks - DONE
@@ -28,3 +26,16 @@ archive
 5. Use python API and write Facts endpoint with chta gtp-3 
 2. add github link 
 1. Swap in my login/register pages to the main app routes
+
+
+ARCHIVE: 
+
+24th feb: 
+- 4) lets create .styles.ts files and move our styled components to seperate files. - DONE 
+2) Tidy up the board and header components - DONE
+2) Upgrade the share functionality to use the naviagtor API - DONE neeeds testing
+3) can we track current game time using redux? - DONE
+1) Fully integrate a modal register - WIP - Need to swap all current now undefined set calls to instead call for the dispatch -DONE
+4) Prevent info modal being accidentally closed - DONE
+3) can we remove 'time' as useState completely from Board?  -DONE 
+7) set up routing - Actually have pages in the right place! 
