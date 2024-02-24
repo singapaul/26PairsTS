@@ -5,8 +5,8 @@ import { startOfTomorrow } from 'date-fns'
 import { BaseModal } from './BaseModal'
 import Countdown from 'react-countdown'
 import { useState } from 'react'
-import getCurrentDate from '../../utils/getCurrentDate'
-import { getGameTitle } from '../../utils/getGameTitle'
+import getCurrentDate from '../../../utils/getCurrentDate'
+import { getGameTitle } from '../../../utils/getGameTitle'
 // @todo pass the difficulty in as a prop
 export const ScoreModal = ({
   isOpen,

@@ -1,29 +1,59 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
+type ModalIds =
+  | "about"
+  | "settings"
+  | "contact"
+  | "info"
+  | "played"
+  | "score"
+  | "stats"
+  | "tac"
+  | null;
 
-export type modalsStateType  = {
-    aboutOpen: boolean
-}
+type ModalState = {
+  isOpen: boolean;
+  id: ModalIds;
+  props?: Record<string, unknown>;
+};
 
-const initialState: modalsStateType = {
-  aboutOpen: false,
-}
+const initialState: ModalState = {
+  isOpen: false,
+  id: null,
+  props: {},
+};
 
 export const openModalSlice = createSlice({
-  name: 'displayModal',
+  name: "modal",
   initialState,
   reducers: {
-    showAbout: (state) => {
-      state.aboutOpen = true
+    setModalConfig: (
+      state,
+      action: {
+        payload: ModalState;
+      }
+    ) => {
+      state.isOpen = action.payload.isOpen;
+      state.id = action.payload.id;
+      state.props = action.payload.props || { ...state.props };
     },
-    hideAbout: (state) => {
-      state.aboutOpen = false
+    resetModalConfig: (state) => {
+      state.isOpen = false;
+      state.id = null;
+      state.props = {};
     },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const {  showAbout, hideAbout } =
-  openModalSlice.actions
+export const { setModalConfig, resetModalConfig } = openModalSlice.actions;
 
-export default openModalSlice.reducer
+export default openModalSlice.reducer;
+
+export const selectActiveModalId = (state: RootState): ModalState["id"] =>
+  state.modal.id;
+export const selectModalIsOpen = (state: RootState): ModalState["isOpen"] =>
+  state.modal.isOpen;
+export const selectModalProps = (state: RootState): ModalState["props"] =>
+  state.modal.props;

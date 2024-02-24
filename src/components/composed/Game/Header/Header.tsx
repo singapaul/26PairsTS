@@ -11,9 +11,12 @@ import { VscDebugRestart } from "react-icons/vsc";
 import { IoMdMenu } from "react-icons/io";
 import { RiMenu4Fill } from "react-icons/ri";
 import { Disclosure } from "@headlessui/react";
- 
+
 import { useNavigateToHomescreen } from "@/routes";
 import { formatTime } from "@/utils";
+
+import { setModalConfig } from "@/store/slices/modals";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
 
 const BoardNav = styled.div`
   width: 100%;
@@ -99,56 +102,67 @@ const StatsStyled = styled.div`
   }
 `;
 type HeaderProps = {
-  turnsCount: any
+  turnsCount: any;
   resetGame: any;
-  MenuModalOpen: any;
-  StatsModalOpen: any;
-  SettingModalOpen: any;
-  AboutModalOpen: any;
   time: any;
 };
 
 export const Header = ({
   turnsCount,
   resetGame,
-  StatsModalOpen,
-  SettingModalOpen,
-  AboutModalOpen,
   time,
 }: HeaderProps) => {
-
-
-  const [NavigateToHomescreen] = useNavigateToHomescreen()
+  const [NavigateToHomescreen] = useNavigateToHomescreen();
 
   const handleImageClick = () => {
     // Set the page URL to the home URL
     window.location.href = "/";
-    NavigateToHomescreen()
+    NavigateToHomescreen();
   };
 
   const navigation = [
     {
       name: "Info",
       current: false,
-      handle: () => AboutModalOpen(true),
+      handle: () =>
+        dispatch(
+          setModalConfig({
+            id: "about",
+            isOpen: true,
+          })
+        ),
       icon: <IoIosInformationCircleOutline />,
     },
     {
       name: "Settings",
       current: false,
-      handle: () => SettingModalOpen(true),
+      handle: () =>
+        dispatch(
+          setModalConfig({
+            id: "settings",
+            isOpen: true,
+          })
+        ),
       icon: <IoIosSettings />,
     },
     {
       name: "Stats",
       current: false,
-      handle: () => StatsModalOpen(true),
+      handle: () =>
+        dispatch(
+          setModalConfig({
+            id: "stats",
+            isOpen: true,
+          })
+        ),
       icon: <FaChartBar />,
     },
   ];
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
+
+  const dispatch = useAppDispatch();
   return (
     <Disclosure as="nav" className="bg-indigo-900">
       {({ open }) => (
@@ -165,7 +179,7 @@ export const Header = ({
             </BoardActionsWrapper>
             <div className="flex items-center sm:hidden">
               <IconWrapper>
-                <StyledButton className="sm:hidden" onClick={()=>resetGame()}>
+                <StyledButton className="sm:hidden" onClick={() => resetGame()}>
                   <VscDebugRestart />
                 </StyledButton>
               </IconWrapper>
@@ -181,22 +195,47 @@ export const Header = ({
             </div>
             <div className="hidden sm:block p-5">
               <IconWrapper>
-                <StyledButton onClick={()=>resetGame()}>
+                <StyledButton onClick={() => resetGame()}>
                   <VscDebugRestart />
                 </StyledButton>
 
-                <StyledButton onClick={() => AboutModalOpen(true)}>
+                <StyledButton
+                  onClick={() =>
+                    dispatch(
+                      setModalConfig({
+                        id: "info",
+                        isOpen: true,
+                      })
+                    )
+                  }
+                >
                   <IoIosInformationCircleOutline />
                 </StyledButton>
 
                 <StyledButton
                   aria-label="Settings menu"
-                  onClick={() => SettingModalOpen(true)}
+                  onClick={() =>
+                    dispatch(
+                      setModalConfig({
+                        id: "settings",
+                        isOpen: true,
+                      })
+                    )
+                  }
                 >
                   <IoIosSettings />
                 </StyledButton>
 
-                <StyledButton onClick={() => StatsModalOpen(true)}>
+                <StyledButton
+                  onClick={() =>
+                    dispatch(
+                      setModalConfig({
+                        id: "stats",
+                        isOpen: true,
+                      })
+                    )
+                  }
+                >
                   <FaChartBar />
                 </StyledButton>
               </IconWrapper>

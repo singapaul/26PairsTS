@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card/Card";
 import { getNameById } from "@/utils";
 import styled from "styled-components";
-import { showAbout } from "@/store/slices/modals";
+
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import {
   resetMoves,
@@ -12,15 +12,8 @@ import {
   updateScore,
 } from "@/store/slices/finishedGameStats";
 import { Header } from "@/components/composed/Game/Header";
-import {
-  AboutModal,
-  InfoModal,
-  PlayedModal,
-  SettingsModal,
-  StatsModal,
-  TACModal,
-} from "@/components/Modals";
 import { ModalRegistry } from "@/components/Modals/Register/ModalRegistry";
+import { setModalConfig } from "@/store/slices/modals";
 
 const BoardStyled = styled.div`
   display: flex;
@@ -45,22 +38,10 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [disabledCardList, setDisabledCardList] = useState([]);
   // redux stats
   // @ts-ignore
-  const turnsCount = useAppSelector((state) => state.finishedGameStats.moves)
-
-  const dispatch = useAppDispatch()
-
-  // modal states
-  const [infoOpen, setInfoOpen] = useState(true);
-  // @todo hide on completion
-  const [isOpenScoreBoard, setIsOpenScoreBoard] = useState(false);
-  const [isOpenAbout, setIsOpenAbout] = useState(false);
-  const [isOpenStats, setIsOpenStats] = useState(false);
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const [isOpenSettings, setIsOpenSettings] = useState(false);
+  const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
+  const dispatch = useAppDispatch();
   const [time, setTime] = useState<number>(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [isOpenTAC, setISOpenTAC] = useState(false);
-  const [playedTodayModal, setPlayedTodayModal] = useState(true);
 
   const handleRevealCards = () => {
     const allCardIds = duplicatedCards.map((card: { id: any }) => card.id);
@@ -79,8 +60,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     const maxScore = 10000;
     const uniqueCardCount = duplicatedCards.length / 2;
     const finalScore = Math.floor(maxScore * (uniqueCardCount / turnsCount));
-    dispatch(updateScore(finalScore))
- 
+    dispatch(updateScore(finalScore));
   };
 
   useEffect(() => {
@@ -142,21 +122,25 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     dispatch(updateScore(0));
     setTime(0);
     setIsRunning(false);
-    setIsOpenScoreBoard(false);
+    // setIsOpenScoreBoard(false);
   };
+
+  useEffect(() => {
+    dispatch(
+      setModalConfig({
+        id: "info",
+        isOpen: true,
+        props: {
+          handleRevealCards,
+        },
+      })
+    );
+  }, []);
 
   return (
     <>
       <div>
-        <Header
-          turnsCount={turnsCount}
-          resetGame={resetGame}
-          AboutModalOpen={setIsOpenAbout}
-          StatsModalOpen={setIsOpenStats}
-          SettingModalOpen={setIsOpenSettings}
-          MenuModalOpen={setIsOpenMenu}
-          time={time}
-        />
+        <Header turnsCount={turnsCount} resetGame={resetGame} time={time} />
         <BoardStyled>
           {duplicatedCards.map(
             (card: {
@@ -179,39 +163,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
             }
           )}
         </BoardStyled>
-        <button onClick={() => dispatch(showAbout())}>sexy button</button>
-        <AboutModal
-          isOpen={isOpenAbout}
-          handleClose={() => setIsOpenAbout(false)}
-        />
-        <ModalRegistry />
-        <StatsModal
-          isOpen={isOpenStats}
-          handleClose={() => setIsOpenStats(false)}
-          gameDifficulty={gameDifficulty}
-        />
-        <TACModal isOpen={isOpenTAC} handleClose={() => setISOpenTAC(false)} />
 
-        <InfoModal
-          isOpen={infoOpen}
-          handleClose={() => {
-            setInfoOpen(false);
-          }}
-          handleRevealCards={handleRevealCards}
-        />
-        <PlayedModal
-          isOpen={isOpenScoreBoard}
-          handleClose={() => setIsOpenScoreBoard(false)}
-          gameDifficulty={gameDifficulty}
-        />
-        <SettingsModal
-          isOpen={isOpenSettings}
-          handleClose={() => setIsOpenSettings(false)}
-          handleTACModal={() => {
-            setIsOpenSettings(false);
-            setISOpenTAC(true);
-          }}
-        />
+        <ModalRegistry />
       </div>
     </>
   );

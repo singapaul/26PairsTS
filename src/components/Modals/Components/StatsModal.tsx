@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { startOfTomorrow } from 'date-fns'
 import Countdown from 'react-countdown'
-import { getGameTitle } from '../../utils/getGameTitle'
+import { getGameTitle } from '../../../utils/getGameTitle'
 import { BaseModal } from './BaseModal'
 // @todo pass the difficulty in as a prop
 export const StatsModal = ({ isOpen, handleClose, gameDifficulty }) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { BaseModal } from './BaseModal'
-import Card from '../composed/Game/Board/Card/Card'
-import { CLASSICDECKLITE } from '../../assets/data/CLASSICDECKLITE'
+import Card from '../../composed/Game/Board/Card/Card'
+import { CLASSICDECKLITE } from '../../../assets/data/CLASSICDECKLITE'
 
 export const InfoModal = ({ isOpen, handleClose, handleRevealCards }: { isOpen: any, handleClose: any, handleRevealCards: any }) => {
   const cardIndexes = [0, 6, 15, 21] // Specify the desired order of card indexes

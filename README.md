@@ -3,9 +3,10 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 
-1) Fully integrate a modal register
+1) Fully integrate a modal register - WIP - Need to swap all current now undefined set calls to instead call for the dispatch 
 2) Tidy up the board and header components
-
+3) can we track current game time using redux? 
+4) lets create .styles.ts files and move our styled components to seperate files.
 1) Create a routes folder/hooks folder of navigate to - DONE needs implementing 
 2) Upgrade the share functionality to use the naviagtor API - DONE neeeds testing
 3) Strip out local storage 
