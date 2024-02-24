@@ -33,9 +33,9 @@ const BoardStyled = styled.div`
 type BoardProps = { duplicatedCards: any; gameDifficulty: any };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
-  const [cardPair, setCardPair] = useState([]);
-  const [flippedCardList, setFlippedCardList] = useState([]);
-  const [disabledCardList, setDisabledCardList] = useState([]);
+  const [cardPair, setCardPair] = useState<any>([]);
+  const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
+  const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
   // redux stats
   // @ts-ignore
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
@@ -66,7 +66,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   useEffect(() => {
     let intervalId: string | number | NodeJS.Timeout | undefined;
     if (isRunning) {
-      // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
       //   @ts-ignore
       intervalId = setInterval(() => setTime(time + 1), 10);
     }
@@ -75,7 +74,10 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
 
   const resetCardPair = () => setCardPair([]);
 
-  const handleCardClick = (id: any) => {
+  const handleCardClick = (id: string) => {
+ 
+
+
     if (turnsCount == 0) {
       // start the timer
       setIsRunning(true);
