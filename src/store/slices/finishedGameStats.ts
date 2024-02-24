@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+
+export type GameStatsType = {
+  moves: number
+  score: number
+  finalTime: number
+}
+
+const initialState: GameStatsType = {
   moves: 0,
   score: 0,
   finalTime: 0,
@@ -29,4 +36,6 @@ export const finishedGameStatsSlice = createSlice({
 export const { updateMoves, updateScore, resetMoves, updateFinalTime } =
   finishedGameStatsSlice.actions
 
+
+export const selectFinishedGameStats = (state: { finishedGameStats: GameStatsType }): GameStatsType => state.finishedGameStats
 export default finishedGameStatsSlice.reducer

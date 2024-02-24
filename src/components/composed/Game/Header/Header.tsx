@@ -11,7 +11,8 @@ import { VscDebugRestart } from "react-icons/vsc";
 import { IoMdMenu } from "react-icons/io";
 import { RiMenu4Fill } from "react-icons/ri";
 import { Disclosure } from "@headlessui/react";
-import { SettingsModal } from "@/components/Modals";
+ 
+import { useNavigateToHomescreen } from "@/routes";
 import { formatTime } from "@/utils";
 
 const BoardNav = styled.div`
@@ -110,15 +111,19 @@ type HeaderProps = {
 export const Header = ({
   turnsCount,
   resetGame,
-  MenuModalOpen,
   StatsModalOpen,
   SettingModalOpen,
   AboutModalOpen,
   time,
 }: HeaderProps) => {
+
+
+  const [NavigateToHomescreen] = useNavigateToHomescreen()
+
   const handleImageClick = () => {
     // Set the page URL to the home URL
     window.location.href = "/";
+    NavigateToHomescreen()
   };
 
   const navigation = [

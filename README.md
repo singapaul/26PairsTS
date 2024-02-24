@@ -3,18 +3,19 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 
+1) Fully integrate a modal register
+2) Tidy up the board and header components
 
-
-1) Create a routes folder/hooks folder of navigate to: 
-2) Upgrade the share functionality to use the naviagtor API 
+1) Create a routes folder/hooks folder of navigate to - DONE needs implementing 
+2) Upgrade the share functionality to use the naviagtor API - DONE neeeds testing
 3) Strip out local storage 
-4) code tidy up! 
+7) set up routing - Actually have pages in the right place! 
 
+ ARCHIVE today: 
+1) Clean up accessing store selectors pattern - solved using two hooks - DONE
+today bonus: integrate the playedDailyShuffleToday? local storage thing 
 
-
-
-
-
+- can I trigger the modals using redux?? 
 2. make layout for profile page 
 3. Add game modes dialog 
 4. todo use folder structure from VP 

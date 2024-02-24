@@ -1,26 +1,24 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { startOfTomorrow } from 'date-fns'
 import { BaseModal } from './BaseModal'
 import { useState } from 'react'
- 
-import { formatTime } from '@/utils'
+
+import { formatTime, isMobile } from '@/utils'
  
 import Countdown from 'react-countdown'
-// @todo pass the difficulty in as a prop
-export const PlayedModal = ({ isOpen,  gameDifficulty, }: { isOpen: any,  gameDifficulty: any}) => {
+import { useAppSelector } from '@/store/hooks'
+ 
+ 
+export const PlayedModal = ({ isOpen,  gameDifficulty, handleClose }: { isOpen: any,  gameDifficulty: any, handleClose: any}) => {
   if (gameDifficulty !== 'dailyShuffle') return
-  // get best time, get best moves
  
   const [copySuccess, setCopySuccess] = useState('Share results')
  
-// @ts-ignore
-    const finalTurns = useSelector((state) => state.finishedGameStats.moves);
-    // @ts-ignore
-    const finalTime = useSelector((state) => state.finishedGameStats.finalTime);
-    
-
+ 
+    const finalTurns = useAppSelector((state) => state.finishedGameStats.moves);
+    const finalTime = useAppSelector((state) => state.finishedGameStats.finalTime);
+ 
   const copyToClipboard = async () => {
  
     try {
@@ -31,6 +29,7 @@ export const PlayedModal = ({ isOpen,  gameDifficulty, }: { isOpen: any,  gameDi
     Try and beat it: 26pairs.com`
 
       await navigator.clipboard.writeText(gameInfo)
+      if(isMobile()) await navigator.share({text: gameInfo})
       setCopySuccess('Copied!')
     } catch (err) {
       setCopySuccess('Share results')
@@ -43,16 +42,8 @@ export const PlayedModal = ({ isOpen,  gameDifficulty, }: { isOpen: any,  gameDi
     }, 2000)
   }
 
- 
-
- 
-
   // @ts-ignore
   const timeTillTommorow = startOfTomorrow() - new Date()
- 
-
-
-
  
   return (
     <BaseModal title="Score" isOpen={isOpen} handleClose={() => {}}>

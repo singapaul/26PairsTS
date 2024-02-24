@@ -1,13 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { CLASSICDECK } from '@/assets/data/CLASSICDECK'
-import { useRef, useEffect } from 'react'
-
-
-
-
-
-
+ 
 const CardStyledLite = styled.div`
 .card {
   overflow: hidden;

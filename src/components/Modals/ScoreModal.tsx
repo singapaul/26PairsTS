@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useAppSelector } from '@/store/hooks'
 import { startOfTomorrow } from 'date-fns'
 import { BaseModal } from './BaseModal'
 import Countdown from 'react-countdown'
@@ -14,8 +15,8 @@ export const ScoreModal = ({
   gameDifficulty,
   handlePlayAgain,
 }) => {
-  const turnsCount = useSelector((state) => state.finishedGameStats.moves)
-  const timeCount = useSelector((state) => state.finishedGameStats.finalTime)
+  const turnsCount = useAppSelector((state) => state.finishedGameStats.moves)
+  const timeCount = useAppSelector((state) => state.finishedGameStats.finalTime)
   // get best time, get best moves
   const [bestTurns, setBestTurns] = useState(turnsCount)
   const [bestTime, setBestTime] = useState(timeCount)
