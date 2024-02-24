@@ -4,6 +4,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 # todo 
 
 4) Let's move as many functions as possible to global utils
+5) fix remaining modals
+
 3) Strip out local storage - and fix remiaining modals
 - Can we set our initial bestScores data from redux as well? 
 2) can we use index.db?
@@ -13,8 +15,7 @@ today bonus: integrate the playedDailyShuffleToday? local storage thing
 2. make layout for profile page 
  - Display sonner after sign in? 
 - use badges for marking comp
-4. Update the share button to use the navigator draw on mobile
-archive
+
 5. Use python API and write Facts endpoint with chta gtp-3 
 1. Swap in my login/register pages to the main app routes
 

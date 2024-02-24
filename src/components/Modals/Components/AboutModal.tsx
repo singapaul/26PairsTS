@@ -8,8 +8,8 @@ export const AboutModal = ({
   isOpen,
   handleClose,
 }: {
-  isOpen: any;
-  handleClose: any;
+  isOpen: boolean;
+  handleClose: () => void;
 }) => {
   const cardIndexes = [0, 6, 15, 21]; // Specify the desired order of card indexes
   // const cardIndexes = [0, 1, 2, 3] // Specify the desired order of card indexes

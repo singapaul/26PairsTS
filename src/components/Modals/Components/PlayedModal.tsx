@@ -1,50 +1,55 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from 'react'
-import { startOfTomorrow } from 'date-fns'
-import { BaseModal } from './BaseModal'
-import { useState } from 'react'
-import { liteShuffle, classicShuffle } from '@/routes/route_strings'
-import { formatTime, isMobile } from '@/utils'
- 
+import React from "react";
+import { startOfTomorrow } from "date-fns";
+import { BaseModal } from "./BaseModal";
+import { useState } from "react";
+import { liteShuffle, classicShuffle } from "@/routes/route_strings";
+import { formatTime, isMobile, timeUntilTomorrow } from "@/utils";
+
 import Countdown from 'react-countdown'
-import { useAppSelector } from '@/store/hooks'
-import { navigate } from 'gatsby'
- 
- 
-export const PlayedModal = ({ isOpen,  gameDifficulty, handleClose }: { isOpen: any,  gameDifficulty: any, handleClose: any}) => {
-  if (gameDifficulty !== 'dailyShuffle') return
- 
-  const [copySuccess, setCopySuccess] = useState('Share results')
- 
- 
-    const finalTurns = useAppSelector((state) => state.finishedGameStats.moves);
-    const finalTime = useAppSelector((state) => state.finishedGameStats.finalTime);
- 
+import { useAppSelector } from "@/store/hooks";
+import { navigate } from "gatsby";
+
+export const PlayedModal = ({
+  isOpen,
+  gameDifficulty,
+  handleClose,
+}: {
+  isOpen: boolean;
+  gameDifficulty: string;
+  handleClose: () => void;
+}) => {
+  if (gameDifficulty !== "dailyShuffle") return;
+
+  const [copySuccess, setCopySuccess] = useState("Share results");
+
+  const finalTurns = useAppSelector((state: { finishedGameStats: { moves: any; }; }) => state.finishedGameStats.moves);
+
+  const finalTime = useAppSelector(
+    (state: { finishedGameStats: { finalTime: any; }; }) => state.finishedGameStats.finalTime
+  );
+
   const copyToClipboard = async () => {
- 
     try {
       const gameInfo = `26 Pairs Daily Shuffle shuffle 🎲
     ⏱️ ${formatTime(finalTime)}
     🃏 ${finalTurns} moves
 
-    Try and beat it: 26pairs.com`
+    Try and beat it: 26pairs.com`;
 
-      await navigator.clipboard.writeText(gameInfo)
-      if(isMobile()) await navigator.share({text: gameInfo})
-      setCopySuccess('Copied!')
+      await navigator.clipboard.writeText(gameInfo);
+      if (isMobile()) await navigator.share({ text: gameInfo });
+      setCopySuccess("Copied!");
     } catch (err) {
-      setCopySuccess('Share results')
-      console.error('Unable to copy to clipboard.', err)
+      setCopySuccess("Share results");
+      console.error("Unable to copy to clipboard.", err);
     }
 
     // Reset the copy success message after a short delay
     setTimeout(() => {
-      setCopySuccess('Share results')
-    }, 2000)
-  }
-
-  // @ts-ignore
-  const timeTillTommorow = startOfTomorrow() - new Date()
+      setCopySuccess("Share results");
+    }, 2000);
+  };
  
   return (
     <BaseModal title="Score" isOpen={isOpen} handleClose={() => {}}>
@@ -57,11 +62,11 @@ export const PlayedModal = ({ isOpen,  gameDifficulty, handleClose }: { isOpen: 
       <div className="my-2 flex justify-center">
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
           <div className="text-3xl font-bold">{finalTurns}</div>
-          <div className="text-xs">{'Turns'}</div>
+          <div className="text-xs">{"Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
           <div className="text-3xl font-bold">{formatTime(finalTime)}</div>
-          <div className="text-xs">{'Time'}</div>
+          <div className="text-xs">{"Time"}</div>
         </div>
       </div>
 
@@ -71,10 +76,10 @@ export const PlayedModal = ({ isOpen,  gameDifficulty, handleClose }: { isOpen: 
           <div className="inline-block w-full text-left">
             {true && (
               <div>
-                <h5>{'Next shuffle in'}</h5>
+                <h5>{"Next shuffle in"}</h5>
                 <Countdown
                   className="text-lg font-medium text-gray-900 dark:text-gray-100"
-                  date={Date.now() + timeTillTommorow}
+                  date={Date.now() + timeUntilTomorrow()}
                   daysInHours={true}
                 />
               </div>
@@ -113,5 +118,5 @@ export const PlayedModal = ({ isOpen,  gameDifficulty, handleClose }: { isOpen: 
         </div>
       </div>
     </BaseModal>
-  )
-}
+  );
+};

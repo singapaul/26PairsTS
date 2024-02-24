@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+
 import { useAppSelector } from '@/store/hooks'
 import { startOfTomorrow } from 'date-fns'
 import { BaseModal } from './BaseModal'
-import Countdown from 'react-countdown'
+
 import { useState } from 'react'
 import getCurrentDate from '../../../utils/getCurrentDate'
 import { getGameTitle } from '../../../utils/getGameTitle'
+import { formatTime, timeUntilTomorrow } from '@/utils'
 // @todo pass the difficulty in as a prop
 export const ScoreModal = ({
   isOpen,
@@ -14,27 +15,29 @@ export const ScoreModal = ({
   turns,
   gameDifficulty,
   handlePlayAgain,
+}:{
+  isOpen: boolean,
+  handleClose: () => void,
+turns: number | string, 
+gameDifficulty: string, 
+handlePlayAgain: () => void
 }) => {
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves)
   const timeCount = useAppSelector((state) => state.finishedGameStats.finalTime)
   // get best time, get best moves
-  const [bestTurns, setBestTurns] = useState(turnsCount)
-  const [bestTime, setBestTime] = useState(timeCount)
-  const [copySuccess, setCopySuccess] = useState('Share results')
-  // function to get stats from local storage
-  const minutes = Math.floor((timeCount % 360000) / 6000)
-  // Seconds calculation
-  const seconds = Math.floor((timeCount % 6000) / 100)
-  const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds
-    .toString()
-    .padStart(2, '0')}`
+  const [bestTurns, setBestTurns] = useState<string | number>(turnsCount)
+  const [bestTime, setBestTime] = useState<string | number>(timeCount)
+  const [copySuccess, setCopySuccess] = useState<string>('Share results')
+ 
+  const formattedTime: string = formatTime(timeCount)
 
+ 
   const copyToClipboard = async () => {
     const gameModeString = getGameTitle(gameDifficulty)
 
     try {
       const gameInfo = `26 Pairs ${gameModeString} shuffle 🎲
-    ⏱️ ${minutes}m ${seconds}s
+    ⏱️ ${formattedTime}
     🃏 ${turnsCount} moves
     
     Try and beat it: 26pairs.com`
@@ -62,14 +65,6 @@ export const ScoreModal = ({
 
     // if there is no score history
     if (!val || !filteredByDifficulty) {
-      const minutes = Math.floor((timeCount % 360000) / 6000)
-
-      // Seconds calculation
-      const seconds = Math.floor((timeCount % 6000) / 100)
-      const loctime = `${minutes.toString().padStart(2, '0')}:${seconds
-        .toString()
-        .padStart(2, '0')}`
-
       setBestTime('-')
       setBestTurns('-')
       return
@@ -107,9 +102,9 @@ export const ScoreModal = ({
     getBestStats()
   }, [bestTime, bestTurns, turnsCount])
 
-  const timeTillTommorow = startOfTomorrow() - new Date()
+  const timeTillTommorow = timeUntilTomorrow()
 
-  const formattedDate = getCurrentDate()
+ 
 
   return (
     <BaseModal title="Score" isOpen={isOpen} handleClose={handleClose}>

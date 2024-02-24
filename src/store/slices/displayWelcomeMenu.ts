@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+
+type displayWelcome = {
+  value: boolean
+}
+
+const initialState: displayWelcome = {
   value: true,
 }
 
