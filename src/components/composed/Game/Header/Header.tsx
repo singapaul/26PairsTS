@@ -3,7 +3,7 @@ import React from "react";
 import { IoIosSettings } from "react-icons/io";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 
-import companyIcon from '@/assets/icons/26pairslogoNoBack.png'
+import companyIcon from "@/assets/icons/26pairslogoNoBack.png";
 import { FaChartBar } from "react-icons/fa";
 import { VscDebugRestart } from "react-icons/vsc";
 
@@ -25,12 +25,16 @@ import {
   StatsStyled,
   StyledButton,
 } from "./styles";
+import { DifficultyKeys } from "@/store/slices/historicStats";
 
 type HeaderProps = {
   resetGame: () => void;
+  gameDifficulty: DifficultyKeys;
 };
 
-export const Header = ({ resetGame }: HeaderProps) => {
+export const Header = ({ resetGame, gameDifficulty }: HeaderProps) => {
+  console.log(gameDifficulty);
+
   const [NavigateToHomescreen] = useNavigateToHomescreen();
   const timeFromRedux = useAppSelector((state) => state.timer.formattedTime);
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
@@ -73,6 +77,9 @@ export const Header = ({ resetGame }: HeaderProps) => {
           setModalConfig({
             id: "stats",
             isOpen: true,
+            props: {
+              gameDifficulty,
+            },
           })
         ),
       icon: <FaChartBar />,
@@ -152,6 +159,7 @@ export const Header = ({ resetGame }: HeaderProps) => {
                       setModalConfig({
                         id: "stats",
                         isOpen: true,
+                        props: { gameDifficulty },
                       })
                     )
                   }

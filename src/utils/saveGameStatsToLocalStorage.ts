@@ -4,14 +4,14 @@ import {
   LOCAL_STORAGE_KEY_NAME_LITE,
 } from "@/settings";
 
-type gameDataObjectType = {
+export type gameDataObjectType = {
   time: string;
   turns: string;
   score: string;
   date: string;
 };
 
-type gameDataObjectArrayType = gameDataObjectType[];
+export type gameDataObjectArrayType = gameDataObjectType[];
 
 export const saveGameStatsToLocalStorage = ({
   gameMode,

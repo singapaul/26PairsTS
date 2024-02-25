@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Board } from "@/components/composed/Game/Board";
 import { nanoid } from "nanoid";
 import { CLASSICDECKLITE } from "@/assets/data";
+import { DAILY_SHUFFLE } from "@/settings";
 import styled from "styled-components";
-
 
 const DailyShuffle = () => {
   const [flip, setFlip] = useState(false);
@@ -85,7 +85,7 @@ const DailyShuffle = () => {
       <BoardContainer>
         <Board
           duplicatedCards={duplicatedCards}
-          gameDifficulty={"dailyShuffle"}
+          gameDifficulty={DAILY_SHUFFLE}
         />
       </BoardContainer>
     </>

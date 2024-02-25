@@ -11,7 +11,6 @@ import {
   updateMoves,
   updateScore,
 } from "@/store/slices/finishedGameStats";
-
 import { Header } from "@/components/composed/Game/Header";
 import { ModalRegistry } from "@/components/Modals/Register/ModalRegistry";
 import { setModalConfig } from "@/store/slices/modals";
@@ -105,6 +104,9 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
               setModalConfig({
                 id: "score",
                 isOpen: true,
+                props: {
+                  gameDifficulty
+                }
               })
             ),
           1000
@@ -156,7 +158,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   return (
     <>
       <div>
-        <Header resetGame={resetGame} />
+        <Header resetGame={resetGame} gameDifficulty={gameDifficulty} />
         <BoardStyled>
           {duplicatedCards.map(
             (card: {
@@ -183,8 +185,11 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
           onClick={() =>
             dispatch(
               setModalConfig({
-                id: "score",
+                id: "stats",
                 isOpen: true,
+                props: {
+                  gameDifficulty
+                }
               })
             )
           }

@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
+import React from "react";
 
-import { useAppSelector } from '@/store/hooks'
-import { startOfTomorrow } from 'date-fns'
-import { BaseModal } from './BaseModal'
-import { useCopyToClipboard } from '@/utils'
-import { useState } from 'react'
-import getCurrentDate from '../../../utils/getCurrentDate'
-import { getGameTitle } from '../../../utils/getGameTitle'
-import { formatTime, timeUntilTomorrow } from '@/utils'
+import { useAppSelector } from "@/store/hooks";
+import { BaseModal } from "./BaseModal";
+import { useCopyToClipboard } from "@/utils";
+import type { DifficultyKeys } from "@/store/slices/historicStats";
+import { formatTime, timeUntilTomorrow } from "@/utils";
 // @todo pass the difficulty in as a prop
 export const ScoreModal = ({
   isOpen,
@@ -15,100 +12,48 @@ export const ScoreModal = ({
   turns,
   gameDifficulty,
   handlePlayAgain,
-}:{
-  isOpen: boolean,
-  handleClose: () => void,
-turns: number | string, 
-gameDifficulty: string, 
-handlePlayAgain: () => void
+}: {
+  isOpen: boolean;
+  handleClose: () => void;
+  turns: number | string;
+  gameDifficulty: DifficultyKeys;
+  handlePlayAgain: () => void;
 }) => {
-  const turnsCount = useAppSelector((state) => state.finishedGameStats.moves)
-  const timeCount = useAppSelector((state) => state.finishedGameStats.finalTime)
-  // get best time, get best moves
-  const [bestTurns, setBestTurns] = useState<string | number>(turnsCount)
-  const [bestTime, setBestTime] = useState<string | number>(timeCount)
+  const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
+  const timeCount = useAppSelector(
+    (state) => state.finishedGameStats.finalTime
+  );
+  const bestStats = useAppSelector((state) => state.stats[gameDifficulty])
+ 
+  const formattedTime: string = formatTime(timeCount);
 
-  const formattedTime: string = formatTime(timeCount)
-
-
-
-  const { copySuccess, copyToClipboard}  =  useCopyToClipboard({
+  const { copySuccess, copyToClipboard } = useCopyToClipboard({
     time: formattedTime,
     turns: JSON.stringify(turnsCount),
     mode: "Daily",
   });
 
-
-
-  const getBestStats = () => {
-    // @todo need to format this to get the best stats for that difficulty
-    const val = JSON.parse(localStorage.getItem('scoreHistory'))
-
-    const filteredByDifficulty = val?.filter(
-      (score) => score.difficulty === gameDifficulty,
-    )
-
-    // if there is no score history
-    if (!val || !filteredByDifficulty) {
-      setBestTime('-')
-      setBestTurns('-')
-      return
-    }
-
-    const result = {
-      lowestTime: Infinity,
-      lowestMoves: Infinity,
-    }
-
-    filteredByDifficulty.forEach((item) => {
-      const { time, moves } = item
-
-      // Update lowest time if current time is smaller
-      result.lowestTime = Math.min(result.lowestTime, parseInt(time))
-
-      // Update lowest moves if current moves is smaller
-      result.lowestMoves = Math.min(result.lowestMoves, parseInt(moves))
-    })
-
-    const newLowestTime = Math.min(result.lowestTime, timeCount)
-    const minutes = Math.floor((newLowestTime % 360000) / 6000)
-
-    // Seconds calculation
-    const seconds = Math.floor((newLowestTime % 6000) / 100)
-    const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds
-      .toString()
-      .padStart(2, '0')}`
-
-    setBestTime(formattedTime)
-    setBestTurns(Math.min(result.lowestMoves, turns))
-  }
-
-  useEffect(() => {
-    getBestStats()
-  }, [bestTime, bestTurns, turnsCount])
-
-  const timeTillTommorow = timeUntilTomorrow()
-
  
+
 
   return (
     <BaseModal title="Score" isOpen={isOpen} handleClose={handleClose}>
       <div className="my-2 flex justify-center">
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{turns}</div>
-          <div className="text-xs">{'Turns'}</div>
+          <div className="text-3xl font-bold">{turnsCount}</div>
+          <div className="text-xs">{"Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
           <div className="text-3xl font-bold">{formattedTime}</div>
-          <div className="text-xs">{'Time'}</div>
+          <div className="text-xs">{"Time"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{bestTurns}</div>
-          <div className="text-xs">{'Best Turns'}</div>
+          <div className="text-3xl font-bold">{bestStats.bestTurns}</div>
+          <div className="text-xs">{"Best Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{bestTime}</div>
-          <div className="text-xs">{'Best Time'}</div>
+          <div className="text-3xl font-bold">{bestStats.bestTime}</div>
+          <div className="text-xs">{"Best Time"}</div>
         </div>
       </div>
       {/* need to pass in a prop to say if the game is over or not */}
@@ -135,5 +80,5 @@ handlePlayAgain: () => void
         </div>
       )}
     </BaseModal>
-  )
-}
+  );
+};
