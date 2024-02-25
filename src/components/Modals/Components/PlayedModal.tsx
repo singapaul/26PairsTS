@@ -2,57 +2,44 @@
 import React from "react";
 import { startOfTomorrow } from "date-fns";
 import { BaseModal } from "./BaseModal";
-import { useState } from "react";
 import { liteShuffle, classicShuffle } from "@/routes/route_strings";
 import { formatTime, isMobile, timeUntilTomorrow } from "@/utils";
-
-import Countdown from 'react-countdown'
+import { useCopyToClipboard } from "@/utils";
+import Countdown from "react-countdown";
 import { useAppSelector } from "@/store/hooks";
 import { navigate } from "gatsby";
 
-export const PlayedModal = ({
+export const PlayedModal =  ({
   isOpen,
-  gameDifficulty,
   handleClose,
+  gameDifficulty,
 }: {
   isOpen: boolean;
-  gameDifficulty: string;
   handleClose: () => void;
+  gameDifficulty: string;
 }) => {
-  if (gameDifficulty !== "dailyShuffle") return;
+  // if (gameDifficulty !== "dailyShuffle") return;
 
-  const [copySuccess, setCopySuccess] = useState("Share results");
 
-  const finalTurns = useAppSelector((state: { finishedGameStats: { moves: any; }; }) => state.finishedGameStats.moves);
-
-  const finalTime = useAppSelector(
-    (state: { finishedGameStats: { finalTime: any; }; }) => state.finishedGameStats.finalTime
+  const finalTurns = useAppSelector(
+    (state: { finishedGameStats: { moves: any } }) =>
+      state.finishedGameStats.moves
   );
 
-  const copyToClipboard = async () => {
-    try {
-      const gameInfo = `26 Pairs Daily Shuffle shuffle 🎲
-    ⏱️ ${formatTime(finalTime)}
-    🃏 ${finalTurns} moves
+  const finalTime = useAppSelector(
+    (state: { finishedGameStats: { finalTime: any } }) =>
+      state.finishedGameStats.finalTime
+  );
 
-    Try and beat it: 26pairs.com`;
-
-      await navigator.clipboard.writeText(gameInfo);
-      if (isMobile()) await navigator.share({ text: gameInfo });
-      setCopySuccess("Copied!");
-    } catch (err) {
-      setCopySuccess("Share results");
-      console.error("Unable to copy to clipboard.", err);
-    }
-
-    // Reset the copy success message after a short delay
-    setTimeout(() => {
-      setCopySuccess("Share results");
-    }, 2000);
-  };
+ 
+  const { copySuccess, copyToClipboard}  =  useCopyToClipboard({
+    time: finalTime,
+    turns: finalTurns,
+    mode: "Daily",
+  });
  
   return (
-    <BaseModal title="Score" isOpen={isOpen} handleClose={() => {}}>
+    <BaseModal title="Score" isOpen={isOpen} handleClose={handleClose}>
       <div>
         <p className="text-sm text-gray-500 dark:text-gray-300">
           Congratulations on beating todays daily shuffle! Your scores are below
@@ -88,7 +75,9 @@ export const PlayedModal = ({
           <div>
             <button
               type="button"
-              onClick={copyToClipboard}
+              onClick={() => {
+                copyToClipboard();
+              }}
               className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-base"
             >
               {copySuccess}

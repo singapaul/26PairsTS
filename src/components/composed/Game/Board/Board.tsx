@@ -14,6 +14,7 @@ import { Header } from "@/components/composed/Game/Header";
 import { ModalRegistry } from "@/components/Modals/Register/ModalRegistry";
 import { setModalConfig } from "@/store/slices/modals";
 import { BoardStyled } from "./styles";
+import { Button } from "@/components/ui/button";
 
 export type BoardProps = { duplicatedCards: any; gameDifficulty: any };
 
@@ -127,17 +128,17 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   };
 
   // @can I just default this true in redux instead??
-  useEffect(() => {
-    dispatch(
-      setModalConfig({
-        id: "info",
-        isOpen: true,
-        props: {
-          handleRevealCards,
-        },
-      })
-    );
-  }, []);
+  // useEffect(() => {
+  //   dispatch(
+  //     setModalConfig({
+  //       id: "info",
+  //       isOpen: true,
+  //       props: {
+  //         handleRevealCards,
+  //       },
+  //     })
+  //   );
+  // }, []);
 
   return (
     <>
@@ -165,6 +166,18 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
             }
           )}
         </BoardStyled>
+        <Button
+          onClick={() =>
+            dispatch(
+              setModalConfig({
+                id: "score",
+                isOpen: true,
+              })
+            )
+          }
+        >
+          Trigger a modal!
+        </Button>
         <ModalRegistry />
       </div>
     </>

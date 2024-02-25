@@ -2,7 +2,7 @@ import React from "react";
 
 import { IoIosSettings } from "react-icons/io";
 import { IoIosInformationCircleOutline } from "react-icons/io";
-// @ts-ignore
+
 import card from "@/assets/images/card_back.png";
 import { FaChartBar } from "react-icons/fa";
 import { VscDebugRestart } from "react-icons/vsc";

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { startOfTomorrow } from "date-fns";
 import Countdown from "react-countdown";
+import { useCopyToClipboard } from "@/utils";
 import { getGameTitle } from "../../../utils/getGameTitle";
 import { BaseModal } from "./BaseModal";
 import { formatTime, timeUntilTomorrow } from "@/utils";
@@ -17,7 +18,6 @@ export const StatsModal = ({
   const [gamesPlayed, setGamesPlayed] = useState<string | number>("-");
   const [bestTime, setBestTime] = useState<string | number>("-");
   const [bestTurns, setBestTurns] = useState<string |number>("-");
-  const [copySuccess, setCopySuccess] = useState<string>("Share");
  
   const getHistoricStats = () => {
     const val = JSON.parse(localStorage.getItem("scoreHistory"));
@@ -58,22 +58,14 @@ export const StatsModal = ({
     getHistoricStats();
   }, [isOpen]);
 
-  const copyToClipboard = async () => {
-    try {
-      const gameInfo = `Come play 26 Pairs 🃏⏱️ Try and beat me: www.26pairs.com`;
+ 
 
-      await navigator.clipboard.writeText(gameInfo);
-      setCopySuccess("Copied!");
-    } catch (err) {
-      setCopySuccess("Share");
-      console.error("Unable to copy to clipboard.", err);
-    }
-
-    // Reset the copy success message after a short delay
-    setTimeout(() => {
-      setCopySuccess("Share results");
-    }, 2000);
-  };
+  const { copySuccess, copyToClipboard}  =  useCopyToClipboard({
+    time: 'finalTime',
+    turns: 'finalTurns',
+    mode: "Daily",
+  });
+  
 
   return (
     <BaseModal title="Statistics" isOpen={isOpen} handleClose={handleClose}>

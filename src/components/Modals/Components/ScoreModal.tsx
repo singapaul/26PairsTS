@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useAppSelector } from '@/store/hooks'
 import { startOfTomorrow } from 'date-fns'
 import { BaseModal } from './BaseModal'
-
+import { useCopyToClipboard } from '@/utils'
 import { useState } from 'react'
 import getCurrentDate from '../../../utils/getCurrentDate'
 import { getGameTitle } from '../../../utils/getGameTitle'
@@ -27,33 +27,18 @@ handlePlayAgain: () => void
   // get best time, get best moves
   const [bestTurns, setBestTurns] = useState<string | number>(turnsCount)
   const [bestTime, setBestTime] = useState<string | number>(timeCount)
-  const [copySuccess, setCopySuccess] = useState<string>('Share results')
- 
+
   const formattedTime: string = formatTime(timeCount)
 
- 
-  const copyToClipboard = async () => {
-    const gameModeString = getGameTitle(gameDifficulty)
 
-    try {
-      const gameInfo = `26 Pairs ${gameModeString} shuffle 🎲
-    ⏱️ ${formattedTime}
-    🃏 ${turnsCount} moves
-    
-    Try and beat it: 26pairs.com`
 
-      await navigator.clipboard.writeText(gameInfo)
-      setCopySuccess('Copied!')
-    } catch (err) {
-      setCopySuccess('Share results')
-      console.error('Unable to copy to clipboard.', err)
-    }
+  const { copySuccess, copyToClipboard}  =  useCopyToClipboard({
+    time: formattedTime,
+    turns: JSON.stringify(turnsCount),
+    mode: "Daily",
+  });
 
-    // Reset the copy success message after a short delay
-    setTimeout(() => {
-      setCopySuccess('Share results')
-    }, 2000)
-  }
+
 
   const getBestStats = () => {
     // @todo need to format this to get the best stats for that difficulty
