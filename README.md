@@ -3,24 +3,24 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 # todo 
 
-
-1) Let's move as many functions as possible to global utils - WIP
-5) Swap in my login/register pages to the main app routes
-6) make layout for profile page 
-7) tidy up game modes
-8) fix the basic UI so it fits immediately onto the screen
-9) I need to validate the turns count bug, do I need the +1 ?
-10) need to update the historic stats on game completion as well, not just on first render
-12) fix copy to clipboard on the stats modal.
-
+1) Swap in my login/register pages to the main app routes
+2) make layout for profile page 
+3) fix the basic UI so it fits immediately onto the screen
+4) I need to validate the turns count bug, do I need the +1 ?
+5) fix copy to clipboard on the stats modal - mayb with a different message.
+6) all my times are in seconds now. I need to refactor these in my presentation points. Validate across stats/scores/played modals w/ & w/o data
 
 
 # future work
+
 1. fix darkmode styles completely and add toggle switch (shadCN) to the settings screen
 2. integrate full sign in flow and make app cohesive
 3. Save scores to online database 
-4. Use python API and write Facts endpoint with chta gtp-3 
+4. Use python API and write Facts endpoint with chat gtp-3 
 5. investigate how we could share a shuffle code
+6. Leaderboards & Auth
+7. Bring back points
+8. Analytics tracking
 
 ## ARCHIVE: 
 
@@ -30,9 +30,13 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 1) Refactor copyToClipboard to a custom hook
 2) fix header logo to correct image 
 3) fix local storage but lets tidy up a new line per game mode
-1) update modals to pull from redux instead of localStorage
-11) need to get stats modal to access the difficulty selected in the mode i.e. gameStats['gameDifficulty'].bestTurns (currently hardcoded to daily shuffle)
-3) Can we set our initial bestScores data from redux as well? 
+4) update modals to pull from redux instead of localStorage
+5) need to get stats modal to access the difficulty selected in the mode i.e. gameStats['gameDifficulty'].bestTurns (currently hardcoded to daily shuffle)
+6) Can we set our initial bestScores data from redux as well? 
+7) need to update the historic stats on game completion as well, not just on first render
+8) Analyse current codebase backlog
+9) Refactored reusable code to global utils
+
  ### 24th feb
 1) lets create .styles.ts files and move our styled components to seperate files. - DONE 
 2) Tidy up the board and header components - DONE

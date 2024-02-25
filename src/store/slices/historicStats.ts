@@ -98,9 +98,16 @@ const historicStats = createSlice({
         );
       }
     },
-  },
-});
+    addToStats: (state, action: PayloadAction<any>) => {
+      const newDataFromLocal = getFromLocalStorage(LOCAL_STORAGE_KEY_NAME_DAILY)
+      const difficulty = action.payload as DifficultyKeys
+      state[difficulty] = newDataFromLocal
 
-export const { setValueDaily } = historicStats.actions;
+      }
+    }
+  },
+);
+
+export const { setValueDaily, addToStats } = historicStats.actions;
 
 export default historicStats.reducer;

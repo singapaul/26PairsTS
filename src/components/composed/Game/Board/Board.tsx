@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Card from "./Card/Card";
 import { CARD_FLIP_TIME } from "@/settings";
+import { addToStats } from "@/store/slices/historicStats";
 import { getNameById } from "@/utils";
 import { increment, stop, reset } from "@/store/slices/timer";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
@@ -11,6 +12,7 @@ import {
   updateMoves,
   updateScore,
 } from "@/store/slices/finishedGameStats";
+import type { DifficultyKeys } from "@/store/slices/historicStats";
 import { Header } from "@/components/composed/Game/Header";
 import { ModalRegistry } from "@/components/Modals/Register/ModalRegistry";
 import { setModalConfig } from "@/store/slices/modals";
@@ -18,7 +20,7 @@ import { BoardStyled } from "./styles";
 import { Button } from "@/components/ui/button";
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
 
-export type BoardProps = { duplicatedCards: any; gameDifficulty: any };
+export type BoardProps = { duplicatedCards: any; gameDifficulty: DifficultyKeys };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [cardPair, setCardPair] = useState<string[]>([]);
@@ -98,6 +100,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
           time: time,
           turns: turnsCount + 1,
         });
+        dispatch(addToStats({gameDifficulty}))
         setTimeout(
           () =>
             dispatch(
@@ -181,21 +184,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
             }
           )}
         </BoardStyled>
-        <Button
-          onClick={() =>
-            dispatch(
-              setModalConfig({
-                id: "stats",
-                isOpen: true,
-                props: {
-                  gameDifficulty
-                }
-              })
-            )
-          }
-        >
-          Trigger a modal!
-        </Button>
         <ModalRegistry />
       </div>
     </>

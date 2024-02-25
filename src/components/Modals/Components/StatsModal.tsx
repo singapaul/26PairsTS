@@ -35,7 +35,7 @@ export const StatsModal = ({
           </div>
           <div className="m-1 w-1/4 items-center justify-center dark:text-white">
             <div className="text-3xl font-bold">{gameStats.bestTime}</div>
-            <div className="text-xs">{"Best Times"}</div>
+            <div className="text-xs">{"Best Time"}</div>
           </div>
           <div className="m-1 w-1/4 items-center justify-center dark:text-white">
             <div className="text-3xl font-bold">{gameStats.gamesPlayed}</div>

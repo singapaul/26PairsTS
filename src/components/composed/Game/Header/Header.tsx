@@ -40,7 +40,7 @@ export const Header = ({ resetGame, gameDifficulty }: HeaderProps) => {
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const handleImageClick = () => {
     // Set the page URL to the home URL
-    window.location.href = "/";
+    // window.location.href = "/";
     NavigateToHomescreen();
   };
 
