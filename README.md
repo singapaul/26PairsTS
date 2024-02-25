@@ -6,9 +6,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 1) Let's move as many functions as possible to global utils
 2) fix local storage but lets tidy up a new line per game mode
 3) Can we set our initial bestScores data from redux as well? 
-4) fix header logo 
 5) Swap in my login/register pages to the main app routes
-6)  make layout for profile page 
+6) make layout for profile page 
 7) tidy up game modes
 8) fix the basic UI so it fits immediately onto the screen
 
@@ -25,6 +24,10 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 ### 25h feb
+
+1) Refactor copyToClipboard to a custom hook
+2) fix header logo to correct image 
+
 
  ### 24th feb
 1) lets create .styles.ts files and move our styled components to seperate files. - DONE 

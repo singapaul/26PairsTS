@@ -3,7 +3,7 @@ import React from "react";
 import { IoIosSettings } from "react-icons/io";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 
-import card from "@/assets/images/card_back.png";
+import companyIcon from '@/assets/icons/26pairslogoNoBack.png'
 import { FaChartBar } from "react-icons/fa";
 import { VscDebugRestart } from "react-icons/vsc";
 
@@ -90,7 +90,7 @@ export const Header = ({ resetGame }: HeaderProps) => {
           <BoardNav>
             <FlexGroup>
               <ImageWrapper onClick={handleImageClick}>
-                <ImageObj src={card} alt="" />
+                <ImageObj src={companyIcon} alt="26 Pairs logo" />
               </ImageWrapper>
             </FlexGroup>
             <BoardActionsWrapper>

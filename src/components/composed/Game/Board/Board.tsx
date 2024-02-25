@@ -1,6 +1,7 @@
 /* eslint-disable eqeqeq */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Card from "./Card/Card";
+import { CARD_FLIP_TIME } from "@/settings";
 import { getNameById } from "@/utils";
 import { increment, stop, reset } from "@/store/slices/timer";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
@@ -10,33 +11,32 @@ import {
   updateMoves,
   updateScore,
 } from "@/store/slices/finishedGameStats";
+
 import { Header } from "@/components/composed/Game/Header";
 import { ModalRegistry } from "@/components/Modals/Register/ModalRegistry";
 import { setModalConfig } from "@/store/slices/modals";
 import { BoardStyled } from "./styles";
 import { Button } from "@/components/ui/button";
+import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
 
 export type BoardProps = { duplicatedCards: any; gameDifficulty: any };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
-  const [cardPair, setCardPair] = useState<any>([]);
+  const [cardPair, setCardPair] = useState<string[]>([]);
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
   const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const dispatch = useAppDispatch();
-
+  const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const [isRunning, setIsRunning] = useState(false);
   const time = useAppSelector((state) => state.timer.timeInSeconds);
   const handleRevealCards = () => {
-    const allCardIds = duplicatedCards.map((card: { id: any }) => card.id);
+    const allCardIds = duplicatedCards.map((card: { id: string }) => card.id);
     setFlippedCardList(allCardIds);
-    // Add a 1-second delay and then set flippedCardList to an empty array
-    const delay = 4000; // 1 second in milliseconds
+
     const delayTimeout = setTimeout(() => {
       setFlippedCardList([]);
-    }, delay);
-
-    // Clean up the timeout to avoid memory leaks
+    }, CARD_FLIP_TIME);
     return () => clearTimeout(delayTimeout);
   };
 
@@ -47,7 +47,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     dispatch(updateScore(finalScore));
   };
 
-  // @here instead we are going to be dispatching a new time to the redux store instead!!
   useEffect(() => {
     let intervalId: string | number | NodeJS.Timeout | undefined;
     if (isRunning) {
@@ -65,7 +64,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       // start the timer
       setIsRunning(true);
     }
-    clearTimeout(window.cardFlipTimer);
+ 
+    if (cardFlipTimerRef.current) clearTimeout(cardFlipTimerRef.current);
     if (cardPair.includes(id)) return;
     const currentCardPair = [...cardPair, id];
     if (currentCardPair.length === 3) {
@@ -89,10 +89,16 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
         const finalScore = Math.floor(
           maxScore * (uniqueCardCount / turnsCount)
         );
-        // Stop the timer
         setIsRunning(false);
         dispatch(updateFinalTime(time));
-        // logLatestStats(finalScore, time, turnsCount, gameDifficulty);
+      
+ 
+        saveGameStatsToLocalStorage({
+          gameMode: "26-pairs-game-stats-daily",
+          score: finalScore,
+          time: time,
+          turns: turnsCount + 1,
+        });
         setTimeout(
           () =>
             dispatch(
@@ -105,7 +111,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
         );
       }
     } else {
-      window.cardFlipTimer = setTimeout(resetCardPair, 1000);
+      cardFlipTimerRef.current = setTimeout(resetCardPair, 1000);
     }
   };
 
@@ -128,17 +134,24 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   };
 
   // @can I just default this true in redux instead??
-  // useEffect(() => {
-  //   dispatch(
-  //     setModalConfig({
-  //       id: "info",
-  //       isOpen: true,
-  //       props: {
-  //         handleRevealCards,
-  //       },
-  //     })
-  //   );
-  // }, []);
+  useEffect(() => {
+    dispatch(
+      setModalConfig({
+        id: "info",
+        isOpen: true,
+        props: {
+          handleRevealCards,
+        },
+      })
+    );
+  }, []);
+
+  // Make sure to clear the timeout when the component unmounts
+  useEffect(() => {
+    return () => {
+      if (cardFlipTimerRef.current) clearTimeout(cardFlipTimerRef.current);
+    };
+  }, []);
 
   return (
     <>

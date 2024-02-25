@@ -4,6 +4,7 @@ import displayWelcomeMenuReducer from './slices/displayWelcomeMenu'
 import finishedGameStatsReducer from './slices/finishedGameStats'
 import openModalReducer from './slices/modals'
 import timerReducer from './slices/timer'
+import historicStatsReducer from './slices/historicStats'
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
@@ -11,6 +12,7 @@ export const store = configureStore({
     finishedGameStats: finishedGameStatsReducer,
     modal: openModalReducer,
     timer: timerReducer,
+    stats: historicStatsReducer, 
   },
 })
 
