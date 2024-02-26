@@ -11,7 +11,6 @@ import DailyShuffle from "./DailyShuffle"
 
 const App = () => (
   <Layout>
-    {/* <Status /> */}
     <Router>
       <PrivateRoute path="/app/profile" component={Profile} location={undefined} />
       <Homescreen path = '/app/' />

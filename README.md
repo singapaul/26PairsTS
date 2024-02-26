@@ -7,9 +7,12 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 2) make layout for profile page 
 3) fix the basic UI so it fits immediately onto the screen
 4) I need to validate the turns count bug, do I need the +1 ?
+5) make fit onto the screen 
 5) fix copy to clipboard on the stats modal - mayb with a different message.
 6) all my times are in seconds now. I need to refactor these in my presentation points. Validate across stats/scores/played modals w/ & w/o data
 7) finish UI for the GameModes dialog
+8) dark mode themes
+9) game modes dialog needs to fit on mobile
 
 
 # future work
@@ -32,6 +35,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 1) fix build issue on redux store initialization (40 mins)
 2) translate routing to Gatsby browser vs pages API & validate (10 mins)
+3) Add icons and configure homescreen buttons (20 mins)
+4) Implement game modes dialog popup on main menu (30 mins)
 
 ### 25th feb
 

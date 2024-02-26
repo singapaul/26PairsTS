@@ -1,5 +1,4 @@
 import React from "react";
-
 import card from "@/assets/images/card_back.png";
 import { Button } from "@/components/ui/button";
 import { useAuthValue } from "@/components/Auth/AuthContext";
@@ -7,7 +6,9 @@ import { navigate } from "gatsby";
 import { useNavigateToDailyShuffle } from "@/routes/route_hooks";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { GameModesDialog } from "../GameModesDialog";
-
+import { IoIosSettings } from "react-icons/io";
+import { TiArrowShuffle } from "react-icons/ti";
+import { FaUser } from "react-icons/fa";
 type Props = {};
 
 export const Hero = (props: Props) => {
@@ -23,12 +24,23 @@ export const Hero = (props: Props) => {
   };
 
   const DynamicButton = !currentUser ? (
-    <Button size={"lg"} variant={"outline"} onClick={handleLogin}>
-      Sign Up/Login
+    <Button size={"lg"} variant={"outline"} onClick={handleLogin} className="w-full">
+      <span className="flex items-center w-full justify-between text-lg gap-4">
+        <p> Sign up / Login </p>
+        <p className="text-2xl">
+          <FaUser />
+        </p>
+      </span>
     </Button>
   ) : (
-    <Button size={"lg"} variant={"outline"} onClick={handleProfile}>
-      Profile
+    <Button size={"lg"} variant={"outline"} onClick={handleProfile} className="w-full">
+   
+      <span className="flex items-center w-full justify-between text-lg gap-4">
+        <p> Profile </p>
+        <p className="text-2xl">
+          <FaUser />
+        </p>
+      </span>
     </Button>
   );
 
@@ -46,11 +58,23 @@ export const Hero = (props: Props) => {
         </p>
         <h2 className="text-lg font-semibold">Select Your Challenge</h2>
         <div className="flex flex-col items-center sm:flex-row gap-2">
-          <Button size={"lg"} onClick={navigateToDailyShuffle}>Daily Shuffle</Button>
+          <Button size={"lg"} onClick={navigateToDailyShuffle} className="w-full">
+            <span className="flex items-center w-full justify-between text-lg gap-4">
+              <p>Daily Shuffle</p>
+              <p className="text-2xl">
+                <TiArrowShuffle />
+              </p>
+            </span>
+          </Button>
 
           <DialogTrigger asChild>
-            <Button size={"lg"} variant={"outline"}>
-              Other game modes
+            <Button size={"lg"} variant={"outline"} className="w-full">
+              <span className="flex items-center w-full justify-between text-lg gap-4">
+                <p> Other game modes </p>
+                <p className="text-2xl">
+                  <IoIosSettings />
+                </p>
+              </span>
             </Button>
           </DialogTrigger>
           {DynamicButton}

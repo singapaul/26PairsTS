@@ -37,16 +37,16 @@ export const GameModesDialog = ({ children }: GameModesDialogProps) => {
                 gameDetails={{
                   numCards: 26,
                   difficulty: "easy",
-                  time: "60",
+                  time: "55",
                 }}
               />
               <GameModeTile
                 title="Classic Mode"
                 link={classicShuffle}
                 gameDetails={{
-                  numCards: 26,
+                  numCards: 52,
                   difficulty: "Challenging",
-                  time: "4",
+                  time: "125",
                 }}
               />
               <GameModeTile
@@ -55,7 +55,7 @@ export const GameModesDialog = ({ children }: GameModesDialogProps) => {
                 gameDetails={{
                   numCards: 26,
                   difficulty: "easy",
-                  time: "2",
+                  time: "55",
                 }}
               />
             </div>
