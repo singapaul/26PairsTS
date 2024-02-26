@@ -4,13 +4,15 @@ import { nanoid } from "nanoid";
 import { CLASSICDECKLITE } from "@/assets/data";
 import { DAILY_SHUFFLE } from "@/settings";
 import styled from "styled-components";
+import { ModalRegistry } from "@/components/Modals";
 
 const DailyShuffle = ({path}:{path: string}) => {
 
-  const x = CLASSICDECKLITE.cards[0].src;
+
   const BoardContainer = styled.div`
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
   `;
 
@@ -83,6 +85,7 @@ const DailyShuffle = ({path}:{path: string}) => {
           duplicatedCards={duplicatedCards}
           gameDifficulty={DAILY_SHUFFLE}
         />
+        <ModalRegistry/>
       </BoardContainer>
     </>
   );

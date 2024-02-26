@@ -6,7 +6,10 @@ type BaseLayoutProps = {
 };
 
 export const BaseLayout = ({ children }: BaseLayoutProps) => {
-  return <body className="h-screen w-screen flex flex-col justify-center items-center gap-8">
-    <ThemeToggle />
-    {children}</body>;
+  return (
+    <body className="h-screen w-screen flex flex-col justify-center items-center gap-8">
+      <ThemeToggle />
+      {children}
+    </body>
+  );
 };

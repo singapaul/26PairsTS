@@ -27,12 +27,15 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
   const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
-  // const turnsCount = 20
   const dispatch = useAppDispatch();
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const [isRunning, setIsRunning] = useState(false);
+
+
+  const [isRunning, setIsRunning] = useState<boolean>(false);
   const time = useAppSelector((state) => state.timer.timeInSeconds);
-  const handleRevealCards = () => {
+
+
+const handleRevealCards = () => {
     const allCardIds = duplicatedCards.map((card: { id: string }) => card.id);
     setFlippedCardList(allCardIds);
 
@@ -99,7 +102,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
           gameMode: "26-pairs-game-stats-daily",
           score: finalScore,
           time: time,
-          turns: turnsCount + 1,
+          turns: turnsCount,
         });
         dispatch(addToStats({gameDifficulty}))
         setTimeout(
@@ -139,18 +142,18 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     );
   };
 
-  // @can I just default this true in redux instead??
-  // useEffect(() => {
-  //   dispatch(
-  //     setModalConfig({
-  //       id: "info",
-  //       isOpen: true,
-  //       props: {
-  //         handleRevealCards,
-  //       },
-  //     })
-  //   );
-  // }, []);
+  // @can I just default this true in redux instead - no 
+  useEffect(() => {
+    dispatch(
+      setModalConfig({
+        id: "info",
+        isOpen: true,
+        props: {
+          handleRevealCards,
+        },
+      })
+    );
+  }, []);
 
   // Make sure to clear the timeout when the component unmounts
   useEffect(() => {
@@ -160,8 +163,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   }, []);
 
   return (
-    <>
-      <div>
+      <>
         <Header resetGame={resetGame} gameDifficulty={gameDifficulty} />
         <BoardStyled>
           {duplicatedCards.map(
@@ -185,8 +187,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
             }
           )}
         </BoardStyled>
-        <ModalRegistry />
-      </div>
-    </>
+      </>
   );
 };

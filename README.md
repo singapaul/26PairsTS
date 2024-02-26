@@ -3,17 +3,17 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 # todo 
 
-1) Swap in my login/register pages to the main app routes
-2) make layout for profile page 
-3) fix the basic UI so it fits immediately onto the screen
-4) I need to validate the turns count bug, do I need the +1 ?
-5) make fit onto the screen 
-5) fix copy to clipboard on the stats modal - mayb with a different message.
-6) all my times are in seconds now. I need to refactor these in my presentation points. Validate across stats/scores/played modals w/ & w/o data
-7) finish UI for the GameModes dialog
-8) dark mode themes
-9) game modes dialog needs to fit on mobile
 
+1) make layout for profile page 
+2) all my times are in seconds now. I need to refactor these in my presentation points. Validate across stats/scores/played modals w/ & w/o data. Score modal currently broken
+3) finish UI for the GameModes dialog
+4) dark mode themes
+5) game modes dialog needs to fit on mobile
+6) handle loading state when waiting for the cards on the home screen (skeleton?)
+7) game state is running refactor to redux store 
+8) loading skeletons for board
+9) tidy up daily shuffle code
+10) classic shuffle and lite shuffle modes set up
 
 # future work
 
@@ -37,6 +37,10 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 2) translate routing to Gatsby browser vs pages API & validate (10 mins)
 3) Add icons and configure homescreen buttons (20 mins)
 4) Implement game modes dialog popup on main menu (30 mins)
+5) Simplify the stats modal (5 mins)
+6) integrate login/register pages to the main app routes (10 mins)
+7) fix the basic UI to prevent headerer loading pop (10 mins)
+8) Address correct turns 1 turn over bug (10 mins)
 
 ### 25th feb
 
