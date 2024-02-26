@@ -9,6 +9,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 4) I need to validate the turns count bug, do I need the +1 ?
 5) fix copy to clipboard on the stats modal - mayb with a different message.
 6) all my times are in seconds now. I need to refactor these in my presentation points. Validate across stats/scores/played modals w/ & w/o data
+7) finish UI for the GameModes dialog
 
 
 # future work
@@ -21,11 +22,18 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 6. Leaderboards & Auth
 7. Bring back points
 8. Analytics tracking
+9. https://ui.aceternity.com/components
+10. build a landing page?
 
 ## ARCHIVE: 
 
 
-### 25h feb
+### 26th feb
+
+1) fix build issue on redux store initialization (40 mins)
+2) translate routing to Gatsby browser vs pages API & validate (10 mins)
+
+### 25th feb
 
 1) Refactor copyToClipboard to a custom hook
 2) fix header logo to correct image 

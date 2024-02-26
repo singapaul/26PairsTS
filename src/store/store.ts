@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './slices/counter'
 import displayWelcomeMenuReducer from './slices/displayWelcomeMenu'
 import finishedGameStatsReducer from './slices/finishedGameStats'
 import openModalReducer from './slices/modals'
@@ -7,7 +6,6 @@ import timerReducer from './slices/timer'
 import historicStatsReducer from './slices/historicStats'
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     displayWelcomeMenuSlice: displayWelcomeMenuReducer,
     finishedGameStats: finishedGameStatsReducer,
     modal: openModalReducer,

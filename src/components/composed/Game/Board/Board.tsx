@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef} from "react";
 import Card from "./Card/Card";
 import { CARD_FLIP_TIME } from "@/settings";
 import { addToStats } from "@/store/slices/historicStats";
@@ -19,7 +19,7 @@ import { setModalConfig } from "@/store/slices/modals";
 import { BoardStyled } from "./styles";
 import { Button } from "@/components/ui/button";
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
-
+ 
 export type BoardProps = { duplicatedCards: any; gameDifficulty: DifficultyKeys };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
@@ -27,6 +27,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
   const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
+  // const turnsCount = 20
   const dispatch = useAppDispatch();
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const [isRunning, setIsRunning] = useState(false);
@@ -139,17 +140,17 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   };
 
   // @can I just default this true in redux instead??
-  useEffect(() => {
-    dispatch(
-      setModalConfig({
-        id: "info",
-        isOpen: true,
-        props: {
-          handleRevealCards,
-        },
-      })
-    );
-  }, []);
+  // useEffect(() => {
+  //   dispatch(
+  //     setModalConfig({
+  //       id: "info",
+  //       isOpen: true,
+  //       props: {
+  //         handleRevealCards,
+  //       },
+  //     })
+  //   );
+  // }, []);
 
   // Make sure to clear the timeout when the component unmounts
   useEffect(() => {

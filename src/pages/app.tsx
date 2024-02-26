@@ -4,10 +4,10 @@ import Layout from "../components/Layout"
 import Profile from "../components/Profile"
 import Login from "../components/Login"
 import PrivateRoute from "../components/PrivateRoute"
-// import Status from "../components/Status"
 import Register from "../components/Register";
 import Reset from "../components/Reset";
 import Homescreen from "./Homescreen"
+import DailyShuffle from "./DailyShuffle"
 
 const App = () => (
   <Layout>
@@ -16,6 +16,7 @@ const App = () => (
       <PrivateRoute path="/app/profile" component={Profile} location={undefined} />
       <Homescreen path = '/app/' />
       <Login path="/app/login" />
+      <DailyShuffle path='/app/daily-shuffle' />
       <Register path="/app/register" />
       <Reset path="/app/reset" />
     </Router>

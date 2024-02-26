@@ -5,12 +5,8 @@ import { CLASSICDECKLITE } from "@/assets/data";
 import { DAILY_SHUFFLE } from "@/settings";
 import styled from "styled-components";
 
-const DailyShuffle = () => {
-  const [flip, setFlip] = useState(false);
+const DailyShuffle = ({path}:{path: string}) => {
 
-  const handleFlip = () => {
-    setFlip(!flip);
-  };
   const x = CLASSICDECKLITE.cards[0].src;
   const BoardContainer = styled.div`
     width: 100%;
