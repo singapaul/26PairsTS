@@ -13,6 +13,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 7) tidy up daily shuffle code
 8) classic shuffle and lite shuffle modes set up
 9) play once per day
+10) homescreen does not fit on the page
+11) games mode dialog isn't mobile friendly, let's use our modal system instead
 
 # future work
 
@@ -42,6 +44,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 8) Address correct turns 1 turn over bug (10 mins)
 9) game state isRunning boolean tracked in store instead of local state (10 mins)
 10) Refactor time played in modals to account for seconds instead of miliseconds (10 mins)
+
 
 ### 25th feb
 

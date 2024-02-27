@@ -18,6 +18,7 @@ const DailyShuffle = ({path}:{path: string}) => {
 
   const [duplicatedCards, setDuplicatedCards] = useState<any>([]);
 
+  // rename this to duplucate and give cards an ID 
   const duplicateCards = (cards: any[]) => {
     return cards.map((card: any) => ({
       ...card,
@@ -25,6 +26,7 @@ const DailyShuffle = ({path}:{path: string}) => {
     }));
   };
 
+  // lets expoort this function seperately
   const reorderArray = (
     originalArray: { cards: any[] },
     orderArray: { [x: string]: any }

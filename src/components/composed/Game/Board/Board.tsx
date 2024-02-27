@@ -54,7 +54,7 @@ const handleRevealCards = () => {
     let intervalId: string | number | NodeJS.Timeout | undefined;
     if (isRunning) {
       intervalId = setInterval(() => {
-        dispatch(increment()); // Dispatch the increment action every second
+        dispatch(increment()); 
       }, 1000);
     }
     return () => clearInterval(intervalId);
@@ -64,8 +64,6 @@ const handleRevealCards = () => {
 
   const handleCardClick = (id: string) => {
     if (turnsCount == 0) {
-      // start the timer
-      // setIsRunning(true);
       dispatch(start())
     }
  
@@ -143,7 +141,6 @@ const handleRevealCards = () => {
     );
   };
 
-  // @can I just default this true in redux instead - no 
   useEffect(() => {
     dispatch(
       setModalConfig({
@@ -169,7 +166,7 @@ const handleRevealCards = () => {
         <BoardStyled>
           {duplicatedCards.map(
             (card: {
-              id: React.Key | null | undefined | never | any;
+              id: string;
               src: any;
             }) => {
               return (
