@@ -16,7 +16,7 @@ import {
 import { Header } from "@/components/composed/Game/Header";
 
 import { setModalConfig } from "@/store/slices/modals";
-import { BoardStyled } from "./styles";
+import { BoardStyled, BoardContainer } from "./styles";
 
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
 
@@ -31,10 +31,10 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
   const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
-  const dispatch = useAppDispatch();
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const isRunning = useAppSelector((state) => state.timer.isRunning);
   const time = useAppSelector((state) => state.timer.timeInSeconds);
+  const dispatch = useAppDispatch();
 
   const [isLoading, setIsLoading] = useState(true); // Add this line to introduce loading state
 
@@ -171,7 +171,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   }, []);
 
   return (
-    <>
+    <BoardContainer>
       <Header resetGame={resetGame} gameDifficulty={gameDifficulty} />
       {isLoading ? (
         <BoardStyled>
@@ -199,6 +199,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
           })}
         </BoardStyled>
       )}
-    </>
+    </BoardContainer>
   );
 };

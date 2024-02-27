@@ -48,10 +48,10 @@ export const Hero = (props: Props) => {
     <>
       <GameModesDialog>
         <div>
-          <img src={card} alt="logo card" className="max-h-64" />
+          <img src={card} alt="logo card" className="max-h-32" />
         </div>
         <h1 className="text-2xl">Welcome to 26 pairs</h1>
-        <p className="max-w-128 px-3">
+        <p className="max-w-96 px-3">
           26 Pairs is a simple card game designed to test your memory and speed.
           Flip 2 cards at a time to find a pair, and keep going until you've
           flipped the entire deck.

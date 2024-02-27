@@ -3,7 +3,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 # todo 
 
-
+1. fix darkmode styles completely and add toggle switch (shadCN) to the settings screen
 1) make layout for profile page 
 2) finish UI for the GameModes dialog
 3) dark mode themes
@@ -12,18 +12,19 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 6) tidy up daily shuffle code
 7) classic shuffle and lite shuffle modes set up
 8) play once per day
-9) homescreen does not fit on the page
+9) homescreen does not fit on the page - UI fixes
 10) games mode dialog isn't mobile friendly, let's use our modal system instead
+11) card alignment on mobile
+
 
 # future work
 
-1. fix darkmode styles completely and add toggle switch (shadCN) to the settings screen
 2. integrate full sign in flow and make app cohesive
-3. Save scores to online database 
+3. Save scores to online database - if signed in.
 4. Use python API and write Facts endpoint with chat gtp-3 
 5. investigate how we could share a shuffle code
 6. Leaderboards & Auth
-7. Bring back points
+7. Bring back points - how do I implement this?
 8. Analytics tracking
 9. https://ui.aceternity.com/components
 10. build a landing page?
@@ -32,9 +33,11 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 ### 27th feb
 
-1) integrate loading skeletons on cards
+1) integrate loading skeletons on cards (15 mins)
+2) board fits on main screen with centered card grid (15 mins)
+3) tidy up styles on DailyShuffle to the Board Component (5 mins)
 
-### 26th feb
+### 26th feb - 1:50
 
 1) fix build issue on redux store initialization (40 mins)
 2) translate routing to Gatsby browser vs pages API & validate (10 mins)
@@ -49,7 +52,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 
-### 25th feb
+### 25th feb 4:00
 
 1) Refactor copyToClipboard to a custom hook
 2) fix header logo to correct image 
@@ -61,7 +64,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 8) Analyse current codebase backlog
 9) Refactored reusable code to global utils
 
- ### 24th feb
+ ### 24th feb 6:00
+
 1) lets create .styles.ts files and move our styled components to seperate files. - DONE 
 2) Tidy up the board and header components - DONE
 3) Upgrade the share functionality to use the naviagtor API - DONE neeeds testing

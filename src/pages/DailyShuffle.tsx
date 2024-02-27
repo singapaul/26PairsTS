@@ -3,22 +3,14 @@ import { Board } from "@/components/composed/Game/Board";
 import { nanoid } from "nanoid";
 import { CLASSICDECKLITE } from "@/assets/data";
 import { DAILY_SHUFFLE } from "@/settings";
-import styled from "styled-components";
 import { ModalRegistry } from "@/components/Modals";
 
-const DailyShuffle = ({path}:{path: string}) => {
+const DailyShuffle = ({ path }: { path: string }) => {
 
-
-  const BoardContainer = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  `;
 
   const [duplicatedCards, setDuplicatedCards] = useState<any>([]);
 
-  // rename this to duplucate and give cards an ID 
+  // rename this to duplucate and give cards an ID
   const duplicateCards = (cards: any[]) => {
     return cards.map((card: any) => ({
       ...card,
@@ -82,13 +74,8 @@ const DailyShuffle = ({path}:{path: string}) => {
 
   return (
     <>
-      <BoardContainer>
-        <Board
-          duplicatedCards={duplicatedCards}
-          gameDifficulty={DAILY_SHUFFLE}
-        />
-        <ModalRegistry/>
-      </BoardContainer>
+      <Board duplicatedCards={duplicatedCards} gameDifficulty={DAILY_SHUFFLE} />
+      <ModalRegistry />
     </>
   );
 };
