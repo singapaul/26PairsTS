@@ -1,42 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Board } from "@/components/composed/Game/Board";
-import { nanoid } from "nanoid";
 import { CLASSICDECKLITE } from "@/assets/data";
 import { DAILY_SHUFFLE } from "@/settings";
+import { ModalRegistry } from "@/components/Modals";
+import { assignIDToCards, reorderArrayAccordingToOrderArray } from "@/utils";
 
 const DailyShuffle = ({ path }: { path: string }) => {
 
 
   const [duplicatedCards, setDuplicatedCards] = useState<any>([]);
 
-  // rename this to duplucate and give cards an ID
-  const duplicateCards = (cards: any[]) => {
-    return cards.map((card: any) => ({
-      ...card,
-      id: nanoid(),
-    }));
-  };
-
-  // lets expoort this function seperately
-  const reorderArray = (
-    originalArray: { cards: any[] },
-    orderArray: { [x: string]: any }
-  ) => {
-    // Combine the original array and the order array into a single array of objects
-    const combinedArray = originalArray.cards.map(
-      (item: any, index: string | number) => ({
-        item,
-        order: orderArray[index],
-      })
-    );
-    // Sort the combined array based on the order property
-    combinedArray.sort(
-      (a: { order: number }, b: { order: number }) => a.order - b.order
-    );
-    // Extract the original items from the sorted array
-    const reorderedArray = combinedArray.map(({ item }) => item);
-    return reorderedArray;
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,10 +32,8 @@ const DailyShuffle = ({ path }: { path: string }) => {
           throw new Error("Network response was not ok");
         }
         const result = await response.json();
-        // setData(result.body[0].lite)
-        const orderedArray = reorderArray(CLASSICDECKLITE, result.body[0].lite);
-        const IDArray = duplicateCards(orderedArray);
-        // note the duplicate cards function does not duplicate the cards, it ids them
+        const orderedArray = reorderArrayAccordingToOrderArray(CLASSICDECKLITE, result.body[0].lite);
+        const IDArray = assignIDToCards(orderedArray);
         setDuplicatedCards(IDArray);
       } catch (error) {
         console.log(error);
@@ -74,6 +45,7 @@ const DailyShuffle = ({ path }: { path: string }) => {
   return (
     <>
       <Board duplicatedCards={duplicatedCards} gameDifficulty={DAILY_SHUFFLE} />
+      <ModalRegistry />
     </>
   );
 };

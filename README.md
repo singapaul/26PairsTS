@@ -8,13 +8,13 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 3) games mode dialog isn't mobile friendly, let's use our modal system instead
 4) finish UI for the GameModes dialog
 5) dark mode themes
-
+----
 6) tidy up daily shuffle code
 7) classic shuffle and lite shuffle modes set up
 8) play once per day
 9) homescreen does not fit on the page - UI fixes
 10) card alignment on mobile
-
+11) check old build useDisabled?
 
 # future work
 
@@ -36,6 +36,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 2) board fits on main screen with centered card grid (15 mins)
 3) Tidy up styles on DailyShuffle to the Board Component (5 mins)
 4) render card skeleton whilst loading daily shufle (10 mins)
+5) Fix flip cards bug on 1st render only (60 mins)
+6) Refactor asignCardId and Re-order array functions to global utils (5 mins)
 
 ### 26th feb - 1:50
 
