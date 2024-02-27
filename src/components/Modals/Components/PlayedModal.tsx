@@ -3,7 +3,7 @@ import React from "react";
 
 import { BaseModal } from "./BaseModal";
 import { liteShuffle, classicShuffle } from "@/routes/route_strings";
-import { formatTime, isMobile, timeUntilTomorrow } from "@/utils";
+import { isMobile, timeUntilTomorrow, formatSecondsToMMSS } from "@/utils";
 import { useCopyToClipboard } from "@/utils";
 import Countdown from "react-countdown";
 import { useAppSelector } from "@/store/hooks";
@@ -52,7 +52,7 @@ export const PlayedModal =  ({
           <div className="text-xs">{"Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{formatTime(finalTime)}</div>
+          <div className="text-3xl font-bold">{formatSecondsToMMSS(finalTime)}</div>
           <div className="text-xs">{"Time"}</div>
         </div>
       </div>

@@ -5,15 +5,14 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 1) make layout for profile page 
-2) all my times are in seconds now. I need to refactor these in my presentation points. Validate across stats/scores/played modals w/ & w/o data. Score modal currently broken
-3) finish UI for the GameModes dialog
-4) dark mode themes
-5) game modes dialog needs to fit on mobile
-6) handle loading state when waiting for the cards on the home screen (skeleton?)
-7) game state is running refactor to redux store 
-8) loading skeletons for board
-9) tidy up daily shuffle code
-10) classic shuffle and lite shuffle modes set up
+2) finish UI for the GameModes dialog
+3) dark mode themes
+4) game modes dialog needs to fit on mobile
+5) handle loading state when waiting for the cards on the home screen (skeleton?)
+6) loading skeletons for board
+7) tidy up daily shuffle code
+8) classic shuffle and lite shuffle modes set up
+9) play once per day
 
 # future work
 
@@ -41,6 +40,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 6) integrate login/register pages to the main app routes (10 mins)
 7) fix the basic UI to prevent headerer loading pop (10 mins)
 8) Address correct turns 1 turn over bug (10 mins)
+9) game state isRunning boolean tracked in store instead of local state (10 mins)
+10) Refactor time played in modals to account for seconds instead of miliseconds (10 mins)
 
 ### 25th feb
 

@@ -4,7 +4,7 @@ import { useAppSelector } from "@/store/hooks";
 import { BaseModal } from "./BaseModal";
 import { useCopyToClipboard } from "@/utils";
 import type { DifficultyKeys } from "@/store/slices/historicStats";
-import { formatTime, timeUntilTomorrow } from "@/utils";
+import { formatSecondsToMMSS } from "@/utils";
 // @todo pass the difficulty in as a prop
 export const ScoreModal = ({
   isOpen,
@@ -25,7 +25,7 @@ export const ScoreModal = ({
   );
   const bestStats = useAppSelector((state) => state.stats[gameDifficulty])
  
-  const formattedTime: string = formatTime(timeCount);
+  const formattedTime: string = formatSecondsToMMSS(timeCount);
 
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
     time: formattedTime,
@@ -34,7 +34,7 @@ export const ScoreModal = ({
   });
 
  
-
+ 
 
   return (
     <BaseModal title="Score" isOpen={isOpen} handleClose={handleClose}>
@@ -52,7 +52,7 @@ export const ScoreModal = ({
           <div className="text-xs">{"Best Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{bestStats.bestTime}</div>
+          <div className="text-3xl font-bold">{formatSecondsToMMSS(Number(bestStats.bestTime))}</div>
           <div className="text-xs">{"Best Time"}</div>
         </div>
       </div>

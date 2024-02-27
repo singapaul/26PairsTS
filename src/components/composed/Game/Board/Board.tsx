@@ -4,7 +4,7 @@ import Card from "./Card/Card";
 import { CARD_FLIP_TIME } from "@/settings";
 import { addToStats } from "@/store/slices/historicStats";
 import { getNameById } from "@/utils";
-import { increment, stop, reset } from "@/store/slices/timer";
+import { increment, stop,start, reset } from "@/store/slices/timer";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import {
   resetMoves,
@@ -12,14 +12,14 @@ import {
   updateMoves,
   updateScore,
 } from "@/store/slices/finishedGameStats";
-import type { DifficultyKeys } from "@/store/slices/historicStats";
 import { Header } from "@/components/composed/Game/Header";
-import { ModalRegistry } from "@/components/Modals/Register/ModalRegistry";
+
 import { setModalConfig } from "@/store/slices/modals";
 import { BoardStyled } from "./styles";
-import { Button } from "@/components/ui/button";
+
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
- 
+
+import type { DifficultyKeys } from "@/store/slices/historicStats";
 export type BoardProps = { duplicatedCards: any; gameDifficulty: DifficultyKeys };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
@@ -29,9 +29,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const dispatch = useAppDispatch();
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-
-  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const isRunning = useAppSelector((state) => state.timer.isRunning)
   const time = useAppSelector((state) => state.timer.timeInSeconds);
 
 
@@ -67,7 +65,8 @@ const handleRevealCards = () => {
   const handleCardClick = (id: string) => {
     if (turnsCount == 0) {
       // start the timer
-      setIsRunning(true);
+      // setIsRunning(true);
+      dispatch(start())
     }
  
     if (cardFlipTimerRef.current) clearTimeout(cardFlipTimerRef.current);
@@ -94,7 +93,8 @@ const handleRevealCards = () => {
         const finalScore = Math.floor(
           maxScore * (uniqueCardCount / turnsCount)
         );
-        setIsRunning(false);
+       
+        dispatch(stop())
         dispatch(updateFinalTime(time));
       
  
@@ -130,7 +130,8 @@ const handleRevealCards = () => {
     dispatch(resetMoves());
     dispatch(updateScore(0));
     dispatch(reset());
-    setIsRunning(false);
+
+    dispatch(stop())
     dispatch(
       setModalConfig({
         id: "info",

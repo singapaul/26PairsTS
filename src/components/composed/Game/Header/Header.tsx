@@ -33,7 +33,6 @@ type HeaderProps = {
 };
 
 export const Header = ({ resetGame, gameDifficulty }: HeaderProps) => {
-  console.log(gameDifficulty);
 
   const [NavigateToHomescreen] = useNavigateToHomescreen();
   const timeFromRedux = useAppSelector((state) => state.timer.formattedTime);
