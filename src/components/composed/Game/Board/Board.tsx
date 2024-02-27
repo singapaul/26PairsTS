@@ -1,10 +1,11 @@
 /* eslint-disable eqeqeq */
-import React, { useState, useEffect, useRef} from "react";
-import Card from "./Card/Card";
+import React, { useState, useEffect, useRef } from "react";
+import Card, { CardStyledLite } from "./Card/Card";
 import { CARD_FLIP_TIME } from "@/settings";
+import { Skeleton } from "@/components/ui/skeleton";
 import { addToStats } from "@/store/slices/historicStats";
 import { getNameById } from "@/utils";
-import { increment, stop,start, reset } from "@/store/slices/timer";
+import { increment, stop, start, reset } from "@/store/slices/timer";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import {
   resetMoves,
@@ -20,7 +21,10 @@ import { BoardStyled } from "./styles";
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
 
 import type { DifficultyKeys } from "@/store/slices/historicStats";
-export type BoardProps = { duplicatedCards: any; gameDifficulty: DifficultyKeys };
+export type BoardProps = {
+  duplicatedCards: any;
+  gameDifficulty: DifficultyKeys;
+};
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [cardPair, setCardPair] = useState<string[]>([]);
@@ -29,11 +33,18 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const dispatch = useAppDispatch();
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const isRunning = useAppSelector((state) => state.timer.isRunning)
+  const isRunning = useAppSelector((state) => state.timer.isRunning);
   const time = useAppSelector((state) => state.timer.timeInSeconds);
 
+  const [isLoading, setIsLoading] = useState(true); // Add this line to introduce loading state
 
-const handleRevealCards = () => {
+  // Modify your useEffect or data fetching logic as needed
+  useEffect(() => {
+    if (duplicatedCards && duplicatedCards.length > 0) {
+      setIsLoading(false); // Set loading to false once data is ready
+    }
+  }, [duplicatedCards]);
+  const handleRevealCards = () => {
     const allCardIds = duplicatedCards.map((card: { id: string }) => card.id);
     setFlippedCardList(allCardIds);
 
@@ -54,7 +65,7 @@ const handleRevealCards = () => {
     let intervalId: string | number | NodeJS.Timeout | undefined;
     if (isRunning) {
       intervalId = setInterval(() => {
-        dispatch(increment()); 
+        dispatch(increment());
       }, 1000);
     }
     return () => clearInterval(intervalId);
@@ -64,9 +75,9 @@ const handleRevealCards = () => {
 
   const handleCardClick = (id: string) => {
     if (turnsCount == 0) {
-      dispatch(start())
+      dispatch(start());
     }
- 
+
     if (cardFlipTimerRef.current) clearTimeout(cardFlipTimerRef.current);
     if (cardPair.includes(id)) return;
     const currentCardPair = [...cardPair, id];
@@ -91,18 +102,17 @@ const handleRevealCards = () => {
         const finalScore = Math.floor(
           maxScore * (uniqueCardCount / turnsCount)
         );
-       
-        dispatch(stop())
+
+        dispatch(stop());
         dispatch(updateFinalTime(time));
-      
- 
+
         saveGameStatsToLocalStorage({
           gameMode: "26-pairs-game-stats-daily",
           score: finalScore,
           time: time,
           turns: turnsCount,
         });
-        dispatch(addToStats({gameDifficulty}))
+        dispatch(addToStats({ gameDifficulty }));
         setTimeout(
           () =>
             dispatch(
@@ -110,8 +120,8 @@ const handleRevealCards = () => {
                 id: "score",
                 isOpen: true,
                 props: {
-                  gameDifficulty
-                }
+                  gameDifficulty,
+                },
               })
             ),
           1000
@@ -129,7 +139,7 @@ const handleRevealCards = () => {
     dispatch(updateScore(0));
     dispatch(reset());
 
-    dispatch(stop())
+    dispatch(stop());
     dispatch(
       setModalConfig({
         id: "info",
@@ -161,30 +171,34 @@ const handleRevealCards = () => {
   }, []);
 
   return (
-      <>
-        <Header resetGame={resetGame} gameDifficulty={gameDifficulty} />
+    <>
+      <Header resetGame={resetGame} gameDifficulty={gameDifficulty} />
+      {isLoading ? (
         <BoardStyled>
-          {duplicatedCards.map(
-            (card: {
-              id: string;
-              src: any;
-            }) => {
-              return (
-                <Card
-                  difficulty={gameDifficulty}
-                  key={card.id}
-                  image={card.src}
-                  cardId={card.id}
-                  handleClick={() => handleCardClick(card.id)}
-                  isFlipped={[...flippedCardList, ...cardPair].includes(
-                    card.id
-                  )}
-                  isDisabled={disabledCardList.includes(card.id)}
-                />
-              );
-            }
-          )}
+          {Array.from({ length: 26 }).map((_, index) => (
+            <Skeleton
+              key={index}
+              className="w-[60px] h-[80px] rounded-[5px] m-0.5"
+            />
+          ))}
         </BoardStyled>
-      </>
+      ) : (
+        <BoardStyled>
+          {duplicatedCards.map((card: { id: string; src: any }) => {
+            return (
+              <Card
+                difficulty={gameDifficulty}
+                key={card.id}
+                image={card.src}
+                cardId={card.id}
+                handleClick={() => handleCardClick(card.id)}
+                isFlipped={[...flippedCardList, ...cardPair].includes(card.id)}
+                isDisabled={disabledCardList.includes(card.id)}
+              />
+            );
+          })}
+        </BoardStyled>
+      )}
+    </>
   );
 };
