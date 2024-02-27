@@ -4,17 +4,16 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 # todo 
 
 1. fix darkmode styles completely and add toggle switch (shadCN) to the settings screen
-1) make layout for profile page 
-2) finish UI for the GameModes dialog
-3) dark mode themes
-4) game modes dialog needs to fit on mobile
-5) handle loading state when waiting for the cards on the home screen (skeleton?)
+2) make layout for profile page 
+3) games mode dialog isn't mobile friendly, let's use our modal system instead
+4) finish UI for the GameModes dialog
+5) dark mode themes
+
 6) tidy up daily shuffle code
 7) classic shuffle and lite shuffle modes set up
 8) play once per day
 9) homescreen does not fit on the page - UI fixes
-10) games mode dialog isn't mobile friendly, let's use our modal system instead
-11) card alignment on mobile
+10) card alignment on mobile
 
 
 # future work
@@ -35,7 +34,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 1) integrate loading skeletons on cards (15 mins)
 2) board fits on main screen with centered card grid (15 mins)
-3) tidy up styles on DailyShuffle to the Board Component (5 mins)
+3) Tidy up styles on DailyShuffle to the Board Component (5 mins)
+4) render card skeleton whilst loading daily shufle (10 mins)
 
 ### 26th feb - 1:50
 
@@ -45,7 +45,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 4) Implement game modes dialog popup on main menu (30 mins)
 5) Simplify the stats modal (5 mins)
 6) integrate login/register pages to the main app routes (10 mins)
-7) fix the basic UI to prevent headerer loading pop (10 mins)
+7) fix the basic UI to prevent header loading pop (10 mins)
 8) Address correct turns 1 turn over bug (10 mins)
 9) game state isRunning boolean tracked in store instead of local state (10 mins)
 10) Refactor time played in modals to account for seconds instead of miliseconds (10 mins)

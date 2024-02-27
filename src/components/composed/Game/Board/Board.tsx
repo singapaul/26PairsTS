@@ -21,6 +21,8 @@ import { BoardStyled, BoardContainer } from "./styles";
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
 
 import type { DifficultyKeys } from "@/store/slices/historicStats";
+import { Button } from "@/components/ui/button";
+import { ModalRegistry } from "@/components/Modals";
 export type BoardProps = {
   duplicatedCards: any;
   gameDifficulty: DifficultyKeys;
@@ -30,6 +32,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [cardPair, setCardPair] = useState<string[]>([]);
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
   const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
+  const [flipCard, setFlipCards] = useState<boolean>(true);
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const isRunning = useAppSelector((state) => state.timer.isRunning);
@@ -44,16 +47,32 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       setIsLoading(false); // Set loading to false once data is ready
     }
   }, [duplicatedCards]);
+  // const handleRevealCards = () => {
+  //   const allCardIds = duplicatedCards.map((card: { id: string }) => card.id);
+  //   setFlippedCardList(allCardIds);
+
+  //   const delayTimeout = setTimeout(() => {
+  //     setFlippedCardList([]);
+  //   }, CARD_FLIP_TIME);
+  //   return () => clearTimeout(delayTimeout);
+  // };
+
   const handleRevealCards = () => {
     const allCardIds = duplicatedCards.map((card: { id: string }) => card.id);
     setFlippedCardList(allCardIds);
-
-    const delayTimeout = setTimeout(() => {
-      setFlippedCardList([]);
-    }, CARD_FLIP_TIME);
-    return () => clearTimeout(delayTimeout);
   };
 
+  useEffect(() => {
+    // Only proceed if all cards are currently revealed
+    if (flippedCardList.length === duplicatedCards.length && duplicatedCards.length > 0) {
+      const delayTimeout = setTimeout(() => {
+        setFlippedCardList([]); // Hide all cards after the delay
+      }, CARD_FLIP_TIME);
+  
+      // Cleanup function to clear the timeout if the component unmounts
+      return () => clearTimeout(delayTimeout);
+    }
+  }, [flippedCardList, duplicatedCards]);
   const calculateScore = () => {
     const maxScore = 10000;
     const uniqueCardCount = duplicatedCards.length / 2;
@@ -152,16 +171,20 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   };
 
   useEffect(() => {
-    dispatch(
-      setModalConfig({
-        id: "info",
-        isOpen: true,
-        props: {
-          handleRevealCards,
-        },
-      })
-    );
-  }, []);
+    if (flipCard) {
+      dispatch(
+        setModalConfig({
+          id: "info",
+          isOpen: true,
+          props: {
+            handleRevealCards,
+          },
+        })
+      );
+      setFlipCards(false); // Ensure this runs only once
+    }
+  }, [flipCard, dispatch]); // Dependencies array ensures effect only reruns if these values change
+  
 
   // Make sure to clear the timeout when the component unmounts
   useEffect(() => {
@@ -173,7 +196,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   return (
     <BoardContainer>
       <Header resetGame={resetGame} gameDifficulty={gameDifficulty} />
-      {isLoading ? (
+{isLoading ? 
         <BoardStyled>
           {Array.from({ length: 26 }).map((_, index) => (
             <Skeleton
@@ -182,23 +205,43 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
             />
           ))}
         </BoardStyled>
-      ) : (
-        <BoardStyled>
-          {duplicatedCards.map((card: { id: string; src: any }) => {
-            return (
-              <Card
-                difficulty={gameDifficulty}
-                key={card.id}
-                image={card.src}
-                cardId={card.id}
-                handleClick={() => handleCardClick(card.id)}
-                isFlipped={[...flippedCardList, ...cardPair].includes(card.id)}
-                isDisabled={disabledCardList.includes(card.id)}
-              />
-            );
-          })}
-        </BoardStyled>
-      )}
+       : 
+        <>
+          <BoardStyled>
+            {duplicatedCards.map((card: { id: string; src: any }) => {
+              return (
+                <Card
+                  difficulty={gameDifficulty}
+                  key={card.id}
+                  image={card.src}
+                  cardId={card.id}
+                  handleClick={() => handleCardClick(card.id)}
+                  isFlipped={[...flippedCardList, ...cardPair].includes(
+                    card.id
+                  )}
+                  isDisabled={disabledCardList.includes(card.id)}
+                />
+              );
+            })}
+          </BoardStyled>
+          <Button
+            onClick={() =>
+              dispatch(
+                setModalConfig({
+                  id: "info",
+                  isOpen: true,
+                  props: {
+                    handleRevealCards,
+                  },
+                })
+              )
+            }
+          >
+            MODAL?
+          </Button>
+        </>
+  }
+      <ModalRegistry />
     </BoardContainer>
   );
 };

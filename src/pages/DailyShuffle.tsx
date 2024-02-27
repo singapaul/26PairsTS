@@ -3,7 +3,6 @@ import { Board } from "@/components/composed/Game/Board";
 import { nanoid } from "nanoid";
 import { CLASSICDECKLITE } from "@/assets/data";
 import { DAILY_SHUFFLE } from "@/settings";
-import { ModalRegistry } from "@/components/Modals";
 
 const DailyShuffle = ({ path }: { path: string }) => {
 
@@ -75,7 +74,6 @@ const DailyShuffle = ({ path }: { path: string }) => {
   return (
     <>
       <Board duplicatedCards={duplicatedCards} gameDifficulty={DAILY_SHUFFLE} />
-      <ModalRegistry />
     </>
   );
 };
