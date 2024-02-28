@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import { useAuthValue } from "@/components/Auth/AuthContext";
 import { navigate } from "gatsby";
 import { useNavigateToDailyShuffle } from "@/routes/route_hooks";
-import { DialogTrigger } from "@/components/ui/dialog";
-import { GameModesDialog } from "../GameModesDialog";
+// import { DialogTrigger } from "@/components/ui/dialog";
+// import { GameModesDialog } from "../GameModesDialog";
+import { useAppDispatch } from "@/store/hooks";
+import { setModalConfig } from "@/store/slices/modals";
 import { IoIosSettings } from "react-icons/io";
 import { TiArrowShuffle } from "react-icons/ti";
 import { FaUser } from "react-icons/fa";
 type Props = {};
 
 export const Hero = (props: Props) => {
+
+  const dispatch = useAppDispatch()
   const { currentUser } = useAuthValue();
   const [navigateToDailyShuffle] = useNavigateToDailyShuffle();
 
@@ -46,7 +50,7 @@ export const Hero = (props: Props) => {
 
   return (
     <>
-      <GameModesDialog>
+      {/* <GameModesDialog> */}
         <div>
           <img src={card} alt="logo card" className="max-h-32" />
         </div>
@@ -67,8 +71,11 @@ export const Hero = (props: Props) => {
             </span>
           </Button>
 
-          <DialogTrigger asChild>
-            <Button size={"lg"} variant={"outline"} className="w-full">
+          {/* <DialogTrigger asChild> */}
+            <Button size={"lg"} variant={"outline"} className="w-full" onClick={()=> dispatch(setModalConfig({
+              id: 'gameModes',
+              isOpen: true,
+            }))}>
               <span className="flex items-center w-full justify-between text-lg gap-4">
                 <p> Other game modes </p>
                 <p className="text-2xl">
@@ -76,10 +83,10 @@ export const Hero = (props: Props) => {
                 </p>
               </span>
             </Button>
-          </DialogTrigger>
+          {/* </DialogTrigger> */}
           {DynamicButton}
         </div>
-      </GameModesDialog>
+      {/* </GameModesDialog> */}
     </>
   );
 };

@@ -1,20 +1,21 @@
 https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p2c?fbclid=IwAR3IjD5K6GgEYgtSV00xAa-NPmtBagADldUVAq9wpcIGxEPLWxyr4H0-180
 
 
-# todo 
+- Analytics dashboard? https://www.youtube.com/watch?v=MGjCIQh5Pkw&t=160s&ab_channel=Joshtriedcoding
 
+
+# todo 
 1. fix darkmode styles completely and add toggle switch (shadCN) to the settings screen
-2) make layout for profile page 
-3) games mode dialog isn't mobile friendly, let's use our modal system instead
-4) finish UI for the GameModes dialog
-5) dark mode themes
-----
-6) tidy up daily shuffle code
-7) classic shuffle and lite shuffle modes set up
-8) play once per day
-9) homescreen does not fit on the page - UI fixes
-10) card alignment on mobile
-11) check old build useDisabled?
+2) homescreen does not fit on the page - UI fixes
+3) make layout for profile page 
+4) tidy up daily shuffle code - move API call and use suspense component? 
+5) close modals on route change
+6) classic shuffle and lite shuffle modes set up
+7) play once per day
+8) card alignment on mobile
+9) check old build useDisabled?
+10) branch protections/staging branch? 
+11) calendar UI for old daily shuffles?
 
 # future work
 
@@ -26,11 +27,15 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 7. Bring back points - how do I implement this?
 8. Analytics tracking
 9. https://ui.aceternity.com/components
-10. build a landing page?
+10. build a landing page - Matt to take the lead on this
 
 ## ARCHIVE: 
 
-### 27th feb
+### 28th feb 
+
+1) Make games mode dialog mobile/dark mode compatiable (40 mins)
+
+### 27th feb - 2:50
 
 1) integrate loading skeletons on cards (15 mins)
 2) board fits on main screen with centered card grid (15 mins)
@@ -38,6 +43,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 4) render card skeleton whilst loading daily shufle (10 mins)
 5) Fix flip cards bug on 1st render only (60 mins)
 6) Refactor asignCardId and Re-order array functions to global utils (5 mins)
+7) Refactor the game modes dialog (60 mins)
 
 ### 26th feb - 1:50
 

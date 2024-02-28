@@ -3,6 +3,7 @@ import { FactContainer } from "@/components/composed/FactContainer";
 import { Hero } from "@/components/composed/Hero";
 import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
 import Status from "@/components/Status";
+import { ModalRegistry } from "@/components/Modals";
  
 
 const Homescreen = ({ path }: { path: string }) => {
@@ -12,6 +13,7 @@ const Homescreen = ({ path }: { path: string }) => {
       <ThemeToggle />
       <Hero />
       <FactContainer />
+      <ModalRegistry/>
     </div>
   );
 };

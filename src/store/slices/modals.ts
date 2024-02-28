@@ -10,6 +10,7 @@ type ModalIds =
   | "score"
   | "stats"
   | "tac"
+  | "gameModes"
   | null;
 
 type ModalState = {

@@ -4,6 +4,7 @@ import {
   SettingsModal,
   ContactModal,
   InfoModal,
+  GameModesModal,
   PlayedModal,
   ScoreModal,
   StatsModal,
@@ -30,6 +31,7 @@ const lookupModal: modalLookupProps = {
   score: ScoreModal,
   stats: StatsModal,
   tac: TACModal,
+  gameModes: GameModesModal,
 };
 
 export const ModalRegistry = (): JSX.Element => {
