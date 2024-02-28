@@ -9,8 +9,6 @@ const DailyShuffle = ({ path }: { path: string }) => {
 
 
   const [duplicatedCards, setDuplicatedCards] = useState<any>([]);
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,8 +17,7 @@ const DailyShuffle = ({ path }: { path: string }) => {
           {
             method: "GET", // or 'POST' or other HTTP methods if applicable
             headers: {
-              "Content-Type": "application/json", // Adjust the content type if necessary
-              // Add any other headers as needed (e.g., authorization headers, API keys)
+              "Content-Type": "application/json", 
             },
           }
         );

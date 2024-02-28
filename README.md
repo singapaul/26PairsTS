@@ -7,17 +7,15 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 # todo 
 
 
-1) make layout for profile page 
-2) tidy up daily shuffle code - move API call and use suspense component? 
-3) close modals on route change
-4) classic shuffle and lite shuffle modes set up
-5) play once per day
-6) card alignment on mobile
-7) check old build useDisabled?
-8) branch protections/staging branch? 
-9) calendar UI for old daily shuffles?
+1) make layout for profile page! 
+2) tidy up daily shuffle code - move API call and use suspense component! 
+3) close modals on route change!
+4) classic shuffle and lite shuffle modes set up!
+5) play once per day!
+
 
 # future work
+
 1. Optimise designs for tablet
 2. integrate full sign in flow and make app cohesive
 3. Save scores to online database - if signed in.
@@ -29,6 +27,9 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 9. https://ui.aceternity.com/components
 10. build a landing page - Matt to take the lead on this
 11. In settings difficulty switch? To reduce the flip time (regardless classic should have a longer flip time)
+12. check old build useDisabled?
+13. branch protections/staging branch? 
+14. calendar UI for old daily shuffles?
 
 ## ARCHIVE: 
 
