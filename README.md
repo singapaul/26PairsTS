@@ -5,17 +5,17 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 # todo 
-1. fix darkmode styles completely and add toggle switch (shadCN) to the settings screen
-2) homescreen does not fit on the page - UI fixes
-3) make layout for profile page 
-4) tidy up daily shuffle code - move API call and use suspense component? 
-5) close modals on route change
-6) classic shuffle and lite shuffle modes set up
-7) play once per day
-8) card alignment on mobile
-9) check old build useDisabled?
-10) branch protections/staging branch? 
-11) calendar UI for old daily shuffles?
+
+1) homescreen does not fit on the page - UI fixes
+2) make layout for profile page 
+3) tidy up daily shuffle code - move API call and use suspense component? 
+4) close modals on route change
+5) classic shuffle and lite shuffle modes set up
+6) play once per day
+7) card alignment on mobile
+8) check old build useDisabled?
+9) branch protections/staging branch? 
+10) calendar UI for old daily shuffles?
 
 # future work
 
@@ -28,12 +28,14 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 8. Analytics tracking
 9. https://ui.aceternity.com/components
 10. build a landing page - Matt to take the lead on this
+11. In settings difficulty switch? To reduce the flip time (regardless classic should have a longer flip time)
 
 ## ARCHIVE: 
 
 ### 28th feb 
 
 1) Make games mode dialog mobile/dark mode compatiable (40 mins)
+2) Integrate switch component and build out settings modal with dark mode switch (50 mins)
 
 ### 27th feb - 2:50
 
