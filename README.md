@@ -4,15 +4,14 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 - Analytics dashboard? https://www.youtube.com/watch?v=MGjCIQh5Pkw&t=160s&ab_channel=Joshtriedcoding
 
 
-# todo 
+# to do 
 
 
 1) make layout for profile page! 
-2) tidy up daily shuffle code - move API call and use suspense component! 
-3) close modals on route change!
-4) classic shuffle and lite shuffle modes set up!
-5) play once per day!
-
+2) close modals on route change!
+3) classic shuffle and lite shuffle modes set up!
+4) play once per day!
+5) add favicon
 
 # future work
 
@@ -30,6 +29,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 12. check old build useDisabled?
 13. branch protections/staging branch? 
 14. calendar UI for old daily shuffles?
+15. Suspense component?
 
 ## ARCHIVE: 
 
@@ -38,6 +38,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 1) Make games mode dialog mobile/dark mode compatiable (40 mins)
 2) Integrate switch component and build out settings modal with dark mode switch (50 mins)
 3) Homescreen UI tidy up for mobile sizing (25 mins)
+4) Refactored getDailyShuffle cards to a custom hook (15 mins)
 
 ### 27th feb - 2:50
 
@@ -62,8 +63,6 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 9) game state isRunning boolean tracked in store instead of local state (10 mins)
 10) Refactor time played in modals to account for seconds instead of miliseconds (10 mins)
 
-
-
 ### 25th feb 4:00
 
 1) Refactor copyToClipboard to a custom hook
@@ -87,7 +86,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 7) can we remove 'time' as useState completely from Board?  -DONE 
 8) set up routing - Actually have pages in the right place! 
 9) Create a routes folder/hooks folder of navigate to - needs implementing 
-10. Add game modes dialog  - DONE
+10) Add game modes dialog  - DONE
 11) add github link - DONE
 12) can I trigger the modals using redux?? - DONE
 13) todo use folder structure from VP - DONE 
