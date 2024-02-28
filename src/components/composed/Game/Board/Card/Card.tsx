@@ -117,12 +117,12 @@ const CardStyledClassic = styled.div`
 
 
 type CardProps = {
-    image: any,
-    cardId: any,
-    isFlipped: any,
-    handleClick: any,
-    difficulty: any,
-    isDisabled: any,
+    image: string,
+    cardId: string,
+    isFlipped: boolean,
+    handleClick: () => void,
+    difficulty: string,
+    isDisabled?: boolean,
 }
 
 const Card = ({
@@ -133,8 +133,6 @@ const Card = ({
     difficulty,
     isDisabled,
 }: CardProps) => {
-
-
 
 const cardClasses = `card ${isFlipped ? 'flipped' : ''} ${
     isDisabled ? 'inactive' : ''

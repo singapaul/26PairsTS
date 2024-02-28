@@ -6,12 +6,13 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 # to do 
 
-
 1) make layout for profile page! 
 2) close modals on route change!
 3) classic shuffle and lite shuffle modes set up!
 4) play once per day!
-5) add favicon
+5) head tags/ analytics tags
+6) move calculate score to utils (currently in board)
+7) Fact of the day scheduler
 
 # future work
 
@@ -30,6 +31,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 13. branch protections/staging branch? 
 14. calendar UI for old daily shuffles?
 15. Suspense component?
+16. Basic testing and mocking with Jest?
 
 ## ARCHIVE: 
 
@@ -39,6 +41,9 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 2) Integrate switch component and build out settings modal with dark mode switch (50 mins)
 3) Homescreen UI tidy up for mobile sizing (25 mins)
 4) Refactored getDailyShuffle cards to a custom hook (15 mins)
+5) discovery and code base review (10 mins)
+6) Add types to the Card component (10 mins)
+7) Update favicon (5 mins)
 
 ### 27th feb - 2:50
 

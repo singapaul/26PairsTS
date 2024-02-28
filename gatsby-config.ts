@@ -12,7 +12,7 @@ const config: GatsbyConfig = {
   plugins: ["gatsby-plugin-postcss", "gatsby-transformer-typescript-css-modules", "gatsby-plugin-image",'gatsby-plugin-react-helmet', "gatsby-plugin-sitemap","gatsby-plugin-dark-mode",  {
     resolve: 'gatsby-plugin-manifest',
     options: {
-      "icon": "src/images/icon.png"
+      "icon": "src/assets/icons/26pairsFavicon.jpeg"
     }
   }, "gatsby-plugin-sharp", "gatsby-transformer-sharp", {
     resolve: 'gatsby-source-filesystem',
