@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -11,7 +11,7 @@ export const BaseModal = ({
   hideCloseButton = false,
 }: {
   title: string;
-  children: any;
+  children: React.ReactNode | ReactElement;
   isOpen: boolean;
   handleClose: () => void;
   hideCloseButton?: boolean;

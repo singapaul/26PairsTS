@@ -22,12 +22,20 @@ import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage
 
 import type { DifficultyKeys } from "@/store/slices/historicStats";
  
+type CardType = {
+  name: string
+  src: string
+  matchID: string
+  id: string
+}
+
 export type BoardProps = {
-  duplicatedCards: any;
+  duplicatedCards: CardType[];
   gameDifficulty: DifficultyKeys;
 };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
+ 
   const dispatch = useAppDispatch();
   const [cardPair, setCardPair] = useState<string[]>([]);
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
@@ -184,7 +192,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       ) : (
         <>
           <BoardStyled>
-            {duplicatedCards.map((card: { id: string; src: any }) => {
+            {duplicatedCards.map((card: { id: string; src: string }) => {
               return (
                 <Card
                   difficulty={gameDifficulty}
