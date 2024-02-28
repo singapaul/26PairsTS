@@ -7,12 +7,14 @@ import { ModalRegistry } from "@/components/Modals";
 
 const Homescreen = ({ path }: { path: string }) => {
   return (
-    <div className="flex flex-col justify-center items-center text-center h-screen gap-4">
-      <Status/>
+    <div className="flex flex-col items-center text-center h-screen pb-6">
+    <div className="flex flex-grow flex-col justify-center items-center gap-4">
       <Hero />
-      <FactContainer />
-      <ModalRegistry/>
     </div>
+    <FactContainer />
+    <ModalRegistry/>
+  </div>
+  
   );
 };
 

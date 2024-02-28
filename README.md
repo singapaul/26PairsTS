@@ -6,19 +6,19 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 # todo 
 
-1) homescreen does not fit on the page - UI fixes
-2) make layout for profile page 
-3) tidy up daily shuffle code - move API call and use suspense component? 
-4) close modals on route change
-5) classic shuffle and lite shuffle modes set up
-6) play once per day
-7) card alignment on mobile
-8) check old build useDisabled?
-9) branch protections/staging branch? 
-10) calendar UI for old daily shuffles?
+
+1) make layout for profile page 
+2) tidy up daily shuffle code - move API call and use suspense component? 
+3) close modals on route change
+4) classic shuffle and lite shuffle modes set up
+5) play once per day
+6) card alignment on mobile
+7) check old build useDisabled?
+8) branch protections/staging branch? 
+9) calendar UI for old daily shuffles?
 
 # future work
-
+1. Optimise designs for tablet
 2. integrate full sign in flow and make app cohesive
 3. Save scores to online database - if signed in.
 4. Use python API and write Facts endpoint with chat gtp-3 
@@ -36,6 +36,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 1) Make games mode dialog mobile/dark mode compatiable (40 mins)
 2) Integrate switch component and build out settings modal with dark mode switch (50 mins)
+3) Homescreen UI tidy up for mobile sizing (25 mins)
 
 ### 27th feb - 2:50
 
