@@ -1,5 +1,6 @@
-import getCurrentDate from './getCurrentDate'
-// @
+import { getCurrentDate } from './getCurrentDate'
+
+
 // @ts-ignore
 export const checkPlayedToday = (difficulty) => {
   if (typeof window !== 'undefined') {

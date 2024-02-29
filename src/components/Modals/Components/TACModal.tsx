@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BaseModal } from './BaseModal'
+import { getCurrentDate } from '@/utils'
 
-import getCurrentDate from '../../../utils/getCurrentDate'
 export const TACModal = ({ isOpen, handleClose }: { isOpen: boolean, handleClose: () => void }) => {
   const [date, setDate] = useState<string>('')
 

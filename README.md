@@ -6,13 +6,13 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 # to do 
 
-
-4) play once per day! - checked the 'playedToday' existing util function
-5) head tags/ analytics tags
-1) make layout for profile page! 
-2) close modals on route change!
-3) classic shuffle and lite shuffle modes set up!
-7) tooltip and countdown to next daily shuffle on homescreen if they have already played today
+1) install simple import sort and run an ESLINT fix
+1) play once per day! - checked the 'playedToday' existing util function
+2) head tags/ analytics tags - @Matt input pending 
+3) close modals on route change!
+4) tooltip and countdown to next daily shuffle on homescreen if they have already played today
+5) make layout for profile page!
+6) classic shuffle and lite shuffle modes set up!
 
 
 # future work
@@ -23,7 +23,6 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 4. Use python API and write Facts endpoint with chat gtp-3 
 5. investigate how we could share a shuffle code
 6. Leaderboards & Auth
-7. Bring back points - how do I implement this?
 8. Analytics tracking
 9. https://ui.aceternity.com/components
 10. build a landing page - Matt to take the lead on this
@@ -33,6 +32,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 14. calendar UI for old daily shuffles?
 15. Suspense component?
 16. Basic testing and mocking with Jest?
+17. Testing branches should be available when  I push code on github
 
 ## ARCHIVE: 
 
