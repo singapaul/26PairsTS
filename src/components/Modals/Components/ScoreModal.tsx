@@ -5,7 +5,8 @@ import { BaseModal } from "./BaseModal";
 import { useCopyToClipboard } from "@/utils";
 import type { DifficultyKeys } from "@/store/slices/historicStats";
 import { formatSecondsToMMSS } from "@/utils";
-// @todo pass the difficulty in as a prop
+
+
 export const ScoreModal = ({
   isOpen,
   handleClose,

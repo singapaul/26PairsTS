@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BaseModal } from "./BaseModal";
 
-import Card from "../../composed/Game/Board/Card/Card";
+import { Card } from "@/components/composed/Game/Board/Card";
 import { CLASSICDECKLITE } from "../../../assets/data/CLASSICDECKLITE";
 
 export const AboutModal = ({
@@ -60,10 +60,10 @@ export const AboutModal = ({
             key={i}
             isFlipped={flippedCards[i]}
             image={CLASSICDECKLITE.cards[index].src}
-            cardId={undefined}
-            handleClick={undefined}
-            difficulty={undefined}
-            isDisabled={undefined}
+            cardId={'placeholder'}
+            handleClick={() => console.log('placehlder')}
+            difficulty={'tbc'}
+            isDisabled={false}
           />
         ))}
       </div>

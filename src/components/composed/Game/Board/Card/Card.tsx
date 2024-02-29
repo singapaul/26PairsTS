@@ -125,7 +125,7 @@ type CardProps = {
     isDisabled?: boolean,
 }
 
-const Card = ({
+export const Card = ({
     image,
     cardId,
     isFlipped,
@@ -174,4 +174,4 @@ const cardClasses = `card ${isFlipped ? 'flipped' : ''} ${
   )
 }
 
-export default Card
+ 

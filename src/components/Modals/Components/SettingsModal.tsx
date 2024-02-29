@@ -4,7 +4,6 @@ import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
 import { SettingRow } from "@/components/composed/modals/settingsModal/settingRow";
 import { Button } from "@/components/ui/button";
 
-
 export const SettingsModal = ({
   isOpen,
   handleClose,
@@ -22,15 +21,16 @@ export const SettingsModal = ({
             href={"mailto:info@26pairs.com"}
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:cursor-pointer hover:text-indigo-700"
           >
             info@26pairs.com
           </a>
         </SettingRow>
-        <SettingRow title={"T&C"}>
-          <Button onClick={handleTACModal}> {"View terms"}</Button>
-        </SettingRow>
         <SettingRow title={"Dark Mode"}>
           <ThemeToggle />
+        </SettingRow>
+        <SettingRow title={"T&C"}>
+          <Button onClick={handleTACModal}> {"View terms"}</Button>
         </SettingRow>
       </div>
     </BaseModal>

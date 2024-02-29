@@ -6,13 +6,14 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 # to do 
 
+
+4) play once per day! - checked the 'playedToday' existing util function
+5) head tags/ analytics tags
 1) make layout for profile page! 
 2) close modals on route change!
 3) classic shuffle and lite shuffle modes set up!
-4) play once per day!
-5) head tags/ analytics tags
-6) move calculate score to utils (currently in board) & reconsider the calculation
-7) Fact of the day scheduler
+7) tooltip and countdown to next daily shuffle on homescreen if they have already played today
+
 
 # future work
 
@@ -35,7 +36,11 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 ## ARCHIVE: 
 
-### 28th feb - 2:50
+### 29th feb - 
+
+1) Refactor game score calculation to utils folder - (15 mins)
+
+### 28th feb - 3:05
 
 1) Make games mode dialog mobile/dark mode compatiable (40 mins)
 2) Integrate switch component and build out settings modal with dark mode switch (50 mins)
@@ -46,6 +51,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 7) Update favicon (5 mins)
 8) Update Helmet site header (5 mins)
 9) Remove use of 'Any' types (10 mins)
+10) Re-implement fact of the day scheduler & container refinement (15 mins)
 
 ### 27th feb - 2:50
 

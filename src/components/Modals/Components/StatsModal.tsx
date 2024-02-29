@@ -4,7 +4,7 @@ import { useAppSelector } from "@/store/hooks";
 import { BaseModal } from "./BaseModal";
 import type { DifficultyKeys } from "@/store/slices/historicStats";
 
-// @todo pass the difficulty in as a prop
+
 export const StatsModal = ({
   isOpen,
   handleClose,

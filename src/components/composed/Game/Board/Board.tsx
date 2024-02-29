@@ -1,10 +1,10 @@
 /* eslint-disable eqeqeq */
 import React, { useState, useEffect, useRef } from "react";
-import Card, { CardStyledLite } from "./Card/Card";
+import { Card } from "./Card";
 import { CARD_FLIP_TIME } from "@/settings";
 import { Skeleton } from "@/components/ui/skeleton";
 import { addToStats } from "@/store/slices/historicStats";
-import { getNameById } from "@/utils";
+import { calculateGameScore, getNameById } from "@/utils";
 import { increment, stop, start, reset } from "@/store/slices/timer";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import {
@@ -21,13 +21,13 @@ import { BoardStyled, BoardContainer } from "./styles";
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
 
 import type { DifficultyKeys } from "@/store/slices/historicStats";
- 
+
 type CardType = {
-  name: string
-  src: string
-  matchID: string
-  id: string
-}
+  name: string;
+  src: string;
+  matchID: string;
+  id: string;
+};
 
 export type BoardProps = {
   duplicatedCards: CardType[];
@@ -35,13 +35,12 @@ export type BoardProps = {
 };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
- 
   const dispatch = useAppDispatch();
   const [cardPair, setCardPair] = useState<string[]>([]);
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Add this line to introduce loading state
   // const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
- 
+
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const isRunning = useAppSelector((state) => state.timer.isRunning);
@@ -71,14 +70,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       })
     );
   }, [dispatch, duplicatedCards]);
-
- 
-  const calculateScore = () => {
-    const maxScore = 10000;
-    const uniqueCardCount = duplicatedCards.length / 2;
-    const finalScore = Math.floor(maxScore * (uniqueCardCount / turnsCount));
-    dispatch(updateScore(finalScore));
-  };
 
   useEffect(() => {
     let intervalId: string | number | NodeJS.Timeout | undefined;
@@ -115,13 +106,12 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       setFlippedCardList(currentFlippedCards);
       resetCardPair();
       if (duplicatedCards.length === currentFlippedCards.length) {
-        calculateScore();
-        const maxScore = 10000;
-        const uniqueCardCount = duplicatedCards.length / 2;
-        const finalScore = Math.floor(
-          maxScore * (uniqueCardCount / turnsCount)
+        const finalScore = calculateGameScore(
+          time,
+          turnsCount,
+          duplicatedCards.length
         );
-
+        dispatch(updateScore(finalScore));
         dispatch(stop());
         dispatch(updateFinalTime(time));
 
@@ -182,7 +172,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       {isLoading ? (
         <BoardStyled>
           {Array.from({ length: 24 }).map((_, index) => (
-       
             <Skeleton
               key={index}
               className="w-[60px] h-[84px] rounded-[2px] m-1"
