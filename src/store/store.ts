@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
+
 import displayWelcomeMenuReducer from './slices/displayWelcomeMenu'
 import finishedGameStatsReducer from './slices/finishedGameStats'
+import historicStatsReducer from './slices/historicStats'
 import openModalReducer from './slices/modals'
 import timerReducer from './slices/timer'
-import historicStatsReducer from './slices/historicStats'
 export const store = configureStore({
   reducer: {
     displayWelcomeMenuSlice: displayWelcomeMenuReducer,

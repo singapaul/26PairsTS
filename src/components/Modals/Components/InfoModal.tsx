@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { BaseModal } from "./BaseModal";
+import React, { useEffect,useState } from "react";
+
 import { Card } from "@/components/composed/Game/Board/Card";
+
 import { CLASSICDECKLITE } from "../../../assets/data/CLASSICDECKLITE";
+import { BaseModal } from "./BaseModal";
 
 export const InfoModal = ({
   isOpen,

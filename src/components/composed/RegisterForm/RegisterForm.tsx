@@ -1,15 +1,16 @@
 import React from "react";
-import { navigate } from "gatsby";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { auth } from "../../Firebase/Firebase";
 import {
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { navigate } from "gatsby";
+import { z } from "zod";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -21,6 +22,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+
+import { auth } from "../../Firebase/Firebase";
 type Props = {};
 
 export const RegisterForm = (props: Props) => {

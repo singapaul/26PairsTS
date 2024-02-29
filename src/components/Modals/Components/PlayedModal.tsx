@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
+import Countdown from "react-countdown";
+import { navigate } from "gatsby";
+
+import { classicShuffle,liteShuffle } from "@/routes/route_strings";
+import { useAppSelector } from "@/store/hooks";
+import { formatSecondsToMMSS, timeUntilTomorrow } from "@/utils";
+import { useCopyToClipboard } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
-import { liteShuffle, classicShuffle } from "@/routes/route_strings";
-import { isMobile, timeUntilTomorrow, formatSecondsToMMSS } from "@/utils";
-import { useCopyToClipboard } from "@/utils";
-import Countdown from "react-countdown";
-import { useAppSelector } from "@/store/hooks";
-import { navigate } from "gatsby";
 
 export const PlayedModal =  ({
   isOpen,

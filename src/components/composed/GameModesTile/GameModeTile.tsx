@@ -1,9 +1,10 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { navigate } from "gatsby";
-import { FaBrain } from "react-icons/fa";
 import { CiStopwatch } from "react-icons/ci";
+import { FaBrain } from "react-icons/fa";
 import { FaCalculator } from "react-icons/fa";
+import { navigate } from "gatsby";
+
+import { Button } from "@/components/ui/button";
 type GameModeTileProps = {
   title: string;
   link: string;

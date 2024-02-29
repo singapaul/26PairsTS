@@ -1,14 +1,15 @@
 import React from "react";
-import card from "@/assets/images/card_back.png";
-import { Button } from "@/components/ui/button";
-import { useAuthValue } from "@/components/Auth/AuthContext";
+import { FaUser } from "react-icons/fa";
+import { IoIosSettings } from "react-icons/io";
+import { TiArrowShuffle } from "react-icons/ti";
 import { navigate } from "gatsby";
+
+import card from "@/assets/images/card_back.png";
+import { useAuthValue } from "@/components/Auth/AuthContext";
+import { Button } from "@/components/ui/button";
 import { useNavigateToDailyShuffle } from "@/routes/route_hooks";
 import { useAppDispatch } from "@/store/hooks";
 import { setModalConfig } from "@/store/slices/modals";
-import { IoIosSettings } from "react-icons/io";
-import { TiArrowShuffle } from "react-icons/ti";
-import { FaUser } from "react-icons/fa";
 
 
 export const Hero = () => {

@@ -1,7 +1,9 @@
 import React from "react";
 
 import { useAppSelector } from "@/store/hooks";
+
 import { BaseModal } from "./BaseModal";
+
 import type { DifficultyKeys } from "@/store/slices/historicStats";
 
 

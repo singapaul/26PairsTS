@@ -1,8 +1,9 @@
 import React from "react";
+
 import { FactContainer } from "@/components/composed/FactContainer";
 import { Hero } from "@/components/composed/Hero";
-import Status from "@/components/Status";
 import { ModalRegistry } from "@/components/Modals";
+// import Status from "@/components/Status";
  
 
 const Homescreen = ({ path }: { path: string }) => {

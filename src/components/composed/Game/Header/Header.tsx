@@ -1,20 +1,19 @@
 import React from "react";
-
+import { FaChartBar } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
 import { IoIosInformationCircleOutline } from "react-icons/io";
-
-import companyIcon from "@/assets/icons/26pairslogoNoBack.png";
-import { FaChartBar } from "react-icons/fa";
-import { VscDebugRestart } from "react-icons/vsc";
-
 import { IoMdMenu } from "react-icons/io";
 import { RiMenu4Fill } from "react-icons/ri";
+import { VscDebugRestart } from "react-icons/vsc";
+
 import { Disclosure } from "@headlessui/react";
 
+import companyIcon from "@/assets/icons/26pairslogoNoBack.png";
 import { useNavigateToHomescreen } from "@/routes/route_hooks";
-
+import { useAppDispatch,useAppSelector } from "@/store/hooks";
+import { DifficultyKeys } from "@/store/slices/historicStats";
 import { setModalConfig } from "@/store/slices/modals";
-import { useAppSelector, useAppDispatch } from "@/store/hooks";
+
 import {
   BoardActionsWrapper,
   BoardNav,
@@ -25,7 +24,6 @@ import {
   StatsStyled,
   StyledButton,
 } from "./styles";
-import { DifficultyKeys } from "@/store/slices/historicStats";
 
 type HeaderProps = {
   resetGame: () => void;

@@ -1,8 +1,10 @@
 import React from "react";
-import { BaseModal } from "./BaseModal";
-import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
+
 import { SettingRow } from "@/components/composed/modals/settingsModal/settingRow";
+import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
 import { Button } from "@/components/ui/button";
+
+import { BaseModal } from "./BaseModal";
 
 export const SettingsModal = ({
   isOpen,

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link, navigate } from "gatsby";
-import { auth } from "./Firebase/Firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
+import { Link, navigate } from "gatsby";
+
+import { auth } from "./Firebase/Firebase";
 import View from "./View";
 
 const Reset = ({path}: {path:string}) => {

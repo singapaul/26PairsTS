@@ -1,9 +1,9 @@
 import React from "react";
 
-import { BaseLayout } from "@/components/Layouts/BaseLayout";
 // @ts-ignore
 import card from "@/assets/images/card_back.png";
 import { RegisterForm } from "@/components/composed/RegisterForm";
+import { BaseLayout } from "@/components/Layouts/BaseLayout";
  
 
 

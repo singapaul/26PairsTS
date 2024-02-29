@@ -1,10 +1,12 @@
 import React from "react";
 
 import { useAppSelector } from "@/store/hooks";
-import { BaseModal } from "./BaseModal";
 import { useCopyToClipboard } from "@/utils";
-import type { DifficultyKeys } from "@/store/slices/historicStats";
 import { formatSecondsToMMSS } from "@/utils";
+
+import { BaseModal } from "./BaseModal";
+
+import type { DifficultyKeys } from "@/store/slices/historicStats";
 
 
 export const ScoreModal = ({

@@ -1,24 +1,25 @@
 /* eslint-disable eqeqeq */
-import React, { useState, useEffect, useRef } from "react";
-import { Card } from "./Card";
-import { CARD_FLIP_TIME } from "@/settings";
+import React, { useEffect, useRef,useState } from "react";
+
+import { Header } from "@/components/composed/Game/Header";
 import { Skeleton } from "@/components/ui/skeleton";
-import { addToStats } from "@/store/slices/historicStats";
-import { calculateGameScore, getNameById } from "@/utils";
-import { increment, stop, start, reset } from "@/store/slices/timer";
-import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { CARD_FLIP_TIME } from "@/settings";
+import { useAppDispatch,useAppSelector } from "@/store/hooks";
 import {
   resetMoves,
   updateFinalTime,
   updateMoves,
   updateScore,
 } from "@/store/slices/finishedGameStats";
-import { Header } from "@/components/composed/Game/Header";
-
+import { addToStats } from "@/store/slices/historicStats";
 import { setModalConfig } from "@/store/slices/modals";
-import { BoardStyled, BoardContainer } from "./styles";
-
+import { increment, reset,start, stop } from "@/store/slices/timer";
+import { calculateGameScore, getNameById } from "@/utils";
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
+
+import { Card } from "./Card";
+
+import { BoardContainer,BoardStyled } from "./styles";
 
 import type { DifficultyKeys } from "@/store/slices/historicStats";
 

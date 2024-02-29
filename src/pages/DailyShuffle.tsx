@@ -1,8 +1,9 @@
 import React from "react";
+
 import { Board } from "@/components/composed/Game/Board";
-import { DAILY_SHUFFLE } from "@/settings";
 import { ModalRegistry } from "@/components/Modals";
 import { useFetchShuffledCards } from "@/hooks";
+import { DAILY_SHUFFLE } from "@/settings";
 const DailyShuffle = ({ path }: { path: string }) => {
 
   const { duplicatedCards, isLoading, error } = useFetchShuffledCards()

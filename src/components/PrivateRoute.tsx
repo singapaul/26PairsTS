@@ -1,6 +1,7 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { navigate } from "gatsby"
+import PropTypes from "prop-types"
+
 import { useAuthValue } from './Auth/AuthContext'
 // @ts-ignore
 const PrivateRoute = ({ component: Component,path, location, ...rest }) => {

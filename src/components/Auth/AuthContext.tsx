@@ -1,6 +1,7 @@
-import React, { ReactNode, createContext, useContext, useEffect, useState  } from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState  } from "react";
+import { onAuthStateChanged,User } from "firebase/auth";
+
 import { auth } from "../Firebase/Firebase";
-import { User, onAuthStateChanged } from "firebase/auth";
 
 const defaultContext = {
   currentUser: null,

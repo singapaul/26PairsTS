@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import {
-  LOCAL_STORAGE_KEY_NAME_DAILY,
   LOCAL_STORAGE_KEY_NAME_CLASSIC,
+  LOCAL_STORAGE_KEY_NAME_DAILY,
   LOCAL_STORAGE_KEY_NAME_LITE,
 } from "@/settings";
+
 import type {
   gameDataObjectArrayType,
 } from "@/utils/saveGameStatsToLocalStorage";

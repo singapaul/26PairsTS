@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import { CLASSICDECK } from '@/assets/data/CLASSICDECK'
  
 export const CardStyledLite = styled.div`

@@ -1,7 +1,8 @@
 import React, { ReactElement } from "react";
-import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
+
+import { Dialog, Transition } from "@headlessui/react";
 
 export const BaseModal = ({
   title,

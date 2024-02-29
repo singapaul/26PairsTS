@@ -1,6 +1,7 @@
+import { useEffect,useState } from 'react';
+
 import { CLASSICDECKLITE } from '@/assets/data';
 import { assignIDToCards, reorderArrayAccordingToOrderArray } from '@/utils';
-import { useState, useEffect } from 'react';
 
 // Custom hook for fetching and processing data
 export const useFetchShuffledCards = () => {

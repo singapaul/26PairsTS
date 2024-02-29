@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 type BaseLayoutProps = {

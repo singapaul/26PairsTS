@@ -1,16 +1,16 @@
 import React from "react";
-import { z } from "zod";
-import { auth } from "../../Firebase/Firebase";
+import { useForm } from "react-hook-form";
 import {
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
-  GoogleAuthProvider,
 } from "firebase/auth";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { Link, navigate } from "gatsby";
+import { z } from "zod";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -21,7 +21,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link, navigate } from "gatsby";
+import { Separator } from "@/components/ui/separator";
+
+import { auth } from "../../Firebase/Firebase";
 type Props = {};
 
 // @todo will need to add the path later as I move this route???

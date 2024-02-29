@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "gatsby";
-import Layout from "../components/Layout";
-import View from "../components/View";
-import Status from "../components/Status";
+
 import { Button } from "@/components/ui/button";
+
+import Layout from "../components/Layout";
+import Status from "../components/Status";
+import View from "../components/View";
 
 const Index = () => (
   <Layout>

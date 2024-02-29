@@ -1,23 +1,24 @@
 import React from "react";
-import {
-  AboutModal,
-  SettingsModal,
-  ContactModal,
-  InfoModal,
-  GameModesModal,
-  PlayedModal,
-  ScoreModal,
-  StatsModal,
-  TACModal,
-} from "../Components";
 
-import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { useAppDispatch,useAppSelector } from "@/store/hooks";
 import {
+  resetModalConfig,
   selectActiveModalId,
   selectModalIsOpen,
   selectModalProps,
-  resetModalConfig,
 } from "@/store/slices/modals";
+
+import {
+  AboutModal,
+  ContactModal,
+  GameModesModal,
+  InfoModal,
+  PlayedModal,
+  ScoreModal,
+  SettingsModal,
+  StatsModal,
+  TACModal,
+} from "../Components";
 type modalLookupProps = {
   [key: string]: React.ElementType;
 };

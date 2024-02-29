@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { BaseModal } from './BaseModal'
 
 export const ContactModal = ({ isOpen, handleClose }: { isOpen: boolean, handleClose: () => void }) => {

@@ -1,12 +1,14 @@
 import React from "react";
-import { BaseModal } from "./BaseModal";
+
+import { GameModesModalDescription } from "@/assets/copy";
 import { GameModeTile } from "@/components/composed/GameModesTile/GameModeTile";
 import {
   classicShuffle,
   dailyShuffle,
   liteShuffle,
 } from "@/routes/route_strings";
-import { GameModesModalDescription } from "@/assets/copy";
+
+import { BaseModal } from "./BaseModal";
 export const GameModesModal = ({
   isOpen,
   handleClose,

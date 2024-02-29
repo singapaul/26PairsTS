@@ -1,4 +1,5 @@
 import { navigate } from "gatsby";
+
 import {home} from './route_strings'
 import { dailyShuffle } from "./route_strings";
 

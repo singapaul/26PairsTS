@@ -1,6 +1,7 @@
 import React from "react";
 // @ts-ignore
 import { ThemeToggler } from "gatsby-plugin-dark-mode";
+
 import { Switch } from "../ui/switch";
 
 type ThemeTogglerChildProps = {

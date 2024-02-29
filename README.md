@@ -6,14 +6,13 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 # to do 
 
-1) install simple import sort and run an ESLINT fix
 1) play once per day! - checked the 'playedToday' existing util function
 2) head tags/ analytics tags - @Matt input pending 
 3) close modals on route change!
 4) tooltip and countdown to next daily shuffle on homescreen if they have already played today
 5) make layout for profile page!
 6) classic shuffle and lite shuffle modes set up!
-
+7) audit modals (don't want to accidentally close score modal either (but will reconsider because of played modal))
 
 # future work
 
@@ -39,6 +38,8 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 ### 29th feb - 
 
 1) Refactor game score calculation to utils folder - (15 mins)
+2) Refactor Utils folder to remove redundant code - (15 mins)
+3) Configure ESLint and project linting rules including regression test  - (15 mins)
 
 ### 28th feb - 3:05
 

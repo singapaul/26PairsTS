@@ -1,10 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
 /* eslint-disable no-lone-blocks */
 import React from "react";
-import { Link, navigate } from "@reach/router";
-import { useAuthValue } from "../Auth/AuthContext";
-
 import { signOut } from "firebase/auth";
+
+import { Link, navigate } from "@reach/router";
+
+import { useAuthValue } from "../Auth/AuthContext";
 import { auth } from "../Firebase/Firebase";
 
 export default () => {

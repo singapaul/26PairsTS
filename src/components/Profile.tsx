@@ -1,12 +1,13 @@
 import React from "react";
-import View from "./View";
-import { ref, set, get } from "firebase/database";
-import { useAuthValue } from "./Auth/AuthContext";
 import { signOut } from "firebase/auth";
+import { get,ref, set } from "firebase/database";
+import { navigate } from "gatsby";
+
+import { useAuthValue } from "./Auth/AuthContext";
 // @ts-ignore
 import { auth, db } from "./Firebase/Firebase";
-import { navigate } from "gatsby";
 import { Button } from "./ui/button";
+import View from "./View";
 const Profile = () => {
   const { currentUser } = useAuthValue();
 
