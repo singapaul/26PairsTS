@@ -1,12 +1,12 @@
 import React from "react";
 
 import { useAppSelector } from "@/store/hooks";
+import { formatSecondsToMMSS } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
 
+// formatSecondsToMMSS
 import type { DifficultyKeys } from "@/store/slices/historicStats";
-
-
 export const StatsModal = ({
   isOpen,
   handleClose,
@@ -17,6 +17,12 @@ export const StatsModal = ({
   gameDifficulty: DifficultyKeys;
 }) => {
   const gameStats = useAppSelector((state) => state.stats[gameDifficulty]);
+
+console.log('wagwan my guy from stats modal')
+console.log(gameStats)
+// need to handle the sitation where gameStats is a string
+
+
 
 
   return (

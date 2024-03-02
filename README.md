@@ -6,17 +6,27 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 # to do 
 
-1) play once per day! - checked the 'playedToday' existing util function
-2) head tags/ analytics tags - @Matt input pending 
-3) close modals on route change!
-4) tooltip and countdown to next daily shuffle on homescreen if they have already played today
-5) make layout for profile page!
-6) classic shuffle and lite shuffle modes set up!
-7) audit modals (don't want to accidentally close score modal either (but will reconsider because of played modal))
+1) global loading state
+1) code base walkthrough 
+1) play once per day integration
+2) disable the flip cards button with global loading state.
+3) start timer on card flip
+4) integrate tooltip & countdown onto homescreen
+5) time on stats modal for best time is broken
+6) head tags (SEO) / analytics tags (tracking) integration - @Matt input pending 
+7) play around with suspense, maybe on the cards?
+8) refactor all slices with the the typedSelector 
 
+9) close modals on route change!
+10) make layout for profile page!
+11) classic shuffle and lite shuffle modes set up!
+12) audit modals (don't want to accidentally close score modal either (but will reconsider because of played modal))
+13) probably need to refactor the historic facts section to make sure it caters for all game modes
+ 14) hard mode? 
 # future work
 
 1. Optimise designs for tablet
+2. Need to test on slow connection and potenially block modal/show a loading spinner?
 2. integrate full sign in flow and make app cohesive
 3. Save scores to online database - if signed in.
 4. Use python API and write Facts endpoint with chat gtp-3 
@@ -35,7 +45,11 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 ## ARCHIVE: 
 
-### 29th feb - 
+### 1st March - 45 mins 
+
+1) Integrate hasPlayedToday boolean into redux store
+
+### 29th feb - 45 mins 
 
 1) Refactor game score calculation to utils folder - (15 mins)
 2) Refactor Utils folder to remove redundant code - (15 mins)
@@ -63,6 +77,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 5) Fix flip cards bug on 1st render only (60 mins)
 6) Refactor asignCardId and Re-order array functions to global utils (5 mins)
 7) Refactor the game modes dialog (60 mins)
+8) facenook twitter card in meta data
 
 ### 26th feb - 1:50
 

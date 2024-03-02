@@ -1,10 +1,10 @@
 /* eslint-disable eqeqeq */
-import React, { useEffect, useRef,useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/composed/Game/Header";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CARD_FLIP_TIME } from "@/settings";
-import { useAppDispatch,useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   resetMoves,
   updateFinalTime,
@@ -13,13 +13,14 @@ import {
 } from "@/store/slices/finishedGameStats";
 import { addToStats } from "@/store/slices/historicStats";
 import { setModalConfig } from "@/store/slices/modals";
-import { increment, reset,start, stop } from "@/store/slices/timer";
+import { setHasPlayedToday } from "@/store/slices/playedToday";
+import { increment, reset, start, stop } from "@/store/slices/timer";
 import { calculateGameScore, getNameById } from "@/utils";
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
 
 import { Card } from "./Card";
 
-import { BoardContainer,BoardStyled } from "./styles";
+import { BoardContainer, BoardStyled } from "./styles";
 
 import type { DifficultyKeys } from "@/store/slices/historicStats";
 
@@ -115,7 +116,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
         dispatch(updateScore(finalScore));
         dispatch(stop());
         dispatch(updateFinalTime(time));
-
+        dispatch(setHasPlayedToday());
         saveGameStatsToLocalStorage({
           gameMode: "26-pairs-game-stats-daily",
           score: finalScore,
