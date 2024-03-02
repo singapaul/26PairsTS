@@ -7,22 +7,20 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 # to do 
 
 1) global loading state
-1) code base walkthrough 
-1) play once per day integration
-2) disable the flip cards button with global loading state.
-3) start timer on card flip
-4) integrate tooltip & countdown onto homescreen
-5) time on stats modal for best time is broken
+2) play once per day integration
+3) disable the flip cards button with global loading state.
+4) start timer on card flip
+5) integrate tooltip & countdown onto homescreen
 6) head tags (SEO) / analytics tags (tracking) integration - @Matt input pending 
 7) play around with suspense, maybe on the cards?
 8) refactor all slices with the the typedSelector 
+9) score modal copy to clipboard -address fixes
+10) close modals on route change!
+11) make layout for profile page!
+12) classic shuffle and lite shuffle modes set up!
+13) audit modals (don't want to accidentally close score modal either (but will reconsider because of played modal))
+14) probably need to refactor the historic facts section to make sure it caters for all game modes
 
-9) close modals on route change!
-10) make layout for profile page!
-11) classic shuffle and lite shuffle modes set up!
-12) audit modals (don't want to accidentally close score modal either (but will reconsider because of played modal))
-13) probably need to refactor the historic facts section to make sure it caters for all game modes
- 14) hard mode? 
 # future work
 
 1. Optimise designs for tablet
@@ -44,6 +42,10 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 17. Testing branches should be available when  I push code on github
 
 ## ARCHIVE: 
+
+### 2nd MARCH
+
+1) Ammend stats modal bug
 
 ### 1st March - 45 mins 
 

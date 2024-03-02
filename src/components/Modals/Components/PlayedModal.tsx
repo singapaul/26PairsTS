@@ -17,10 +17,8 @@ export const PlayedModal =  ({
 }: {
   isOpen: boolean;
   handleClose: () => void;
-  gameDifficulty: string;
+  gameDifficulty?: string;
 }) => {
-  // if (gameDifficulty !== "dailyShuffle") return;
-
 
   const finalTurns = useAppSelector(
     (state: { finishedGameStats: { moves: any } }) =>
@@ -43,7 +41,7 @@ export const PlayedModal =  ({
     <BaseModal title="Score" isOpen={isOpen} handleClose={handleClose}>
       <div>
         <p className="text-sm text-gray-500 dark:text-gray-300">
-          Congratulations on beating todays daily shuffle! Your scores are below
+          Congratulations on beating todays daily shuffle! Come back tommorow to beat your score.
         </p>
       </div>
 

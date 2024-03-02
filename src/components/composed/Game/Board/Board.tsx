@@ -14,6 +14,7 @@ import {
 import { addToStats } from "@/store/slices/historicStats";
 import { setModalConfig } from "@/store/slices/modals";
 import { setHasPlayedToday } from "@/store/slices/playedToday";
+import { selectHasPlayedToday } from "@/store/slices/playedToday";
 import { increment, reset, start, stop } from "@/store/slices/timer";
 import { calculateGameScore, getNameById } from "@/utils";
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
@@ -47,7 +48,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const isRunning = useAppSelector((state) => state.timer.isRunning);
   const time = useAppSelector((state) => state.timer.timeInSeconds);
-
+  const hasPlayedToday: boolean = useAppSelector(selectHasPlayedToday)
   const handleRevealCards = () => {
     const allCardIds = duplicatedCards.map((card: { id: string }) => card.id);
     setFlippedCardList(allCardIds);
@@ -62,15 +63,27 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     if (duplicatedCards && duplicatedCards.length > 0) {
       setIsLoading(false); // Set loading to false once data is ready
     }
-    dispatch(
-      setModalConfig({
-        id: "info",
-        isOpen: true,
-        props: {
-          handleRevealCards,
-        },
-      })
-    );
+
+// depending if we have played today or not we open a different modal
+    if(hasPlayedToday){
+      dispatch(setModalConfig({
+        id: 'played',
+        isOpen: true
+      }))
+    } else {
+
+      dispatch(
+        setModalConfig({
+          id: "info",
+          isOpen: true,
+          props: {
+            handleRevealCards,
+          },
+        })
+      );
+    }
+
+
   }, [dispatch, duplicatedCards]);
 
   useEffect(() => {
@@ -128,11 +141,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
           () =>
             dispatch(
               setModalConfig({
-                id: "score",
+                id: "played",
                 isOpen: true,
-                props: {
-                  gameDifficulty,
-                },
               })
             ),
           1000

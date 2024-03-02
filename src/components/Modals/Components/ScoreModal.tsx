@@ -30,6 +30,8 @@ export const ScoreModal = ({
  
   const formattedTime: string = formatSecondsToMMSS(timeCount);
 
+
+  
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
     time: formattedTime,
     turns: JSON.stringify(turnsCount),

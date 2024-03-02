@@ -5,7 +5,6 @@ import { formatSecondsToMMSS } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
 
-// formatSecondsToMMSS
 import type { DifficultyKeys } from "@/store/slices/historicStats";
 export const StatsModal = ({
   isOpen,
