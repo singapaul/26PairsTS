@@ -1,4 +1,6 @@
-export const formatSecondsToMMSS = (seconds: number): string => {
+export const formatSecondsToMMSS = (seconds: number | string): string => {
+  if (typeof seconds === "string") return "-";
+
   const minutes: number = Math.floor(seconds / 60);
   const remainingSeconds: number = seconds % 60;
 
