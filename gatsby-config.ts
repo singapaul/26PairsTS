@@ -11,7 +11,6 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     "gatsby-plugin-postcss",
-    "gatsby-transformer-typescript-css-modules",
     "gatsby-plugin-image",
     'gatsby-plugin-dts-css-modules',
     "gatsby-plugin-react-helmet",
