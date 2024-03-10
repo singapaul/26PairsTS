@@ -69,9 +69,10 @@
   "devDependencies": {
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.48",
-    "css-loader": "^6.10.0",
     "@types/react-dom": "^18.2.18",
     "@types/react-helmet": "^6.1.11",
+    "css-loader": "^6.10.0",
+    "gatsby-plugin-dts-css-modules": "^3.0.0",
     "typescript": "^5.3.3",
     "typescript-plugin-css-modules": "^5.0.2"
   }

@@ -5281,6 +5281,11 @@ dotenv@^8.6.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.6.0.tgz#061af664d19f7f4d8fc6e4ff9b584ce237adcb8b"
   integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
 
+dts-css-modules-loader@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/dts-css-modules-loader/-/dts-css-modules-loader-2.0.0.tgz#2c18d9bfc8d4de2f2fd6f0d5819299ee1c6a66ac"
+  integrity sha512-eheqA1F2uVKs8A5BQTpPyg5wwLE2mictYjN0atJX/VLVpXDr9Xx1bqM9W5piQi9zp/CUkMBCBw+a2zr1TxFtQw==
+
 duplexer@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.2.tgz#3abe43aef3835f8ae077d136ddce0f276b0400e6"
@@ -6577,6 +6582,13 @@ gatsby-plugin-dark-mode@^1.1.2:
   integrity sha512-kq/7/KSIgyYxolSqLxXfmcC/iBU98XpRGcIOaa3bjjl8Tb0WDYwfa45zABx1XNjB0YecWdgniss+kqmeAu04GA==
   dependencies:
     prop-types "^15.5.7"
+
+gatsby-plugin-dts-css-modules@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-dts-css-modules/-/gatsby-plugin-dts-css-modules-3.0.0.tgz#5d363736dc9812d6b9e9c40a600f73590903d876"
+  integrity sha512-ZDTNPvJOXbuKf1my1AhEqqMFetuH5IYxz73k5GK8VYFNAsy8rraIm0OxMHsYjaR/8J5dpm4mrYAJf9++5bjzHg==
+  dependencies:
+    dts-css-modules-loader "2.0.0"
 
 gatsby-plugin-google-gtag@^5.13.1:
   version "5.13.1"
