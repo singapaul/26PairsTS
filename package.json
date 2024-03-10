@@ -31,6 +31,7 @@
     "autoprefixer": "^10.4.17",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "css-loader": "^6.10.0",
     "date-fns": "^3.3.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-react-app": "^7.0.1",
@@ -73,7 +74,6 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@types/react-helmet": "^6.1.11",
-    "css-loader": "2",
     "typescript": "^5.3.3",
     "typescript-plugin-css-modules": "^5.0.2"
   }
