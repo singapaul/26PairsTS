@@ -14,7 +14,6 @@ const config: GatsbyConfig = {
     "gatsby-plugin-image",
     'gatsby-plugin-dts-css-modules',
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-open-graph-images",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-dark-mode",
     {
