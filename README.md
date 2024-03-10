@@ -4,9 +4,14 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 - Analytics dashboard? https://www.youtube.com/watch?v=MGjCIQh5Pkw&t=160s&ab_channel=Joshtriedcoding
 
 
+
+4) re route homepage and addresses
+
 # to do 
 
+1) if you've played today we should reveal the cards
 1) global loading state
+3) rename the playedTodayModal
 2) play once per day integration
 3) disable the flip cards button with global loading state.
 4) start timer on card flip
@@ -42,6 +47,12 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 17. Testing branches should be available when  I push code on github
 
 ## ARCHIVE: 
+
+### 10th March 
+
+1) Update latest scores received in the playedToday Modal on daily shuffle - (30 mins)
+2) Add open graph tags for better sharing on social media - (45 mins)
+3) Setup Classic/Daily shuffle & bug fixing (60 mins)
 
 ### 2nd MARCH
 

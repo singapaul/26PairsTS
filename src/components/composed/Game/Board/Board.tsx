@@ -16,7 +16,11 @@ import { setModalConfig } from "@/store/slices/modals";
 import { setHasPlayedToday } from "@/store/slices/playedToday";
 import { selectHasPlayedToday } from "@/store/slices/playedToday";
 import { increment, reset, start, stop } from "@/store/slices/timer";
-import { calculateGameScore, getNameById } from "@/utils";
+import {
+  calculateGameScore,
+  getLocalStorageKeyFromGameMode,
+  getNameById,
+} from "@/utils";
 import { saveGameStatsToLocalStorage } from "@/utils/saveGameStatsToLocalStorage";
 
 import { Card } from "./Card";
@@ -38,6 +42,7 @@ export type BoardProps = {
 };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
+  const difficulty = gameDifficulty
   const dispatch = useAppDispatch();
   const [cardPair, setCardPair] = useState<string[]>([]);
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
@@ -48,7 +53,9 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const isRunning = useAppSelector((state) => state.timer.isRunning);
   const time = useAppSelector((state) => state.timer.timeInSeconds);
-  const hasPlayedToday: boolean = useAppSelector(selectHasPlayedToday)
+  const hasPlayedToday: boolean = useAppSelector(selectHasPlayedToday);
+
+  // @todo refactor this case
   const handleRevealCards = () => {
     const allCardIds = duplicatedCards.map((card: { id: string }) => card.id);
     setFlippedCardList(allCardIds);
@@ -58,20 +65,28 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     }, CARD_FLIP_TIME);
     return () => clearTimeout(delayTimeout);
   };
+
+  // @todo refactor this case
+  const handleShowCardsPerm = (): void => {
+    const allCardIds = duplicatedCards.map((card: { id: string }) => card.id);
+    setFlippedCardList(allCardIds);
+  };
   // Modify your useEffect or data fetching logic as needed
   useEffect(() => {
     if (duplicatedCards && duplicatedCards.length > 0) {
       setIsLoading(false); // Set loading to false once data is ready
     }
 
-// depending if we have played today or not we open a different modal
-    if(hasPlayedToday){
-      dispatch(setModalConfig({
-        id: 'played',
-        isOpen: true
-      }))
+    // depending if we have played today or not we open a different modal
+    if (hasPlayedToday && gameDifficulty === "DAILY_SHUFFLE") {
+      dispatch(
+        setModalConfig({
+          id: "played",
+          isOpen: true,
+        })
+      );
+      handleShowCardsPerm();
     } else {
-
       dispatch(
         setModalConfig({
           id: "info",
@@ -82,8 +97,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
         })
       );
     }
-
-
   }, [dispatch, duplicatedCards]);
 
   useEffect(() => {
@@ -130,23 +143,41 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
         dispatch(stop());
         dispatch(updateFinalTime(time));
         dispatch(setHasPlayedToday());
+
+        const gameModeString = getLocalStorageKeyFromGameMode(gameDifficulty);
         saveGameStatsToLocalStorage({
-          gameMode: "26-pairs-game-stats-daily",
+          gameMode: gameModeString,
           score: finalScore,
           time: time,
           turns: turnsCount,
         });
         dispatch(addToStats({ gameDifficulty }));
-        setTimeout(
-          () =>
-            dispatch(
-              setModalConfig({
-                id: "played",
-                isOpen: true,
-              })
-            ),
-          1000
-        );
+        if (gameDifficulty === "DAILY_SHUFFLE") {
+          setTimeout(
+            () =>
+              dispatch(
+                setModalConfig({
+                  id: "played",
+                  isOpen: true,
+                })
+              ),
+            1000
+          );
+        } else {
+          setTimeout(
+            () =>
+              dispatch(
+                setModalConfig({
+                  id: "score",
+                  isOpen: true,
+                  props: {
+                    gameDifficulty: difficulty
+                  }
+                })
+              ),
+            1000
+          );
+        }
       }
     } else {
       cardFlipTimerRef.current = setTimeout(resetCardPair, 1000);

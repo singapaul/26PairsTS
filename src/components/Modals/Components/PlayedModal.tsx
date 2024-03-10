@@ -3,14 +3,20 @@ import React from "react";
 import Countdown from "react-countdown";
 import { navigate } from "gatsby";
 
-import { classicShuffle,liteShuffle } from "@/routes/route_strings";
+import { classicShuffle, liteShuffle } from "@/routes/route_strings";
+import { LOCAL_STORAGE_KEY_NAME_DAILY } from "@/settings";
 import { useAppSelector } from "@/store/hooks";
 import { formatSecondsToMMSS, timeUntilTomorrow } from "@/utils";
 import { useCopyToClipboard } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
 
-export const PlayedModal =  ({
+import type { gameDataObjectType } from "@/utils/saveGameStatsToLocalStorage";
+
+// this is just a daily shuffle modal -@todo rename
+// so maybe lets make it check local storage
+
+export const PlayedModal = ({
   isOpen,
   handleClose,
   gameDifficulty,
@@ -19,39 +25,42 @@ export const PlayedModal =  ({
   handleClose: () => void;
   gameDifficulty?: string;
 }) => {
+  const getTodayGame = (): gameDataObjectType => {
+    const data = localStorage.getItem(LOCAL_STORAGE_KEY_NAME_DAILY);
+    const JSONDATA = JSON.parse(data || "[]");
+    const todayGame: gameDataObjectType = JSONDATA.pop();
+    return todayGame;
+  };
 
-  const finalTurns = useAppSelector(
-    (state: { finishedGameStats: { moves: any } }) =>
-      state.finishedGameStats.moves
-  );
+  const { turns, time } = getTodayGame();
 
-  const finalTime = useAppSelector(
-    (state: { finishedGameStats: { finalTime: any } }) =>
-      state.finishedGameStats.finalTime
-  );
-
- 
-  const { copySuccess, copyToClipboard}  =  useCopyToClipboard({
-    time: finalTime,
-    turns: finalTurns,
+  const { copySuccess, copyToClipboard } = useCopyToClipboard({
+    time: formatSecondsToMMSS(time),
+    turns: turns,
     mode: "Daily",
   });
- 
+
   return (
-    <BaseModal title="Score" isOpen={isOpen} handleClose={handleClose}>
+    <BaseModal
+      title="Score"
+      isOpen={isOpen}
+      handleClose={() => console.log("")}
+      hideCloseButton
+    >
       <div>
         <p className="text-sm text-gray-500 dark:text-gray-300">
-          Congratulations on beating todays daily shuffle! Come back tommorow to beat your score.
+          Congratulations on beating todays daily shuffle! Come back tommorow to
+          beat your score.
         </p>
       </div>
 
       <div className="my-2 flex justify-center">
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{finalTurns}</div>
+          <div className="text-3xl font-bold">{turns}</div>
           <div className="text-xs">{"Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{formatSecondsToMMSS(finalTime)}</div>
+          <div className="text-3xl font-bold">{formatSecondsToMMSS(time)}</div>
           <div className="text-xs">{"Time"}</div>
         </div>
       </div>

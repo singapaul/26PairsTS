@@ -7,7 +7,7 @@ import { RootState } from '../store'
 type PlayedTodayType = {
   value: boolean
 }
-
+// If there is a completed game we need to passs completed game stats to the modal
 
 const initialState: PlayedTodayType = {
   value: checkPlayedToday(LOCAL_STORAGE_KEY_NAME_DAILY) ,

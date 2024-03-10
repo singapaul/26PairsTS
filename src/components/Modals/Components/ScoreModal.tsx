@@ -1,5 +1,6 @@
 import React from "react";
 
+import { CLASSIC_SHUFFLE, DAILY_SHUFFLE, LITE_SHUFFLE } from "@/settings";
 import { useAppSelector } from "@/store/hooks";
 import { useCopyToClipboard } from "@/utils";
 import { formatSecondsToMMSS } from "@/utils";
@@ -9,37 +10,48 @@ import { BaseModal } from "./BaseModal";
 import type { DifficultyKeys } from "@/store/slices/historicStats";
 
 
+  const getGameMode = (gameMode: string)  => {
+  // Match the gameMode with its corresponding local storage key
+  switch (gameMode) {
+    case CLASSIC_SHUFFLE:
+      return 'Classic';
+    case DAILY_SHUFFLE:
+      return 'Daily';
+    case LITE_SHUFFLE:
+      return 'Lite';
+    default:
+      return 'Lite';
+  }
+};
+
 export const ScoreModal = ({
   isOpen,
   handleClose,
-  turns,
   gameDifficulty,
   handlePlayAgain,
 }: {
   isOpen: boolean;
   handleClose: () => void;
-  turns: number | string;
   gameDifficulty: DifficultyKeys;
   handlePlayAgain: () => void;
 }) => {
+
+  const bestStats = useAppSelector((state) => state.stats[gameDifficulty]);
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const timeCount = useAppSelector(
     (state) => state.finishedGameStats.finalTime
   );
-  const bestStats = useAppSelector((state) => state.stats[gameDifficulty])
- 
+
+
+ const gameMode = getGameMode(gameDifficulty)
+  
   const formattedTime: string = formatSecondsToMMSS(timeCount);
 
-
-  
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
     time: formattedTime,
     turns: JSON.stringify(turnsCount),
-    mode: "Daily",
+    mode: gameMode,
   });
-
- 
- 
 
   return (
     <BaseModal title="Score" isOpen={isOpen} handleClose={handleClose}>
@@ -57,7 +69,9 @@ export const ScoreModal = ({
           <div className="text-xs">{"Best Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{formatSecondsToMMSS(Number(bestStats.bestTime))}</div>
+          <div className="text-3xl font-bold">
+            {formatSecondsToMMSS(Number(bestStats.bestTime))}
+          </div>
           <div className="text-xs">{"Best Time"}</div>
         </div>
       </div>
