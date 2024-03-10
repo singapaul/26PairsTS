@@ -1,1 +1,1 @@
-export * from './settingRow'
+export * from './SettingRow'
