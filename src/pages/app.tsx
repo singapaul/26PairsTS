@@ -8,18 +8,18 @@ import PrivateRoute from "../components/PrivateRoute"
 import Profile from "../components/Profile"
 import Register from "../components/Register";
 import Reset from "../components/Reset";
+import Homescreen from "." 
 import DailyShuffle from "./DailyShuffle"
-import Homescreen from "./Homescreen"
 
 const App = () => (
   <Layout>
     <Router>
-      <PrivateRoute path="/app/profile" component={Profile} location={undefined} />
-      <Homescreen path = '/app/' />
-      <Login path="/app/login" />
-      <DailyShuffle path='/app/daily-shuffle' />
-      <Register path="/app/register" />
-      <Reset path="/app/reset" />
+      <Homescreen path='/'/>
+      <PrivateRoute path="/profile" component={Profile} location={undefined} />
+      <Login path="/login" />
+      <DailyShuffle path='/daily-shuffle' />
+      <Register path="/register" />
+      <Reset path="/reset" />
     </Router>
   </Layout>
 )

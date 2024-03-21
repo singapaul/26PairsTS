@@ -14,7 +14,7 @@ export default () => {
   const handleSignOut = () => {
         /* @ts-ignore */
     signOut(auth);
-    navigate('/app/');
+    navigate('/');
   }
   let details;
   if (!currentUser) {
@@ -22,7 +22,7 @@ export default () => {
       <p className={"text-pink dark:text-red mx-auto max-w-[640px] text-right"}>
         To get the full app experience, you’ll need to
         {` `}
-        <Link to="/app/login">log in</Link>.
+        <Link to="/login">log in</Link>.
       </p>
     );
   } else {

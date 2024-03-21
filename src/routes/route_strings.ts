@@ -1,4 +1,4 @@
-export const home = '/Homescreen'
+export const home = '/'
 export const dailyShuffle = '/DailyShuffle/'
-export const classicShuffle ='/DailyShuffle/'
-export const liteShuffle ='/DailyShuffle/'
+export const classicShuffle ='/ClassicShuffle/'
+export const liteShuffle ='/LiteShuffle/'

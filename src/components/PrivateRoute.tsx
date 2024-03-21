@@ -8,7 +8,7 @@ const PrivateRoute = ({ component: Component,path, location, ...rest }) => {
 
   const {currentUser} = useAuthValue()
   if(!currentUser){
-    navigate("/app/login")
+    navigate("/login")
     return null
   }
 

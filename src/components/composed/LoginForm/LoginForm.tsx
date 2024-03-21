@@ -48,7 +48,7 @@ export const LoginForm = (props: Props) => {
     try {
       // @ts-ignore
       await signInWithEmailAndPassword(auth, email, password);
-      navigate(`/app/profile`);
+      navigate(`/profile`);
     } catch (err) {
       // @ts-ignore
       console.log(err);
@@ -56,7 +56,7 @@ export const LoginForm = (props: Props) => {
   };
 
   const handleRegisterClick = () => {
-    navigate("/app/register");
+    navigate("/register");
   };
 
   const handleGoogleSignIn = async () => {
@@ -64,7 +64,7 @@ export const LoginForm = (props: Props) => {
     try {
       // @ts-ignore
       await signInWithPopup(auth, provider);
-      navigate(`/app/profile`);
+      navigate(`/profile`);
     } catch (error) {
       console.log(error);
     }

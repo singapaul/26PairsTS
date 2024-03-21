@@ -18,11 +18,11 @@ export const Hero = () => {
   const [navigateToDailyShuffle] = useNavigateToDailyShuffle();
 
   const handleLogin = () => {
-    navigate("/app/login");
+    navigate("/login");
   };
 
   const handleProfile = () => {
-    navigate("/app/profile");
+    navigate("/profile");
   };
 
   const DynamicButton = !currentUser ? (

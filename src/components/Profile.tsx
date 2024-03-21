@@ -26,7 +26,7 @@ const Profile = () => {
   const handleSignOut = async () => {
     // @ts-ignore
     signOut(auth)
-    navigate('/app/')
+    navigate('/')
   }
 
   return (

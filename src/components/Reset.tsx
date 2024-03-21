@@ -14,7 +14,7 @@ const Reset = ({path}: {path:string}) => {
     try {
       // @ts-ignore
       await sendPasswordResetEmail(auth, email);
-      navigate(`/app/login`);
+      navigate(`/login`);
     } catch (err) {
             // @ts-ignore
       setError(err.message);
@@ -38,10 +38,10 @@ const Reset = ({path}: {path:string}) => {
             <button>Forgot Password</button>
           </form>
           <div>
-            Already have an account? <Link to="/app/login">Login</Link> now.
+            Already have an account? <Link to="/login">Login</Link> now.
           </div>
           <div>
-            Don't have an account? <Link to="/app/register">Register</Link> now.
+            Don't have an account? <Link to="/register">Register</Link> now.
           </div>
         </div>
       </div>

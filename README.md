@@ -5,26 +5,26 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 
-4) re route homepage and addresses
+# Priority 
+
+
+
+3) Deploy new branches for testing ahead of merges
 
 # to do 
 
-1) if you've played today we should reveal the cards
+1) Create profile page
 1) global loading state
-3) rename the playedTodayModal
-2) play once per day integration
+2) rename the playedTodayModal
 3) disable the flip cards button with global loading state.
 4) start timer on card flip
 5) integrate tooltip & countdown onto homescreen
 6) head tags (SEO) / analytics tags (tracking) integration - @Matt input pending 
 7) play around with suspense, maybe on the cards?
 8) refactor all slices with the the typedSelector 
-9) score modal copy to clipboard -address fixes
-10) close modals on route change!
-11) make layout for profile page!
-12) classic shuffle and lite shuffle modes set up!
-13) audit modals (don't want to accidentally close score modal either (but will reconsider because of played modal))
-14) probably need to refactor the historic facts section to make sure it caters for all game modes
+9) close modals on route change!
+10) make layout for profile page!
+11) probably need to refactor the historic facts section to make sure it caters for all game modes
 
 # future work
 
@@ -48,11 +48,16 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 ## ARCHIVE: 
 
+### 21st March
+
+1) update the routes - (40 mins)
+
 ### 10th March 
 
 1) Update latest scores received in the playedToday Modal on daily shuffle - (30 mins)
 2) Add open graph tags for better sharing on social media - (45 mins)
 3) Setup Classic/Daily shuffle & bug fixing (60 mins)
+4) Vercel deployment and build troublshooting (90 mins)
 
 ### 2nd MARCH
 
