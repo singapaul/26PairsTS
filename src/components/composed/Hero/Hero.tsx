@@ -22,7 +22,7 @@ export const Hero = () => {
   };
 
   const handleProfile = () => {
-    navigate("/profile");
+    navigate("/");
   };
 
   const DynamicButton = !currentUser ? (
@@ -98,7 +98,7 @@ export const Hero = () => {
           </span>
         </Button>
 
-        {DynamicButton}
+        {/* {DynamicButton} */}
       </div>
     </>
   );
