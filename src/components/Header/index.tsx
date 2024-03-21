@@ -20,7 +20,7 @@ const Header = () => (
           Home
         </Link>
         <Link
-          to="/profile"
+          to="/"
           className="text-white font-bold ml-[0.75rem] mt-0 p-[0.25rem] no-underline hover:bg-white hover:text-[#663399] focus:bg-white focus:text-[#663399] active:bg-white active:text-[#663399]"
         >
           Profile

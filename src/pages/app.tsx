@@ -15,7 +15,7 @@ const App = () => (
   <Layout>
     <Router>
       <Homescreen path='/'/>
-      <PrivateRoute path="/profile" component={Profile} location={undefined} />
+      {/* <PrivateRoute path="/profile" component={Profile} location={undefined} /> */}
       <Login path="/login" />
       <DailyShuffle path='/daily-shuffle' />
       <Register path="/register" />

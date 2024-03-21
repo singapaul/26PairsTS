@@ -47,7 +47,7 @@ export const RegisterForm = (props: Props) => {
     try {
       // @ts-ignore
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate(`/profile`);
+      navigate(`/`);
     } catch (err) {
       // @ts-ignore
       console.log(err);
@@ -63,7 +63,7 @@ export const RegisterForm = (props: Props) => {
     try {
       // @ts-ignore
       await signInWithPopup(auth, provider);
-      navigate(`/profile`);
+      navigate(`/`);
     } catch (error) {
       console.log(error);
     }

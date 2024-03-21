@@ -48,7 +48,7 @@ export const LoginForm = (props: Props) => {
     try {
       // @ts-ignore
       await signInWithEmailAndPassword(auth, email, password);
-      navigate(`/profile`);
+      navigate(`/`);
     } catch (err) {
       // @ts-ignore
       console.log(err);
@@ -64,7 +64,7 @@ export const LoginForm = (props: Props) => {
     try {
       // @ts-ignore
       await signInWithPopup(auth, provider);
-      navigate(`/profile`);
+      navigate(`/`);
     } catch (error) {
       console.log(error);
     }
