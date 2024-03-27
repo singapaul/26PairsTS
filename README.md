@@ -48,6 +48,11 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 ## ARCHIVE: 
 
+### 26th March
+
+1) Update copy on how to play modal (5 mins)
+
+
 ### 21st March
 
 1) update the routes - (40 mins)

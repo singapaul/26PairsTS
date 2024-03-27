@@ -28,7 +28,7 @@ export const PlayedModal = ({
   const getTodayGame = (): gameDataObjectType => {
     const data = localStorage.getItem(LOCAL_STORAGE_KEY_NAME_DAILY);
     const JSONDATA = JSON.parse(data || "[]");
-    const todayGame: gameDataObjectType = JSONDATA.pop();
+    const todayGame: gameDataObjectType = JSONDATA.pop() || { turns: 0, time: 0 , score: 0, date: 0};
     return todayGame;
   };
 

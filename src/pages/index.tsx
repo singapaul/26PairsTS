@@ -16,8 +16,6 @@ const Homescreen = ({ path }: { path: string }) => {
   return (
     <div className="flex flex-col items-center text-center h-screen pb-6">
       <div className="flex flex-grow flex-col justify-center items-center gap-4">
-        {/* @todo remove */}
-        <h4>I AM THE DEMO BRANCH</h4>
         <Hero />
       </div>
       <FactContainer />

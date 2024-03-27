@@ -171,7 +171,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
                   id: "score",
                   isOpen: true,
                   props: {
-                    gameDifficulty: difficulty
+                    gameDifficulty: difficulty,
+                    handlePlayAgain: resetGame
                   }
                 })
               ),
@@ -184,13 +185,13 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     }
   };
 
-  const resetGame = () => {
+   const resetGame = () => {
     setCardPair([]);
     setFlippedCardList([]);
     dispatch(resetMoves());
     dispatch(updateScore(0));
-    dispatch(reset());
     dispatch(stop());
+    dispatch(reset());
     dispatch(
       setModalConfig({
         id: "info",
