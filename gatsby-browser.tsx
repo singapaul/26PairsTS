@@ -24,8 +24,7 @@ export const wrapRootElement = ({ element }) => (
  
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
-
-  console.log('Navigating from', prevLocation?.pathname, 'to', location.pathname);
+ 
   store.dispatch(reset())
   store.dispatch(resetMoves());
   store.dispatch(updateScore(0));

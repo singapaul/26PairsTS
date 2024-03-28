@@ -4,6 +4,12 @@ import { useFetchShuffledCards } from "@/hooks";
 
 import { isMobile } from "./isMobile";
 
+
+function timeToSeconds(time: string) {
+  const [minutes, seconds] = time.split(":").map(Number);
+  return (minutes * 60) + seconds;
+}
+
 export const useCopyToClipboard = ({
   time,
   turns,
@@ -16,40 +22,42 @@ export const useCopyToClipboard = ({
   link?: string
 }) => {
   const [copySuccess, setCopySuccess] = useState("Share results");
+ 
 
+
+  const timeInSeconds: number = timeToSeconds(time)
+ 
   const {gameID} = useFetchShuffledCards()
-  const score = Number.parseInt(time) + Number.parseInt(turns)
+  const score =  (timeInSeconds) + Number.parseInt(turns)
 
   let modeDescription: string;
   switch (mode) {
     case "Daily":
-      modeDescription = `
-      New 26Pairs Challenge 🔥
-
-      Daily Shuffle #${gameID}
-      My score: ${score} 🎉
+      modeDescription = `Daily Shuffle #${gameID}
+My score: ${score} 🎉
       
-      Can you beat me? www.26pairs.com/dailyshuffle
-      `;
+Can you beat me? www.26pairs.com/dailyshuffle`;
       break;
     case "Classic":
       modeDescription = `New 26Pairs Challenge 🔥
 
-      Classic Shuffle
-      My score: ${score} 🎉
+Classic Shuffle
+My score: ${score} 🎉
       
-      Can you beat me? www.26pairs.com/ClassicShuffle`;
+Can you beat me? www.26pairs.com/ClassicShuffle`;
       break;
     case "Lite":
       modeDescription = `New 26Pairs Challenge 🔥
 
-      Lite Shuffle
-      My score: ${score} 🎉
+Lite Shuffle
+My score: ${score} 🎉
       
-      Can you beat me? www.26pairs.com/LiteShuffle`
+Can you beat me? www.26pairs.com/LiteShuffle`
       break;
     default:
-      modeDescription = "A mode for every mood.";
+      modeDescription = `My score: ${score} 🎉
+      
+Can you beat me? www.26pairs.com/dailyshuffle`;
   }
 
   const copyToClipboard = async () => {
