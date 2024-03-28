@@ -16,6 +16,7 @@ const config: GatsbyConfig = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-dark-mode",
+    "gatsby-plugin-styled-components",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
