@@ -23,12 +23,15 @@ export const useFetchShuffledCards = () => {
             },
           }
         );
+ 
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
 
         const result = await response.json();
+
+        console.log(result)
         const orderedArray = reorderArrayAccordingToOrderArray(CLASSICDECKLITE, result.body[0].lite);
         const IDArray = assignIDToCards(orderedArray);
         setDuplicatedCards(IDArray);

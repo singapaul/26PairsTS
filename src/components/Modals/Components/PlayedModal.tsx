@@ -5,7 +5,6 @@ import { navigate } from "gatsby";
 
 import { classicShuffle, liteShuffle } from "@/routes/route_strings";
 import { LOCAL_STORAGE_KEY_NAME_DAILY } from "@/settings";
-import { useAppSelector } from "@/store/hooks";
 import { formatSecondsToMMSS, timeUntilTomorrow } from "@/utils";
 import { useCopyToClipboard } from "@/utils";
 

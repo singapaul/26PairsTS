@@ -136,9 +136,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       if (duplicatedCards.length === currentFlippedCards.length) {
         const finalScore = calculateGameScore(
           time,
-          turnsCount,
-          duplicatedCards.length
-        );
+          turnsCount);
         dispatch(updateScore(finalScore));
         dispatch(stop());
         dispatch(updateFinalTime(time));

@@ -1,6 +1,6 @@
 import React from "react";
 import { signOut } from "firebase/auth";
-import { get,ref, set } from "firebase/database";
+import { ref, set } from "firebase/database";
 import { navigate } from "gatsby";
 
 import { useAuthValue } from "./Auth/AuthContext";
