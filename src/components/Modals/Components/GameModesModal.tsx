@@ -25,17 +25,17 @@ export const GameModesModal = ({
         <GameModeTile
           title="DAILY SHUFFLE"
           link={dailyShuffle}
-          gameDetails={{ difficulty: "easy", numCards: 24, time: "55 s" }}
+          gameDetails={{ difficulty: "easy", numCards: 12, time: "Avg. 1-2 mins" }}
         />
         <GameModeTile
           title="CLASSIC SHUFFLE"
           link={classicShuffle}
-          gameDetails={{ difficulty: "hard", numCards: 52, time: "180 s" }}
+          gameDetails={{ difficulty: "hard", numCards: 26, time: "Avg. 2-3 mins" }}
         />
         <GameModeTile
           title="LITE SHUFFLE"
           link={liteShuffle}
-          gameDetails={{ difficulty: "easy", numCards: 24, time: "75 s" }}
+          gameDetails={{ difficulty: "easy", numCards: 12, time: "Avg. 1-2 mins" }}
         />
       </div>
     </BaseModal>

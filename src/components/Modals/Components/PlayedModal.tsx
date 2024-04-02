@@ -5,7 +5,6 @@ import { navigate } from "gatsby";
 
 import { classicShuffle, liteShuffle } from "@/routes/route_strings";
 import { LOCAL_STORAGE_KEY_NAME_DAILY } from "@/settings";
-import { useAppSelector } from "@/store/hooks";
 import { formatSecondsToMMSS, timeUntilTomorrow } from "@/utils";
 import { useCopyToClipboard } from "@/utils";
 
@@ -28,7 +27,7 @@ export const PlayedModal = ({
   const getTodayGame = (): gameDataObjectType => {
     const data = localStorage.getItem(LOCAL_STORAGE_KEY_NAME_DAILY);
     const JSONDATA = JSON.parse(data || "[]");
-    const todayGame: gameDataObjectType = JSONDATA.pop();
+    const todayGame: gameDataObjectType = JSONDATA.pop() || { turns: 0, time: 0 , score: 0, date: 0};
     return todayGame;
   };
 
@@ -107,7 +106,7 @@ export const PlayedModal = ({
         <div>
           <button
             type="button"
-            onClick={() => () => navigate(classicShuffle)}
+            onClick={() => navigate(classicShuffle)}
             className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-base"
           >
             Classic Shuffle

@@ -8,7 +8,7 @@ export const useFetchShuffledCards = () => {
   const [duplicatedCards, setDuplicatedCards] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<any>(null);
-
+  const [gameID, setGameId] = useState<number>(0)
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -23,12 +23,15 @@ export const useFetchShuffledCards = () => {
             },
           }
         );
+ 
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
 
         const result = await response.json();
+
+        setGameId(result.body[0].id)
         const orderedArray = reorderArrayAccordingToOrderArray(CLASSICDECKLITE, result.body[0].lite);
         const IDArray = assignIDToCards(orderedArray);
         setDuplicatedCards(IDArray);
@@ -42,7 +45,7 @@ export const useFetchShuffledCards = () => {
     fetchData();
   }, []); 
 
-  return { duplicatedCards, isLoading, error };
+  return { duplicatedCards, isLoading, error, gameID };
 }
 
  

@@ -31,7 +31,7 @@ export const GameModeTile = ({
         <div className="flex text-[10px] gap-1 sm:text-sm text-gray-900 dark:text-gray-300">
           <div className="flex w-full gap-1 items-center">
             <FaCalculator />
-            <p className="whitespace-nowrap">{gameDetails.numCards}</p>
+            <p className="whitespace-nowrap">{gameDetails.numCards} pairs</p>
           </div>
           <div className="flex w-full gap-1 items-center">
             <FaBrain />

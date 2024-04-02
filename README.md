@@ -48,6 +48,17 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 ## ARCHIVE: 
 
+### 28th March
+
+1) Update score calculation (10 mins)
+2) Fix banner size breaking CSS
+3) Update copy to clipboard messaging
+
+### 26th March
+
+1) Update copy on how to play modal (5 mins)
+ 
+
 ### 21st March
 
 1) update the routes - (40 mins)
