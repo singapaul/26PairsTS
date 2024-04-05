@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from "react";
 
 import { Card } from "@/components/composed/Game/Board/Card";
+import { Button } from "@/components/ui/button";
 
 import { CLASSICDECKLITE } from "../../../assets/data/CLASSICDECKLITE";
 import { BaseModal } from "./BaseModal";
@@ -15,7 +16,7 @@ export const InfoModal = ({
   handleRevealCards: () => void;
 }) => {
   const cardIndexes = [0, 6, 15, 21]; // Specify the desired order of card indexes
-
+  const [disabledFlip, setDisabledFlip] = useState<boolean>(true)
   const [flippedCards, setFlippedCards] = useState([
     false,
     false,
@@ -24,27 +25,39 @@ export const InfoModal = ({
   ]);
 
   const handleShowCards = () => {
+   if(!disabledFlip){ 
     handleRevealCards();
-    handleClose();
+    handleClose();}
   };
 
   useEffect(() => {
     if (isOpen) {
+      // Immediately disable the flip button when the modal is opened
+      setDisabledFlip(true);
+  
+      // Reset flipped cards to all false when the modal is opened
+      setFlippedCards([false, false, false, false]);
+  
       const flipCardsWithDelay = () => {
-        const delay = 500; // 1 second delay between each flip
+        const delay = 500; // 500 ms delay between each flip
         cardIndexes.forEach((index, i) => {
           setTimeout(() => {
             toggleFlipCard(index);
           }, i * delay);
         });
       };
-
-      // Reset flipped cards to all false when the modal is opened
-      setFlippedCards([false, false, false, false]);
-
+  
       flipCardsWithDelay();
+      const delay = 500; // 500 ms delay between each flip
+      // Calculate the total delay needed to flip all cards
+      const totalDelay = cardIndexes.length * delay;
+      // Enable the flip button after all cards have been flipped
+      setTimeout(() => {
+        setDisabledFlip(false);
+      }, totalDelay - delay); // Adjusted to account for the timing of the first card flip
     }
   }, [isOpen]);
+  
 
   const toggleFlipCard = (index: number) => {
     setFlippedCards((prevFlippedCards) => {
@@ -85,13 +98,14 @@ export const InfoModal = ({
         Flip the cards to begin.
       </p>
 
-      <button
+      <Button
         onClick={handleShowCards}
         type="button"
         className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-base"
+        disabled={disabledFlip}
       >
         {"Flip cards"}
-      </button>
+      </Button>
     </BaseModal>
   );
 };
