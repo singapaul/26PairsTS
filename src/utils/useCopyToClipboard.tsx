@@ -34,6 +34,7 @@ export const useCopyToClipboard = ({
   switch (mode) {
     case "Daily":
       modeDescription = `New 26Pairs Challenge 🔥
+
 Daily Shuffle #${gameID}
 My score: ${score} 🎉
       
@@ -41,6 +42,7 @@ Can you beat me? www.26pairs.com${dailyShuffle}`;
       break;
     case "Classic":
       modeDescription = `New 26Pairs Challenge 🔥
+
 Classic Shuffle
 My score: ${score} 🎉
       
@@ -48,6 +50,7 @@ Can you beat me? www.26pairs.com${classicShuffle}`;
       break;
     case "Lite":
       modeDescription = `New 26Pairs Challenge 🔥
+      
 Lite Shuffle
 My score: ${score} 🎉
       
