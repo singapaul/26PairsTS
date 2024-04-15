@@ -1,7 +1,6 @@
 import React from "react";
 
 import { useAppSelector } from "@/store/hooks";
-import { formatSecondsToMMSS } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
 
@@ -27,7 +26,7 @@ export const StatsModal = ({
           </div>
           <div className="m-1 w-1/4 items-center justify-center dark:text-white">
             <div className="text-2xl font-bold">
-              {formatSecondsToMMSS(gameStats.bestTime)}
+              {(gameStats.bestTime)}
             </div>
             <div className="text-xs whitespace-nowrap">{"Best Time"}</div>
           </div>

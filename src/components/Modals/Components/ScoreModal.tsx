@@ -48,7 +48,7 @@ export const ScoreModal = ({
   const formattedTime: string = formatSecondsToMMSS(timeCount);
 
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
-    time: formattedTime,
+    time: parseInt(formattedTime),
     turns: JSON.stringify(turnsCount),
     mode: gameMode,
   });
@@ -61,7 +61,7 @@ export const ScoreModal = ({
           <div className="text-xs">{"Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{formattedTime}</div>
+          <div className="text-3xl font-bold">{timeCount}</div>
           <div className="text-xs">{"Time"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
