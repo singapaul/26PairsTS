@@ -71,8 +71,8 @@ const CardStyledClassic = styled.div`
 
 .card-front,
 .card-back {
-  width: 45px;
-  height: 63px;
+  width: 49px;
+  height: 68.6px;
   border-radius: 2px;
   cursor: pointer;
 
@@ -142,7 +142,9 @@ const cardClasses = `card ${isFlipped ? 'flipped' : ''} ${
   const cardStyle = {
     visibility: isFlipped && isDisabled ? 'hidden' : 'visible',
   }
-   if (difficulty === 'classic-shuffle') {
+  console.log(difficulty)
+   if (difficulty === 'CLASSIC_SHUFFLE') {
+    console.log('difficulty')
     return (
       <CardStyledClassic onClick={handleClick}>
         {/* @ts-ignore */}
