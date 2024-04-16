@@ -34,7 +34,7 @@ export const PlayedModal = ({
   const { turns, time } = getTodayGame();
 
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
-    time: formatSecondsToMMSS(time),
+    time: parseInt(time),
     turns: turns,
     mode: "Daily",
   });
@@ -59,8 +59,8 @@ export const PlayedModal = ({
           <div className="text-xs">{"Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{formatSecondsToMMSS(time)}</div>
-          <div className="text-xs">{"Time"}</div>
+          <div className="text-3xl font-bold">{(time)}</div>
+          <div className="text-xs">{"Time (s)"}</div>
         </div>
       </div>
 

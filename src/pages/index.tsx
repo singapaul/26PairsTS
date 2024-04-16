@@ -52,6 +52,18 @@ export function Head() {
         name="twitter:image"
         content="https://www.26pairs.com/og-image.jpg"
       />
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-WVXZRW28SC"
+      ></script>
+      <script>
+        {`window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WVXZRW28SC')`}
+        ;
+      </script>
     </>
   );
 }

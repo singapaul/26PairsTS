@@ -3,7 +3,6 @@ import React from "react";
 import { CLASSIC_SHUFFLE, DAILY_SHUFFLE, LITE_SHUFFLE } from "@/settings";
 import { useAppSelector } from "@/store/hooks";
 import { useCopyToClipboard } from "@/utils";
-import { formatSecondsToMMSS } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
 
@@ -45,10 +44,9 @@ export const ScoreModal = ({
 
  const gameMode = getGameMode(gameDifficulty)
   
-  const formattedTime: string = formatSecondsToMMSS(timeCount);
-
+ 
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
-    time: formattedTime,
+    time: timeCount,
     turns: JSON.stringify(turnsCount),
     mode: gameMode,
   });
@@ -61,8 +59,8 @@ export const ScoreModal = ({
           <div className="text-xs">{"Turns"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
-          <div className="text-3xl font-bold">{formattedTime}</div>
-          <div className="text-xs">{"Time"}</div>
+          <div className="text-3xl font-bold">{timeCount}</div>
+          <div className="text-xs">{"Time (s)"}</div>
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
           <div className="text-3xl font-bold">{bestStats.bestTurns}</div>
@@ -70,9 +68,9 @@ export const ScoreModal = ({
         </div>
         <div className="m-1 w-1/4 items-center justify-center dark:text-white">
           <div className="text-3xl font-bold">
-            {formatSecondsToMMSS(Number(bestStats.bestTime))}
+            {(Number(bestStats.bestTime))}
           </div>
-          <div className="text-xs">{"Best Time"}</div>
+          <div className="text-xs">{"Best Time (s)"}</div>
         </div>
       </div>
       {/* need to pass in a prop to say if the game is over or not */}

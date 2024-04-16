@@ -15,7 +15,7 @@ export const useFetchShuffledCards = () => {
       setError(null);
       try {
         const response = await fetch(
-          "https://alpha-gules.vercel.app/api/getShuffle",
+          "https://getdailyshuffle-mpknwhehla-uc.a.run.app/",
           {
             method: "GET",
             headers: {
@@ -24,15 +24,15 @@ export const useFetchShuffledCards = () => {
           }
         );
  
-
+ 
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
 
         const result = await response.json();
-
-        setGameId(result.body[0].id)
-        const orderedArray = reorderArrayAccordingToOrderArray(CLASSICDECKLITE, result.body[0].lite);
+        const { entryNumber, lite } = result
+        setGameId(entryNumber)
+        const orderedArray = reorderArrayAccordingToOrderArray(CLASSICDECKLITE, lite);
         const IDArray = assignIDToCards(orderedArray);
         setDuplicatedCards(IDArray);
       } catch (error) {
