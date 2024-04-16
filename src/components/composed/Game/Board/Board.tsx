@@ -47,7 +47,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [cardPair, setCardPair] = useState<string[]>([]);
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Add this line to introduce loading state
-  // const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
+  const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
 
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -131,6 +131,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     );
     if (firstCardName === secondCardName) {
       const currentFlippedCards = [...flippedCardList, ...currentCardPair];
+      setDisabledCardList(currentFlippedCards)
       setFlippedCardList(currentFlippedCards);
       resetCardPair();
       if (duplicatedCards.length === currentFlippedCards.length) {
@@ -234,7 +235,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
                   isFlipped={[...flippedCardList, ...cardPair].includes(
                     card.id
                   )}
-                  // isDisabled={disabledCardList.includes(card.id)}
+                  isDisabled={disabledCardList.includes(card.id)}
                 />
               );
             })}
