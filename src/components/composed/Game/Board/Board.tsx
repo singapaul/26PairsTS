@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/composed/Game/Header";
+import { HowScoringWorksModal, HowToPlayModal } from "@/components/Modals";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CARD_FLIP_TIME } from "@/settings";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -211,6 +212,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
 
   return (
     <BoardContainer>
+      {/* <HowToPlayModal isOpen={true} handleClose={() => console.log('hi')} /> */}
+      <HowScoringWorksModal isOpen={true} handleClose={() => console.log('hi')}   />
       <Header resetGame={resetGame} gameDifficulty={gameDifficulty} />
       {isLoading ? (
         <BoardStyled>

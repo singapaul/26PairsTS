@@ -12,13 +12,14 @@ import {
   AboutModal,
   ContactModal,
   GameModesModal,
+  HowScoringWorksModal,
+  HowToPlayModal,
   InfoModal,
   PlayedModal,
   ScoreModal,
   SettingsModal,
   StatsModal,
-  TACModal,
-} from "../Components";
+  TACModal} from "../Components";
 type modalLookupProps = {
   [key: string]: React.ElementType;
 };
@@ -33,6 +34,8 @@ const lookupModal: modalLookupProps = {
   stats: StatsModal,
   tac: TACModal,
   gameModes: GameModesModal,
+  howToPlay: HowToPlayModal,
+  howScoringWorks: HowScoringWorksModal
 };
 
 export const ModalRegistry = (): JSX.Element => {

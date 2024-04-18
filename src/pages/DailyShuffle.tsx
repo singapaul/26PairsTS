@@ -11,7 +11,8 @@ const DailyShuffle = ({ path }: { path: string }) => {
   return (
     <>
       <Board duplicatedCards={duplicatedCards} gameDifficulty={DAILY_SHUFFLE} />
-      <ModalRegistry />
+      {/* @todo undo later */}
+      {/* <ModalRegistry /> */}
     </>
   );
 };

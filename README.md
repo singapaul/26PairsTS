@@ -9,21 +9,18 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 
-3) Deploy new branches for testing ahead of merges
+3) Deploy new branches for testing ahead of merges - DONE
 
 # to do 
 
 1) Create profile page
 1) global loading state
 2) rename the playedTodayModal
-3) disable the flip cards button with global loading state.
-4) start timer on card flip
 5) integrate tooltip & countdown onto homescreen
-6) head tags (SEO) / analytics tags (tracking) integration - @Matt input pending 
+
 7) play around with suspense, maybe on the cards?
 8) refactor all slices with the the typedSelector 
 9) close modals on route change!
-10) make layout for profile page!
 11) probably need to refactor the historic facts section to make sure it caters for all game modes
 
 # future work
@@ -47,6 +44,13 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 17. Testing branches should be available when  I push code on github
 
 ## ARCHIVE: 
+
+### undated
+
+4) start timer on card flip - DONE
+3) disable the flip cards button with global loading state. - DONE
+6) head tags (SEO) / analytics tags (tracking) integration - @Matt input pending  - DONE
+10) make layout for profile page! - parked
 
 ### 28th March
 
