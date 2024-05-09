@@ -45,6 +45,14 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 ## ARCHIVE: 
 
+
+### 9th May 
+
+1) Implement functionality pre-game modal across game modes
+2) Modals further implemented
+@todo handle NAN in pregame on classic mode
+@todo copyToClipboard functionality needs adding (pass turns/time prop to component)
+
 ### undated
 
 4) start timer on card flip - DONE

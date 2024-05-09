@@ -12,7 +12,7 @@ const DailyShuffle = ({ path }: { path: string }) => {
     <>
       <Board duplicatedCards={duplicatedCards} gameDifficulty={DAILY_SHUFFLE} />
       {/* @todo undo later */}
-      {/* <ModalRegistry /> */}
+    /  <ModalRegistry />
     </>
   );
 };

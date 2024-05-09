@@ -2,7 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/composed/Game/Header";
-import { HowScoringWorksModal, HowToPlayModal } from "@/components/Modals";
+import { HowScoringWorksModal, HowToPlayModal, PreGameModal } from "@/components/Modals";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CARD_FLIP_TIME } from "@/settings";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -82,17 +83,23 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     if (hasPlayedToday && gameDifficulty === "DAILY_SHUFFLE") {
       dispatch(
         setModalConfig({
-          id: "played",
+          id: "postGame",
           isOpen: true,
+          props: {
+            difficulty: gameDifficulty,
+            handleRevealCards
+          }
         })
       );
       handleShowCardsPerm();
     } else {
+      
       dispatch(
         setModalConfig({
-          id: "info",
+          id: "preGame",
           isOpen: true,
           props: {
+            difficulty: gameDifficulty,
             handleRevealCards,
           },
         })
@@ -203,6 +210,26 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     );
   };
 
+  const handleOpenModal = () => {
+ 
+    dispatch(setModalConfig({
+      id: 'preGame',
+      isOpen: true,
+      props: {
+        difficulty
+      }
+    }))
+  }
+
+  const handleOpenModalPOST = () => {
+    dispatch(setModalConfig({
+      id: 'postGame',
+      isOpen: true,
+      props: {
+        difficulty
+      }
+    }))
+  }
   // Make sure to clear the timeout when the component unmounts
   useEffect(() => {
     return () => {
@@ -212,8 +239,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
 
   return (
     <BoardContainer>
-      {/* <HowToPlayModal isOpen={true} handleClose={() => console.log('hi')} /> */}
-      <HowScoringWorksModal isOpen={true} handleClose={() => console.log('hi')}   />
+      <Button onClick={handleOpenModal} >PRESS FOR PREGAME MODAL</Button>
+      <Button onClick={handleOpenModalPOST} variant={'secondary'} >PRESS FOR POSTGAME MODAl</Button>
       <Header resetGame={resetGame} gameDifficulty={gameDifficulty} />
       {isLoading ? (
         <BoardStyled>

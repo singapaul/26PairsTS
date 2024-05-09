@@ -12,8 +12,15 @@ type ModalIds =
   | "stats"
   | "tac"
   | "gameModes"
+  | "preGame"
+  | "postGame"
+  | "howToPlay"
+  | "howScoringWorks"
   | null;
 
+
+  // howToPlay: HowToPlayModal,
+  // howScoringWorks: HowScoringWorksModal,
 type ModalState = {
   isOpen: boolean;
   id: ModalIds;

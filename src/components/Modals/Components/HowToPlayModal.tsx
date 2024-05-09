@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { Card } from "@/components/composed/Game/Board/Card";
 import { Button } from "@/components/ui/button";
+import { useAppDispatch } from "@/store/hooks";
+import { setModalConfig } from "@/store/slices/modals";
 
 import { CLASSICDECKLITE } from "../../../assets/data/CLASSICDECKLITE";
 import { BaseModal } from "./BaseModal";
@@ -9,9 +11,13 @@ import { BaseModal } from "./BaseModal";
 export const HowToPlayModal = ({
   isOpen,
   handleClose,
+  
+    handleRevealCards,
+ 
 }: {
   isOpen: boolean;
   handleClose: () => void;
+  handleRevealCards: () =>() => void;
 }) => {
   const cardIndexes = [ 0, 15, 6, 21]; // Specify the desired order of card indexes
   const [flippedCards, setFlippedCards] = useState([
@@ -20,6 +26,8 @@ export const HowToPlayModal = ({
     false,
     false,
   ]);
+
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (isOpen) {
@@ -51,6 +59,19 @@ export const HowToPlayModal = ({
       return newFlippedCards;
     });
   };
+
+
+  const handleGoBack = () => {
+    dispatch(setModalConfig({
+      id: 'preGame', 
+      isOpen: true,
+    }))
+  }
+
+  const handleFlipCards = () => {
+    handleClose()
+    handleRevealCards()
+  }
 
   return (
     <BaseModal title="How to Play" isOpen={isOpen} handleClose={handleClose}>
@@ -91,10 +112,9 @@ export const HowToPlayModal = ({
           </p>
  
         </div>
-        <div className="flex flex-col sm:flex-row gap-3">
-            {/* @todo make functional and sort colors */}
-            <Button>Flip Cards</Button>
-            <Button variant={'secondary'}>Go back</Button>
+        <div className="w-full flex flex-col sm:flex-row sm:justify-between">
+            <Button onClick={handleFlipCards}>Flip Cards</Button>
+            <Button variant={'secondary'} onClick={handleGoBack} >Go back</Button>
         </div>
       </section>
     </BaseModal>
