@@ -46,12 +46,16 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 ## ARCHIVE: 
 
 
+### 15th May 
+
+1) Handled more modal logic (copyToClipboard, type improvements)
+2) Handled NaN edgecase on empty scores
+3) Minor board bug fixes
+
 ### 9th May 
 
 1) Implement functionality pre-game modal across game modes
 2) Modals further implemented
-@todo handle NAN in pregame on classic mode
-@todo copyToClipboard functionality needs adding (pass turns/time prop to component)
 
 ### undated
 

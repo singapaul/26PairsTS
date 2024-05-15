@@ -11,10 +11,8 @@ import { useCopyToClipboard } from "@/utils";
 import { BaseModal } from "./BaseModal";
 
 import type { gameDataObjectType } from "@/utils/saveGameStatsToLocalStorage";
-
-// this is just a daily shuffle modal -@todo rename
-// so maybe lets make it check local storage
-
+ 
+// @todo delete this file
 export const PlayedModal = ({
   isOpen,
   handleClose,

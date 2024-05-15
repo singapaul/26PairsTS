@@ -56,7 +56,7 @@ export const PreGameModal = ({
     | typeof DAILY_SHUFFLE
     | typeof LITE_SHUFFLE;
 }) => {
-  console.log(difficulty);
+
 
   // let's get from local
   const getGameStats = (): GameRecord => {
@@ -206,7 +206,7 @@ export const PreGameModal = ({
             <StreakContainer streak={currentStreak} />
           )}
           <Button
-            disabled={playedToday}
+            disabled={playedToday && difficulty === DAILY_SHUFFLE}
             className="w-full"
             onClick={handleFlipCards}
           >

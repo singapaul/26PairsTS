@@ -8,12 +8,12 @@ import { setModalConfig } from "@/store/slices/modals";
 import { CLASSICDECKLITE } from "../../../assets/data/CLASSICDECKLITE";
 import { BaseModal } from "./BaseModal";
 
+
+// @todo delete?
 export const HowToPlayModal = ({
   isOpen,
   handleClose,
-  
-    handleRevealCards,
- 
+  handleRevealCards, 
 }: {
   isOpen: boolean;
   handleClose: () => void;

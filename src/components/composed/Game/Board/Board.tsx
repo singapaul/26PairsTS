@@ -50,7 +50,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Add this line to introduce loading state
   const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
-
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const isRunning = useAppSelector((state) => state.timer.isRunning);
@@ -164,8 +163,15 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
             () =>
               dispatch(
                 setModalConfig({
-                  id: "played",
+                  id: "postGame",
                   isOpen: true,
+                  props: {
+                    difficulty,
+                    handlePlayAgain: resetGame,
+                    time,
+                    // latency offset
+                    turns: turnsCount +1,
+                  }
                 })
               ),
             1000
@@ -175,11 +181,14 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
             () =>
               dispatch(
                 setModalConfig({
-                  id: "score",
+                  id: "postGame",
                   isOpen: true,
                   props: {
-                    gameDifficulty: difficulty,
-                    handlePlayAgain: resetGame
+                    difficulty,
+                    handlePlayAgain: resetGame,
+                    time,
+                    // latency offset
+                    turns: turnsCount + 1,
                   }
                 })
               ),
@@ -201,7 +210,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     dispatch(reset());
     dispatch(
       setModalConfig({
-        id: "info",
+        id: "preGame",
         isOpen: true,
         props: {
           handleRevealCards,

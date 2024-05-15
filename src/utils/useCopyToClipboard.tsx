@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { useFetchShuffledCards } from "@/hooks";
 import { classicShuffle, dailyShuffle, liteShuffle } from "@/routes/route_strings";
+import { CLASSIC_SHUFFLE, DAILY_SHUFFLE, LITE_SHUFFLE } from "@/settings";
 
 import { isMobile } from "./isMobile";
-
 function timeToSeconds(time: string) {
   const [minutes, seconds] = time.split(":").map(Number);
   return (minutes * 60) + seconds;
@@ -18,10 +18,10 @@ export const useCopyToClipboard = ({
 }: {
   time: number;
   turns: string;
-  mode: "Daily" | "Classic" | "Lite";
+  mode: typeof CLASSIC_SHUFFLE | typeof LITE_SHUFFLE | typeof DAILY_SHUFFLE;
   link?: string
 }) => {
-  const [copySuccess, setCopySuccess] = useState("Share results");
+  const [copySuccess, setCopySuccess] = useState("Challenge a friend");
  
 
 
@@ -32,7 +32,7 @@ export const useCopyToClipboard = ({
 
   let modeDescription: string;
   switch (mode) {
-    case "Daily":
+    case DAILY_SHUFFLE:
       modeDescription = `New 26Pairs Challenge 🔥
 
 Daily Shuffle #${gameID}
@@ -40,7 +40,7 @@ My score: ${score} 🎉
       
 Can you beat me? www.26pairs.com${dailyShuffle}`;
       break;
-    case "Classic":
+    case CLASSIC_SHUFFLE:
       modeDescription = `New 26Pairs Challenge 🔥
 
 Classic Shuffle
@@ -48,7 +48,7 @@ My score: ${score} 🎉
       
 Can you beat me? www.26pairs.com${classicShuffle}`;
       break;
-    case "Lite":
+    case LITE_SHUFFLE:
       modeDescription = `New 26Pairs Challenge 🔥
       
 Lite Shuffle

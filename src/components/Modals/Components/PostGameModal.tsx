@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Countdown from "react-countdown";
 import { FaLock } from "react-icons/fa";
 import { FaRegShareSquare } from "react-icons/fa";
@@ -18,24 +18,32 @@ import ScoreContainer from "./ModalComponents/ScoreContainer";
 export const PostGameModal = ({
   isOpen,
   handleClose,
+  time, 
+  turns,
   difficulty,
+  handlePlayAgain,
 }: {
   isOpen: boolean;
   handleClose: () => void;
+  time: number;
+  turns: string;
+  handlePlayAgain: () => void;
   difficulty:
     | typeof CLASSIC_SHUFFLE
     | typeof DAILY_SHUFFLE
     | typeof LITE_SHUFFLE;
 }) => {
+
+ 
   const playedToday = useAppSelector(selectHasPlayedToday);
  
 
   
-  // const { copySuccess, copyToClipboard } = useCopyToClipboard({
-  //   time: parseInt(time),
-  //   turns: turns,
-  //   mode: "Daily",
-  // });
+  const { copySuccess, copyToClipboard } = useCopyToClipboard({
+    time: time,
+    turns: turns,
+    mode: difficulty,
+  });
   const getModalHeader = (gameMode: string): string => {
     // Match the gameMode with its corresponding local storage key
     switch (gameMode) {
@@ -53,12 +61,16 @@ export const PostGameModal = ({
 
   const gameTitle = getModalHeader(difficulty);
 
-  const handleClickChallengeFriend = () => {};
+  const handleClickChallengeFriend = () => {
+    copyToClipboard()
+  };
 
-  const handleClickReplayDeck = () => {};
+  const handleClickReplayDeck = () => {
+    handlePlayAgain();
+  };
 
-  // @todo 2 make the buttons on this page work
-  // @todo add scoreContaisner scores
+ 
+ 
 
 
   return (
@@ -69,11 +81,11 @@ export const PostGameModal = ({
             {gameTitle}
           </h3>
           <h2 className="text-xl font-bold ">Game Complete! 🎉</h2>
-          <ScoreContainer seconds={Number(54)} turns={Number(54)} />
+          <ScoreContainer seconds={Number(time)} turns={Number(turns)} />
 
           <div className="flex flex-col gap-3 w-full">
             <Button className="w-full" onClick={handleClickChallengeFriend}>
-              Challenge a friend <FaRegShareSquare className="ml-3" />
+              {copySuccess} <FaRegShareSquare className="ml-3" />
             </Button>
             {difficulty !== "DAILY_SHUFFLE" && (
               <Button
@@ -168,7 +180,6 @@ const LiteClassicShuffleButtonArray = ({
 
  const handleClickClassicShuffle = () => {
    const currentPath = window.location.pathname; // Get the current path
-   console.log(currentPath)
    if (currentPath === '/ClassicShuffle/') {
      // If the current path is the same as the target path, refresh the page
      window.location.reload(); // Refresh the page
