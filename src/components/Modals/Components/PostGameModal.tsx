@@ -110,7 +110,7 @@ export const PostGameModal = ({
   };
 
   return (
-    <BaseModal title="" isOpen={isOpen} handleClose={handleClose}>
+    <BaseModal title="" isOpen={isOpen} handleClose={handleClose} homeButton={true} >
       <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-5">
         <div className="w-full flex flex-col items-start gap-3">
           <h3 className="text-xs text-indigo-600 dark:text-white font-normal">

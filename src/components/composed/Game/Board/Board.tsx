@@ -168,7 +168,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
                     handlePlayAgain: resetGame,
                     time,
                     // latency offset
-                    turns: turnsCount +1,
+                    turns: turnsCount,
                   }
                 })
               ),
@@ -186,7 +186,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
                     handlePlayAgain: resetGame,
                     time,
                     // latency offset
-                    turns: turnsCount + 1,
+                    turns: turnsCount,
                   }
                 })
               ),

@@ -1,6 +1,8 @@
 import React, { ReactElement } from "react";
 import { Fragment } from "react";
+import { FaHome } from "react-icons/fa";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { navigate } from "gatsby";
 
 import { Dialog, Transition } from "@headlessui/react";
 
@@ -10,13 +12,20 @@ export const BaseModal = ({
   isOpen,
   handleClose,
   hideCloseButton = false,
+  homeButton = false,
 }: {
   title: string;
   children: React.ReactNode | ReactElement;
   isOpen: boolean;
   handleClose: () => void;
   hideCloseButton?: boolean;
+  homeButton?: boolean;
 }) => {
+
+  console.log('base modall??')
+
+
+
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -46,14 +55,22 @@ export const BaseModal = ({
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <div className="inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all dark:bg-gray-800 sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:align-middle">
-              {!hideCloseButton && <button
-                onClick={() => handleClose()}
-                tabIndex={0}
-                aria-pressed="false"
-                className="absolute right-4 top-4"
-              >
-                <IoCloseCircleOutline className="h-6 w-6 cursor-pointer dark:stroke-white" />
-              </button>}
+              {!hideCloseButton && (
+                <button
+                  onClick={
+                    homeButton ? () => navigate("/") : () => handleClose()
+                  }
+                  tabIndex={0}
+                  aria-pressed="false"
+                  className="absolute right-4 top-4"
+                >
+                  {homeButton ? (
+                    <FaHome className="h-6 w-6 cursor-pointer dark:stroke-white" />
+                  ) : (
+                    <IoCloseCircleOutline className="h-6 w-6 cursor-pointer dark:stroke-white" />
+                  )}
+                </button>
+              )}
               <div>
                 <div className="text-center">
                   <Dialog.Title

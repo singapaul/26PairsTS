@@ -74,7 +74,7 @@ export const HowToPlayModal = ({
   }
 
   return (
-    <BaseModal title="How to Play" isOpen={isOpen} handleClose={handleClose}>
+    <BaseModal title="How to Play" isOpen={isOpen} handleClose={handleClose} >
       <section className="flex flex-col gap-2">
         <div className="flex flex-col gap-4">
           <p>A shuffled deck of cards is laid out in front of you</p>
@@ -112,7 +112,7 @@ export const HowToPlayModal = ({
           </p>
  
         </div>
-        <div className="w-full flex flex-col sm:flex-row sm:justify-between">
+        <div className="w-full flex flex-col sm:flex-row-reverse sm:justify-between">
             <Button onClick={handleFlipCards}>Flip Cards</Button>
             <Button variant={'secondary'} onClick={handleGoBack} >Go back</Button>
         </div>
