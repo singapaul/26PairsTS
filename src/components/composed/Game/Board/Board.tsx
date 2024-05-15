@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/composed/Game/Header";
-import { HowScoringWorksModal, HowToPlayModal, PreGameModal } from "@/components/Modals";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CARD_FLIP_TIME } from "@/settings";
@@ -248,8 +247,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
 
   return (
     <BoardContainer>
-      <Button onClick={handleOpenModal} >PRESS FOR PREGAME MODAL</Button>
-      <Button onClick={handleOpenModalPOST} variant={'secondary'} >PRESS FOR POSTGAME MODAl</Button>
       <Header resetGame={resetGame} gameDifficulty={gameDifficulty} />
       {isLoading ? (
         <BoardStyled>

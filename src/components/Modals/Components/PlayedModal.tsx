@@ -34,7 +34,7 @@ export const PlayedModal = ({
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
     time: parseInt(time),
     turns: turns,
-    mode: "Daily",
+    mode: "CLASSIC_SHUFFLE",
   });
 
   return (
