@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/composed/Game/Header";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CARD_FLIP_TIME } from "@/settings";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";

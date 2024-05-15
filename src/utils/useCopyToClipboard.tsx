@@ -5,10 +5,7 @@ import { classicShuffle, dailyShuffle, liteShuffle } from "@/routes/route_string
 import { CLASSIC_SHUFFLE, DAILY_SHUFFLE, LITE_SHUFFLE } from "@/settings";
 
 import { isMobile } from "./isMobile";
-function timeToSeconds(time: string) {
-  const [minutes, seconds] = time.split(":").map(Number);
-  return (minutes * 60) + seconds;
-}
+ 
 
 export const useCopyToClipboard = ({
   time,
@@ -24,8 +21,6 @@ export const useCopyToClipboard = ({
   const [copySuccess, setCopySuccess] = useState("Challenge a friend");
  
 
-
-  // const timeInSeconds: number = timeToSeconds(time)
  
   const {gameID} = useFetchShuffledCards()
   const score =  (time) + Number.parseInt(turns)
