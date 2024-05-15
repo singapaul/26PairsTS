@@ -42,7 +42,7 @@ export type BoardProps = {
 };
 
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
-  const difficulty = gameDifficulty
+  const difficulty = gameDifficulty;
   const dispatch = useAppDispatch();
   const [cardPair, setCardPair] = useState<string[]>([]);
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
@@ -84,13 +84,12 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
           isOpen: true,
           props: {
             difficulty: gameDifficulty,
-            handleRevealCards
-          }
+            handleRevealCards,
+          },
         })
       );
       handleShowCardsPerm();
     } else {
-      
       dispatch(
         setModalConfig({
           id: "preGame",
@@ -116,6 +115,89 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
 
   const resetCardPair = () => setCardPair([]);
 
+  // const handleCardClick = (id: string): void => {
+  //   if (turnsCount == 0) {
+  //     dispatch(start());
+  //   }
+
+  //   if (cardFlipTimerRef.current) clearTimeout(cardFlipTimerRef.current);
+  //   if (cardPair.includes(id)) return;
+  //   const currentCardPair = [...cardPair, id];
+  //   if (currentCardPair.length === 3) {
+  //     setCardPair([id]);
+  //   } else {
+  //     setCardPair(currentCardPair);
+  //   }
+  //   if (currentCardPair.length !== 2) return;
+  //   dispatch(updateMoves());
+  //   const [firstCardName, secondCardName] = currentCardPair.map((cardId) =>
+  //     getNameById(duplicatedCards, cardId)
+  //   );
+  //   if (firstCardName === secondCardName) {
+  //     const currentFlippedCards = [...flippedCardList, ...currentCardPair];
+  //     setDisabledCardList(currentFlippedCards)
+  //     setFlippedCardList(currentFlippedCards);
+  //     resetCardPair();
+  //     if (duplicatedCards.length === currentFlippedCards.length) {
+  //       const finalScore = calculateGameScore(
+  //         time,
+  //         turnsCount);
+  //       dispatch(updateScore(finalScore));
+  //       dispatch(stop());
+  //       dispatch(updateFinalTime(time));
+  //       dispatch(setHasPlayedToday());
+
+  //       const gameModeString = getLocalStorageKeyFromGameMode(gameDifficulty);
+  //       saveGameStatsToLocalStorage({
+  //         gameMode: gameModeString,
+  //         score: finalScore,
+  //         time: time,
+  //         turns: turnsCount,
+  //       });
+  //       dispatch(addToStats({ gameDifficulty }));
+  //       if (gameDifficulty === "DAILY_SHUFFLE") {
+  //         setTimeout(
+  //           () =>
+  //             dispatch(
+  //               setModalConfig({
+  //                 id: "postGame",
+  //                 isOpen: true,
+  //                 props: {
+  //                   difficulty,
+  //                   handlePlayAgain: resetGame,
+  //                   time,
+  //                   // latency offset
+  //                   turns: turnsCount,
+  //                 }
+  //               })
+  //             ),
+  //           1000
+  //         );
+  //       } else {
+  //         setTimeout(
+  //           () =>
+  //             dispatch(
+  //               setModalConfig({
+  //                 id: "postGame",
+  //                 isOpen: true,
+  //                 props: {
+  //                   difficulty,
+  //                   handlePlayAgain: resetGame,
+  //                   time,
+  //                   // latency offset
+  //                   turns: turnsCount,
+  //                 }
+  //               })
+  //             ),
+  //           1000
+  //         );
+  //       }
+  //     }
+  //   } else {
+  //     cardFlipTimerRef.current = setTimeout(resetCardPair, 1000);
+  //   }
+  // };
+
   const handleCardClick = (id: string) => {
     if (turnsCount == 0) {
       dispatch(start());
@@ -124,9 +206,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     if (cardFlipTimerRef.current) clearTimeout(cardFlipTimerRef.current);
     if (cardPair.includes(id)) return;
     const currentCardPair = [...cardPair, id];
-    if (currentCardPair.length === 3) {
-      setCardPair([id]);
-    } else {
+    if (currentCardPair.length !== 2) {
+      // Adjusted condition here
       setCardPair(currentCardPair);
     }
     if (currentCardPair.length !== 2) return;
@@ -136,24 +217,21 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     );
     if (firstCardName === secondCardName) {
       const currentFlippedCards = [...flippedCardList, ...currentCardPair];
-      setDisabledCardList(currentFlippedCards)
+      setDisabledCardList(currentFlippedCards);
       setFlippedCardList(currentFlippedCards);
       resetCardPair();
       if (duplicatedCards.length === currentFlippedCards.length) {
-        const finalScore = calculateGameScore(
-          time,
-          turnsCount);
+        const finalScore = calculateGameScore(time, turnsCount + 1);
         dispatch(updateScore(finalScore));
         dispatch(stop());
         dispatch(updateFinalTime(time));
-        dispatch(setHasPlayedToday());
-
+        difficulty === 'DAILY_SHUFFLE' && dispatch(setHasPlayedToday());
         const gameModeString = getLocalStorageKeyFromGameMode(gameDifficulty);
         saveGameStatsToLocalStorage({
           gameMode: gameModeString,
           score: finalScore,
           time: time,
-          turns: turnsCount,
+          turns: turnsCount + 1,
         });
         dispatch(addToStats({ gameDifficulty }));
         if (gameDifficulty === "DAILY_SHUFFLE") {
@@ -168,8 +246,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
                     handlePlayAgain: resetGame,
                     time,
                     // latency offset
-                    turns: turnsCount,
-                  }
+                    turns: turnsCount +1 ,
+                  },
                 })
               ),
             1000
@@ -186,8 +264,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
                     handlePlayAgain: resetGame,
                     time,
                     // latency offset
-                    turns: turnsCount,
-                  }
+                    turns: turnsCount + 1,
+                  },
                 })
               ),
             1000
@@ -199,7 +277,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     }
   };
 
-   const resetGame = () => {
+  const resetGame = () => {
     setCardPair([]);
     setFlippedCardList([]);
     dispatch(resetMoves());
@@ -218,25 +296,28 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   };
 
   const handleOpenModal = () => {
- 
-    dispatch(setModalConfig({
-      id: 'preGame',
-      isOpen: true,
-      props: {
-        difficulty
-      }
-    }))
-  }
+    dispatch(
+      setModalConfig({
+        id: "preGame",
+        isOpen: true,
+        props: {
+          difficulty,
+        },
+      })
+    );
+  };
 
   const handleOpenModalPOST = () => {
-    dispatch(setModalConfig({
-      id: 'postGame',
-      isOpen: true,
-      props: {
-        difficulty
-      }
-    }))
-  }
+    dispatch(
+      setModalConfig({
+        id: "postGame",
+        isOpen: true,
+        props: {
+          difficulty,
+        },
+      })
+    );
+  };
   // Make sure to clear the timeout when the component unmounts
   useEffect(() => {
     return () => {

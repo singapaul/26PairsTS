@@ -8,6 +8,7 @@ export const checkPlayedToday = (LOCAL_STORAGE_KEY_NAME: string): boolean => {
       LOCAL_STORAGE_KEY_NAME
     );
     if (!storedData) {
+      console.log('theres no stored data')
       // if there is no stored data, return false
       return false;
     }

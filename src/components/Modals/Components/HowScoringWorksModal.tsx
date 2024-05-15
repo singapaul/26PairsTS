@@ -48,7 +48,7 @@ const dispatch = useAppDispatch()
           of <span className="font-bold">112</span> (38+74).
         </p>
         </div>
-        <div className="w-full flex flex-col sm:flex-row sm:justify-between">
+        <div className="w-full flex flex-col sm:flex-row-reverse sm:justify-between">
           <Button onClick={handleFlipCards}>Flip Cards</Button>
           <Button variant={"secondary"} onClick={handleGoBack}>Go back</Button>
         </div>

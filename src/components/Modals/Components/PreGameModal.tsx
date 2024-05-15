@@ -185,14 +185,14 @@ export const PreGameModal = ({
               onClick={handleHowToPlay}
               variant={"secondary"}
             >
-              How to play <FaArrowRight />
+              How to play <FaArrowRight className="ml-3" />
             </Button>
             <Button
               className="w-full"
               onClick={handleHowScoringWorks}
               variant={"secondary"}
             >
-              How Scoring works <FaArrowRight />
+              How Scoring works <FaArrowRight className="ml-3" />
             </Button>
           </div>
         </div>

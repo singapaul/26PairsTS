@@ -21,10 +21,7 @@ export const BaseModal = ({
   hideCloseButton?: boolean;
   homeButton?: boolean;
 }) => {
-
-  console.log('base modall??')
-
-
+ 
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
