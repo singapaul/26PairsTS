@@ -51,6 +51,7 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 1) Handled more modal logic (copyToClipboard, type improvements)
 2) Handled NaN edgecase on empty scores
 3) Minor board bug fixes
+4) Daily shuffle completed already score display logic
 
 ### 9th May 
 

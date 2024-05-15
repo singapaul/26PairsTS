@@ -60,10 +60,10 @@ export const PreGameModal = ({
 
   // let's get from local
   const getGameStats = (): GameRecord => {
+ 
     if (typeof window !== "undefined") {
       const key = getLocalStorageKeyFromGameMode(difficulty);
       const storedValue = window.localStorage.getItem(key);
-
       if (storedValue !== null) {
         // storedValue will be an array of scores or null
         const gameDataArray = JSON.parse(storedValue);

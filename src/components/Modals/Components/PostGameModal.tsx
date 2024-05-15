@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Countdown from "react-countdown";
 import { FaLock } from "react-icons/fa";
 import { FaRegShareSquare } from "react-icons/fa";
@@ -9,16 +9,23 @@ import { Button } from "@/components/ui/button";
 import { CLASSIC_SHUFFLE, DAILY_SHUFFLE, LITE_SHUFFLE } from "@/settings";
 import { useAppSelector } from "@/store/hooks";
 import { selectHasPlayedToday } from "@/store/slices/playedToday";
-import { useCopyToClipboard } from "@/utils";
+import { getLocalStorageKeyFromGameMode, useCopyToClipboard } from "@/utils";
 import { timeUntilTomorrow } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
 import ScoreContainer from "./ModalComponents/ScoreContainer";
 
+type GameRecord = {
+  time: string;
+  turns: string;
+  score: string;
+  date: string;
+};
+
 export const PostGameModal = ({
   isOpen,
   handleClose,
-  time, 
+  time,
   turns,
   difficulty,
   handlePlayAgain,
@@ -33,12 +40,45 @@ export const PostGameModal = ({
     | typeof DAILY_SHUFFLE
     | typeof LITE_SHUFFLE;
 }) => {
-
- 
   const playedToday = useAppSelector(selectHasPlayedToday);
- 
 
-  
+  const getLatest = (records: GameRecord[]): GameRecord => {
+    if (records.length === 0) {
+      return {
+        time: "-",
+        turns: "-",
+        score: "-",
+        date: "-",
+      };
+    }
+
+    return records[records.length - 1];
+  };
+
+  const getGameStats = (): GameRecord => {
+    if (typeof window !== "undefined") {
+      const key = getLocalStorageKeyFromGameMode(difficulty);
+      const storedValue = window.localStorage.getItem(key);
+      if (storedValue !== null) {
+        // storedValue will be an array of scores or null
+        const gameDataArray = JSON.parse(storedValue);
+        return getLatest(gameDataArray);
+      }
+      return {
+        time: "-",
+        turns: "-",
+        score: "-",
+        date: "-",
+      };
+    }
+    return {
+      time: "-",
+      turns: "-",
+      score: "-",
+      date: "-",
+    };
+  };
+  const [bestGame, setBestGame] = useState<GameRecord>(getGameStats());
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
     time: time,
     turns: turns,
@@ -62,16 +102,12 @@ export const PostGameModal = ({
   const gameTitle = getModalHeader(difficulty);
 
   const handleClickChallengeFriend = () => {
-    copyToClipboard()
+    copyToClipboard();
   };
 
   const handleClickReplayDeck = () => {
     handlePlayAgain();
   };
-
- 
- 
-
 
   return (
     <BaseModal title="" isOpen={isOpen} handleClose={handleClose}>
@@ -81,7 +117,14 @@ export const PostGameModal = ({
             {gameTitle}
           </h3>
           <h2 className="text-xl font-bold ">Game Complete! 🎉</h2>
-          <ScoreContainer seconds={Number(time)} turns={Number(turns)} />
+          {playedToday && difficulty === DAILY_SHUFFLE ? (
+            <ScoreContainer
+              seconds={Number(bestGame.time)}
+              turns={Number(bestGame.turns)}
+            />
+          ) : (
+            <ScoreContainer seconds={Number(time)} turns={Number(turns)} />
+          )}
 
           <div className="flex flex-col gap-3 w-full">
             <Button className="w-full" onClick={handleClickChallengeFriend}>
@@ -114,8 +157,8 @@ export const PostGameModal = ({
 
 const DailyShuffleButtonArray = ({ playedToday }: { playedToday: boolean }) => {
   const handleClickLiteShuffle = () => {
-     const currentPath = window.location.pathname; // Get the current path
-    if (currentPath === '/LiteShuffle') {
+    const currentPath = window.location.pathname; // Get the current path
+    if (currentPath === "/LiteShuffle") {
       // If the current path is the same as the target path, refresh the page
       window.location.reload(); // Refresh the page
     } else {
@@ -125,12 +168,13 @@ const DailyShuffleButtonArray = ({ playedToday }: { playedToday: boolean }) => {
 
   const handleClickClassicShuffle = () => {
     const currentPath = window.location.pathname; // Get the current path
-    if (currentPath === '/ClassicShuffle') {
+    if (currentPath === "/ClassicShuffle") {
       // If the current path is the same as the target path, refresh the page
       window.location.reload(); // Refresh the page
     } else {
       navigate("/ClassicShuffle"); // Navigate to the new path
-  }};
+    }
+  };
 
   return (
     <>
@@ -167,32 +211,29 @@ const LiteClassicShuffleButtonArray = ({
 }: {
   playedToday: boolean;
 }) => {
- 
   const handleClickLiteShuffle = () => {
     const currentPath = window.location.pathname; // Get the current path
-   if (currentPath === '/LiteShuffle/') {
-     // If the current path is the same as the target path, refresh the page
-     window.location.reload(); // Refresh the page
-   } else {
-     navigate("/LiteShuffle/"); // Navigate to the new path
-   }
- };
+    if (currentPath === "/LiteShuffle/") {
+      // If the current path is the same as the target path, refresh the page
+      window.location.reload(); // Refresh the page
+    } else {
+      navigate("/LiteShuffle/"); // Navigate to the new path
+    }
+  };
 
- const handleClickClassicShuffle = () => {
-   const currentPath = window.location.pathname; // Get the current path
-   if (currentPath === '/ClassicShuffle/') {
-     // If the current path is the same as the target path, refresh the page
-     window.location.reload(); // Refresh the page
-   } else {
-     navigate("/ClassicShuffle/"); // Navigate to the new path
- }};
+  const handleClickClassicShuffle = () => {
+    const currentPath = window.location.pathname; // Get the current path
+    if (currentPath === "/ClassicShuffle/") {
+      // If the current path is the same as the target path, refresh the page
+      window.location.reload(); // Refresh the page
+    } else {
+      navigate("/ClassicShuffle/"); // Navigate to the new path
+    }
+  };
 
-
-
- const handleClickDailyShuffle = () => {
-
-  navigate('/DailyShuffle/')
- }
+  const handleClickDailyShuffle = () => {
+    navigate("/DailyShuffle/");
+  };
   return (
     <>
       <Button
