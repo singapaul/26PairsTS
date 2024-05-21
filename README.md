@@ -1,52 +1,25 @@
-https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p2c?fbclid=IwAR3IjD5K6GgEYgtSV00xAa-NPmtBagADldUVAq9wpcIGxEPLWxyr4H0-180
+## Change log: 
 
 
-- Analytics dashboard? https://www.youtube.com/watch?v=MGjCIQh5Pkw&t=160s&ab_channel=Joshtriedcoding
+### 15th May 
 
+1) Handled more modal logic (copyToClipboard, type improvements)
+2) Handled NaN edgecase on empty scores
+3) Minor board bug fixes
+4) Daily shuffle completed already score display logic
+5) Small redux fixes and small UI fixes. 
 
+### 9th May 
 
-# Priority 
+1) Implement functionality pre-game modal across game modes
+2) Modals further implemented
 
+### undated
 
-
-3) Deploy new branches for testing ahead of merges
-
-# to do 
-
-1) Create profile page
-1) global loading state
-2) rename the playedTodayModal
-3) disable the flip cards button with global loading state.
-4) start timer on card flip
-5) integrate tooltip & countdown onto homescreen
-6) head tags (SEO) / analytics tags (tracking) integration - @Matt input pending 
-7) play around with suspense, maybe on the cards?
-8) refactor all slices with the the typedSelector 
-9) close modals on route change!
-10) make layout for profile page!
-11) probably need to refactor the historic facts section to make sure it caters for all game modes
-
-# future work
-
-1. Optimise designs for tablet
-2. Need to test on slow connection and potenially block modal/show a loading spinner?
-2. integrate full sign in flow and make app cohesive
-3. Save scores to online database - if signed in.
-4. Use python API and write Facts endpoint with chat gtp-3 
-5. investigate how we could share a shuffle code
-6. Leaderboards & Auth
-8. Analytics tracking
-9. https://ui.aceternity.com/components
-10. build a landing page - Matt to take the lead on this
-11. In settings difficulty switch? To reduce the flip time (regardless classic should have a longer flip time)
-12. check old build useDisabled?
-13. branch protections/staging branch? 
-14. calendar UI for old daily shuffles?
-15. Suspense component?
-16. Basic testing and mocking with Jest?
-17. Testing branches should be available when  I push code on github
-
-## ARCHIVE: 
+4) start timer on card flip - DONE
+3) disable the flip cards button with global loading state. - DONE
+6) head tags (SEO) / analytics tags (tracking) integration - @Matt input pending  - DONE
+10) make layout for profile page! - parked
 
 ### 28th March
 
@@ -150,3 +123,42 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 13) todo use folder structure from VP - DONE 
 14) fix remaining modals - done
 15) Clean up accessing store selectors pattern - solved using two hooks - DONE
+
+
+https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p2c?fbclid=IwAR3IjD5K6GgEYgtSV00xAa-NPmtBagADldUVAq9wpcIGxEPLWxyr4H0-180
+
+
+- Analytics dashboard? https://www.youtube.com/watch?v=MGjCIQh5Pkw&t=160s&ab_channel=Joshtriedcoding
+
+
+# to do 
+
+1) Create profile page
+1) global loading state
+2) rename the playedTodayModal
+5) integrate tooltip & countdown onto homescreen
+
+7) play around with suspense, maybe on the cards?
+8) refactor all slices with the the typedSelector 
+9) close modals on route change!
+11) probably need to refactor the historic facts section to make sure it caters for all game modes
+
+# future work
+
+1. Optimise designs for tablet
+2. Need to test on slow connection and potenially block modal/show a loading spinner?
+2. integrate full sign in flow and make app cohesive
+3. Save scores to online database - if signed in.
+4. Use python API and write Facts endpoint with chat gtp-3 
+5. investigate how we could share a shuffle code
+6. Leaderboards & Auth
+8. Analytics tracking
+9. https://ui.aceternity.com/components
+10. build a landing page - Matt to take the lead on this
+11. In settings difficulty switch? To reduce the flip time (regardless classic should have a longer flip time)
+12. check old build useDisabled?
+13. branch protections/staging branch? 
+14. calendar UI for old daily shuffles?
+15. Suspense component?
+16. Basic testing and mocking with Jest?
+17. Testing branches should be available when  I push code on github

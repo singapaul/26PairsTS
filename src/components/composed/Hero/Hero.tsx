@@ -1,4 +1,5 @@
 import React from "react";
+import Countdown from "react-countdown";
 import { FaUser } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
 import { TiArrowShuffle } from "react-icons/ti";
@@ -8,14 +9,17 @@ import card from "@/assets/images/card_back.png";
 import { useAuthValue } from "@/components/Auth/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useNavigateToDailyShuffle } from "@/routes/route_hooks";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setModalConfig } from "@/store/slices/modals";
+import { selectHasPlayedToday } from "@/store/slices/playedToday";
+import { timeUntilTomorrow } from "@/utils";
 
 
 export const Hero = () => {
   const dispatch = useAppDispatch();
   const { currentUser } = useAuthValue();
   const [navigateToDailyShuffle] = useNavigateToDailyShuffle();
+  const playedToday = useAppSelector(selectHasPlayedToday);
 
   const handleLogin = () => {
     navigate("/login");
@@ -68,6 +72,7 @@ export const Hero = () => {
       </p>
       <h2 className="text-md font-semibold">Select Your Challenge</h2>
       <div className="flex flex-col items-center gap-2">
+
         <Button size={"lg"} onClick={navigateToDailyShuffle} className="w-full">
           <span className="flex items-center w-full justify-between text-lg gap-4">
             <p>Daily Shuffle</p>
@@ -76,7 +81,6 @@ export const Hero = () => {
             </p>
           </span>
         </Button>
-
         <Button
           size={"lg"}
           variant={"outline"}
@@ -97,8 +101,16 @@ export const Hero = () => {
             </p>
           </span>
         </Button>
-
-        {/* {DynamicButton} */}
+        {playedToday && (
+            <span className="text-nowrap text-sm text-gray-900 dark:text-gray-100">
+              {"Next daily shuffle in "}
+              <Countdown
+                date={Date.now() + timeUntilTomorrow()}
+                daysInHours={true}
+                className="font-medium"
+              />
+            </span>
+          )}
       </div>
     </>
   );

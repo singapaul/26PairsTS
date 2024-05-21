@@ -6,10 +6,13 @@ import {
   LOCAL_STORAGE_KEY_NAME_LITE,
 } from "@/settings";
 
+import { RootState } from "../store";
+
 import type {
   gameDataObjectArrayType,
 } from "@/utils/saveGameStatsToLocalStorage";
 
+// @todo this needs a refactoring
 // Define a type for the slice state
 type GameModeStats = {
   gamesPlayed: number | string;
@@ -112,4 +115,6 @@ const historicStats = createSlice({
 
 export const { setValueDaily, addToStats } = historicStats.actions;
 
+
+export const selectHistoricGameStats= (state: RootState): TwentySixStats => state.stats
 export default historicStats.reducer;

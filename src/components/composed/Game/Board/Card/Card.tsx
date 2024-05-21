@@ -145,9 +145,9 @@ const cardClasses = `card ${isFlipped ? 'flipped' : ''} ${
   const cardStyle = {
     opacity: isFlipped && isDisabled ? '50%' : ''
   }
-  console.log(difficulty)
+ 
    if (difficulty === 'CLASSIC_SHUFFLE') {
-    console.log('difficulty')
+ 
     return (
       <CardStyledClassic onClick={handleClick}>
         {/* @ts-ignore */}

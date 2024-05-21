@@ -46,7 +46,7 @@ export const saveGameStatsToLocalStorage = ({
 
       const gameDataObject: gameDataObjectType = {
         time: time.toString(),
-        turns: (turns + 1).toString(),
+        turns: (turns).toString(),
         score: score.toString(),
         date: today.toString(),
       };

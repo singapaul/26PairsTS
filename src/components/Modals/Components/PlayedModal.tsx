@@ -5,16 +5,14 @@ import { navigate } from "gatsby";
 
 import { classicShuffle, liteShuffle } from "@/routes/route_strings";
 import { LOCAL_STORAGE_KEY_NAME_DAILY } from "@/settings";
-import { formatSecondsToMMSS, timeUntilTomorrow } from "@/utils";
+import {  timeUntilTomorrow } from "@/utils";
 import { useCopyToClipboard } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
 
 import type { gameDataObjectType } from "@/utils/saveGameStatsToLocalStorage";
-
-// this is just a daily shuffle modal -@todo rename
-// so maybe lets make it check local storage
-
+ 
+// @todo delete this file
 export const PlayedModal = ({
   isOpen,
   handleClose,
@@ -36,7 +34,7 @@ export const PlayedModal = ({
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
     time: parseInt(time),
     turns: turns,
-    mode: "Daily",
+    mode: "CLASSIC_SHUFFLE",
   });
 
   return (
