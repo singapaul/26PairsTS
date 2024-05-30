@@ -33,7 +33,8 @@ export const useCopyToClipboard = ({
 Daily Shuffle #${gameID}
 My score: ${score} 🎉
       
-Can you beat me? www.26pairs.com${dailyShuffle}`;
+Your turn...
+www.26pairs.com${dailyShuffle}`;
       break;
     case CLASSIC_SHUFFLE:
       modeDescription = `New 26Pairs Challenge 🔥
@@ -41,7 +42,8 @@ Can you beat me? www.26pairs.com${dailyShuffle}`;
 Classic Shuffle
 My score: ${score} 🎉
       
-Can you beat me? www.26pairs.com${classicShuffle}`;
+Your turn...
+www.26pairs.com${classicShuffle}`;
       break;
     case LITE_SHUFFLE:
       modeDescription = `New 26Pairs Challenge 🔥
@@ -49,12 +51,14 @@ Can you beat me? www.26pairs.com${classicShuffle}`;
 Lite Shuffle
 My score: ${score} 🎉
       
-Can you beat me? www.26pairs.com${liteShuffle}`
+Your turn...
+www.26pairs.com${liteShuffle}`
       break;
     default:
       modeDescription = `My score: ${score} 🎉
       
-Can you beat me? www.26pairs.com${dailyShuffle}`;
+Your turn...
+www.26pairs.com${dailyShuffle}`;
   }
 
   const copyToClipboard = async () => {
