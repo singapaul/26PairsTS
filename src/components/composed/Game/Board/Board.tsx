@@ -1,7 +1,8 @@
-/* eslint-disable eqeqeq */
+/* eslint-disablec  */
 import React, { useEffect, useRef, useState } from "react";
 
 import { Header } from "@/components/composed/Game/Header";
+import { PostGameModal, PreGameModal } from "@/components/Modals";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CARD_FLIP_TIME } from "@/settings";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -12,7 +13,8 @@ import {
   updateScore,
 } from "@/store/slices/finishedGameStats";
 import { addToStats } from "@/store/slices/historicStats";
-import { setModalConfig } from "@/store/slices/modals";
+import { selectLoadingState } from "@/store/slices/loading";
+import { setIsNotLoading } from "@/store/slices/loading";
 import { setHasPlayedToday } from "@/store/slices/playedToday";
 import { selectHasPlayedToday } from "@/store/slices/playedToday";
 import { increment, reset, start, stop } from "@/store/slices/timer";
@@ -41,18 +43,22 @@ export type BoardProps = {
   gameDifficulty: DifficultyKeys;
 };
 
+ 
+
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
-  const difficulty = gameDifficulty;
   const dispatch = useAppDispatch();
   const [cardPair, setCardPair] = useState<string[]>([]);
   const [flippedCardList, setFlippedCardList] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(true); // Add this line to introduce loading state
+  const isLoading = useAppSelector(selectLoadingState);
   const [disabledCardList, setDisabledCardList] = useState<string[]>([]);
   const turnsCount = useAppSelector((state) => state.finishedGameStats.moves);
   const cardFlipTimerRef = useRef<NodeJS.Timeout | null>(null);
   const isRunning = useAppSelector((state) => state.timer.isRunning);
   const time = useAppSelector((state) => state.timer.timeInSeconds);
   const hasPlayedToday: boolean = useAppSelector(selectHasPlayedToday);
+  const [isOpenPreGameModal, setIsOpenPreGameModal] = useState<boolean>(true);
+  const [isOpenPostGameModal, setIsOpenPostGameModal] =
+    useState<boolean>(false);
 
   // @todo refactor this case
   const handleRevealCards = () => {
@@ -73,33 +79,14 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   // Modify your useEffect or data fetching logic as needed
   useEffect(() => {
     if (duplicatedCards && duplicatedCards.length > 0) {
-      setIsLoading(false); // Set loading to false once data is ready
+      dispatch(setIsNotLoading());
     }
 
     // depending if we have played today or not we open a different modal
     if (hasPlayedToday && gameDifficulty === "DAILY_SHUFFLE") {
-      dispatch(
-        setModalConfig({
-          id: "postGame",
-          isOpen: true,
-          props: {
-            difficulty: gameDifficulty,
-            handleRevealCards,
-          },
-        })
-      );
+      setIsOpenPreGameModal(false);
+      setIsOpenPostGameModal(true);
       handleShowCardsPerm();
-    } else {
-      dispatch(
-        setModalConfig({
-          id: "preGame",
-          isOpen: true,
-          props: {
-            difficulty: gameDifficulty,
-            handleRevealCards,
-          },
-        })
-      );
     }
   }, [dispatch, duplicatedCards]);
 
@@ -116,7 +103,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const resetCardPair = () => setCardPair([]);
 
   const handleCardClick = (id: string): void => {
-    if (turnsCount == 0) {
+    if (turnsCount === 0) {
       dispatch(start());
     }
 
@@ -154,41 +141,9 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
         });
         dispatch(addToStats({ gameDifficulty }));
         if (gameDifficulty === "DAILY_SHUFFLE") {
-          setTimeout(
-            () =>
-              dispatch(
-                setModalConfig({
-                  id: "postGame",
-                  isOpen: true,
-                  props: {
-                    difficulty,
-                    handlePlayAgain: resetGame,
-                    time,
-                    // latency offset
-                    turns: turnsCount + 1,
-                  },
-                })
-              ),
-            1000
-          );
+          setTimeout(() => setIsOpenPostGameModal(true), 1000);
         } else {
-          setTimeout(
-            () =>
-              dispatch(
-                setModalConfig({
-                  id: "postGame",
-                  isOpen: true,
-                  props: {
-                    difficulty,
-                    handlePlayAgain: resetGame,
-                    time,
-                    // latency offset
-                    turns: turnsCount + 1,
-                  },
-                })
-              ),
-            1000
-          );
+          setTimeout(() => setIsOpenPostGameModal(true), 1000);
         }
       }
     } else {
@@ -203,40 +158,11 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     dispatch(updateScore(0));
     dispatch(stop());
     dispatch(reset());
-    dispatch(
-      setModalConfig({
-        id: "preGame",
-        isOpen: true,
-        props: {
-          handleRevealCards,
-        },
-      })
-    );
+    setIsOpenPreGameModal(true);
   };
 
-  const handleOpenModal = () => {
-    dispatch(
-      setModalConfig({
-        id: "preGame",
-        isOpen: true,
-        props: {
-          difficulty,
-        },
-      })
-    );
-  };
 
-  const handleOpenModalPOST = () => {
-    dispatch(
-      setModalConfig({
-        id: "postGame",
-        isOpen: true,
-        props: {
-          difficulty,
-        },
-      })
-    );
-  };
+
   // Make sure to clear the timeout when the component unmounts
   useEffect(() => {
     return () => {
@@ -277,6 +203,20 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
           </BoardStyled>
         </>
       )}
+      <PreGameModal
+        difficulty={gameDifficulty}
+        handleRevealCards={handleRevealCards}
+        isOpen={isOpenPreGameModal}
+        handleClose={() => setIsOpenPreGameModal(false)}
+      />
+      <PostGameModal
+        isOpen={isOpenPostGameModal}
+        handleClose={() => setIsOpenPostGameModal(false)}
+        time={time}
+        turns={JSON.stringify(turnsCount + 1)}
+        handlePlayAgain={resetGame}
+        difficulty={gameDifficulty}
+      />
     </BoardContainer>
   );
 };

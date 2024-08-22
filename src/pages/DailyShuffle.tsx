@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Board } from "@/components/composed/Game/Board";
 import { ModalRegistry } from "@/components/Modals";
 import { useFetchShuffledCards } from "@/hooks";
 import { DAILY_SHUFFLE } from "@/settings";
- 
+import { useAppDispatch } from "@/store/hooks";
+import { setIsLoading, setIsNotLoading } from "@/store/slices/loading";
 const DailyShuffle = ({ path }: { path: string }) => {
-  const { duplicatedCards, isLoading, error } = useFetchShuffledCards();
+  const { duplicatedCards, isLoading } = useFetchShuffledCards();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setIsLoading());
+    } else {
+      dispatch(setIsNotLoading());
+    }
+  }, [dispatch, isLoading]);
 
   return (
     <>
@@ -21,6 +31,7 @@ export default DailyShuffle;
 export function Head() {
   return (
     <>
+      <title>Daily Shuffle | 26Pairs</title>
       <meta property="og:title" content="26Pairs" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://www.26pairs.com" />

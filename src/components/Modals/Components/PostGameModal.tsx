@@ -41,7 +41,7 @@ export const PostGameModal = ({
     | typeof LITE_SHUFFLE;
 }) => {
   const playedToday = useAppSelector(selectHasPlayedToday);
-console.log(playedToday)
+ 
   const getLatest = (records: GameRecord[]): GameRecord => {
     if (records.length === 0) {
       return {

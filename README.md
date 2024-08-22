@@ -1,6 +1,9 @@
 ## Change log: 
 
-
+1) flip cards button is dependant on global loading state set by redux to support sync with card fetching in daily shuffle
+2) Pre, Post game modals now moved to the board component to redux number of redux errors associated with passing functions through redux
+3) Small code improvements 
+4) Updated the game mode tile to close on click
 ### 15th May 
 
 1) Handled more modal logic (copyToClipboard, type improvements)

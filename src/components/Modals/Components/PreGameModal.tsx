@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { CLASSIC_SHUFFLE, DAILY_SHUFFLE, LITE_SHUFFLE } from "@/settings";
 import { useAppDispatch } from "@/store/hooks";
 import { useAppSelector } from "@/store/hooks";
+import { selectLoadingState } from "@/store/slices/loading";
 import { setModalConfig } from "@/store/slices/modals";
 import { selectHasPlayedToday } from "@/store/slices/playedToday";
 import { calculateCurrentStreak, timeUntilTomorrow } from "@/utils";
@@ -15,6 +16,62 @@ import { getLocalStorageKeyFromGameMode } from "@/utils";
 import { BaseModal } from "./BaseModal";
 import ScoreContainer from "./ModalComponents/ScoreContainer";
 import { StreakContainer } from "./ModalComponents/StreakContainer";
+
+// let's get from local
+const getGameStats = (difficulty: string): GameRecord => {
+  if (typeof window !== "undefined") {
+    const key = getLocalStorageKeyFromGameMode(difficulty);
+    const storedValue = window.localStorage.getItem(key);
+    if (storedValue !== null) {
+      // storedValue will be an array of scores or null
+      const gameDataArray = JSON.parse(storedValue);
+      return getLowestScore(gameDataArray);
+    }
+    return {
+      time: "-",
+      turns: "-",
+      score: "-",
+      date: "-",
+    };
+  }
+  return {
+    time: "-",
+    turns: "-",
+    score: "-",
+    date: "-",
+  };
+};
+
+const getStreak = (difficulty: any): number => {
+  if (typeof window !== "undefined") {
+    const key = getLocalStorageKeyFromGameMode(difficulty);
+    const storedValue = window.localStorage.getItem(key);
+
+    if (storedValue !== null) {
+      // storedValue will be an array of scores or null
+      const gameDataArray = JSON.parse(storedValue);
+      return calculateCurrentStreak(gameDataArray);
+    }
+    return 0;
+  }
+  return 0;
+};
+
+const getModalHeader = (gameMode: string): string => {
+  // Match the gameMode with its corresponding local storage key
+  switch (gameMode) {
+    case CLASSIC_SHUFFLE:
+      return "Classic Shuffle";
+    case DAILY_SHUFFLE:
+      return "Daily Shuffle";
+    case LITE_SHUFFLE:
+      return "Lite Shuffle";
+    default:
+      // Handle case where the gameMode does not match any known type
+      return "Lite Shuffle";
+  }
+};
+
 type GameRecord = {
   time: string;
   turns: string;
@@ -42,6 +99,21 @@ const getLowestScore = (records: GameRecord[]): GameRecord => {
   });
 };
 
+const getModalCopy = (gameMode: string): string => {
+  // Match the gameMode with its corresponding local storage key
+  switch (gameMode) {
+    case CLASSIC_SHUFFLE:
+      return "If you are new or need a reminder on how to play, please read below:";
+    case DAILY_SHUFFLE:
+      return "Ready to beat the daily shuffle? If you need a reminder on how to play, please read below:";
+    case LITE_SHUFFLE:
+      return "If you are new or need a reminder on how to play, please read below:";
+    default:
+      // Handle case where the gameMode does not match any known type
+      return "If you are new or need a reminder on how to play, please read below:";
+  }
+};
+
 export const PreGameModal = ({
   isOpen,
   handleClose,
@@ -56,52 +128,15 @@ export const PreGameModal = ({
     | typeof DAILY_SHUFFLE
     | typeof LITE_SHUFFLE;
 }) => {
-
-
-  // let's get from local
-  const getGameStats = (): GameRecord => {
- 
-    if (typeof window !== "undefined") {
-      const key = getLocalStorageKeyFromGameMode(difficulty);
-      const storedValue = window.localStorage.getItem(key);
-      if (storedValue !== null) {
-        // storedValue will be an array of scores or null
-        const gameDataArray = JSON.parse(storedValue);
-        return getLowestScore(gameDataArray);
-      }
-      return {
-        time: "-",
-        turns: "-",
-        score: "-",
-        date: "-",
-      };
-    }
-    return {
-      time: "-",
-      turns: "-",
-      score: "-",
-      date: "-",
-    };
-  };
-
-  const getStreak = (): number => {
-    if (typeof window !== "undefined") {
-      const key = getLocalStorageKeyFromGameMode(difficulty);
-      const storedValue = window.localStorage.getItem(key);
-
-      if (storedValue !== null) {
-        // storedValue will be an array of scores or null
-        const gameDataArray = JSON.parse(storedValue);
-        return calculateCurrentStreak(gameDataArray);
-      }
-      return 0;
-    }
-    return 0;
-  };
-
-  const [bestGame, setBestGame] = useState<GameRecord>(getGameStats());
-  const [currentStreak, setCurrentStreak] = useState<number>(getStreak());
+  const dispatch = useAppDispatch();
+  const gameTitle = getModalHeader(difficulty);
+  const modalCopy = getModalCopy(difficulty);
+  const isCardsLoading = useAppSelector(selectLoadingState);
+  const currentStreak: number = getStreak(difficulty);
   const playedToday = useAppSelector(selectHasPlayedToday);
+  const [bestGame, setBestGame] = useState<GameRecord>(
+    getGameStats(difficulty)
+  );
 
   const handleHowToPlay = (): void => {
     dispatch(
@@ -127,50 +162,20 @@ export const PreGameModal = ({
     );
   };
 
-  const dispatch = useAppDispatch();
-
-  const getModalHeader = (gameMode: string): string => {
-    // Match the gameMode with its corresponding local storage key
-    switch (gameMode) {
-      case CLASSIC_SHUFFLE:
-        return "Classic Shuffle";
-      case DAILY_SHUFFLE:
-        return "Daily Shuffle";
-      case LITE_SHUFFLE:
-        return "Lite Shuffle";
-      default:
-        // Handle case where the gameMode does not match any known type
-        return "Lite Shuffle";
-    }
-  };
-
-  const getModalCopy = (gameMode: string): string => {
-    // Match the gameMode with its corresponding local storage key
-    switch (gameMode) {
-      case CLASSIC_SHUFFLE:
-        return "If you are new or need a reminder on how to play, please read below:";
-      case DAILY_SHUFFLE:
-        return "Ready to beat the daily shuffle? If you need a reminder on how to play, please read below:";
-      case LITE_SHUFFLE:
-        return "If you are new or need a reminder on how to play, please read below:";
-      default:
-        // Handle case where the gameMode does not match any known type
-        return "If you are new or need a reminder on how to play, please read below:";
-    }
-  };
-
-  const gameTitle = getModalHeader(difficulty);
-  const modalCopy = getModalCopy(difficulty);
-
   const handleFlipCards = () => {
     handleClose();
     handleRevealCards();
   };
 
-  getGameStats();
+  // getGameStats(difficulty);
 
   return (
-    <BaseModal title="" isOpen={isOpen} handleClose={handleClose} homeButton={true}>
+    <BaseModal
+      title=""
+      isOpen={isOpen}
+      handleClose={handleClose}
+      homeButton={true}
+    >
       <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-5">
         <div className="w-full flex flex-col items-start">
           <h3 className="text-xs text-indigo-600 dark:text-white font-normal">
@@ -206,7 +211,9 @@ export const PreGameModal = ({
             <StreakContainer streak={currentStreak} />
           )}
           <Button
-            disabled={playedToday && difficulty === DAILY_SHUFFLE}
+            disabled={
+              (playedToday && difficulty === DAILY_SHUFFLE) || isCardsLoading
+            }
             className="w-full"
             onClick={handleFlipCards}
           >

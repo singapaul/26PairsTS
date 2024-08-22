@@ -17,7 +17,7 @@ export const GameModesModal = ({
   handleClose: () => void;
 }) => {
   return (
-    <BaseModal title="How to play" isOpen={isOpen} handleClose={handleClose}>
+    <BaseModal title="Game Modes" isOpen={isOpen} handleClose={handleClose}>
       <div className="flex flex-col gap-4 min-w-80">
         <p className="text-left text-base text-gray-700 dark:text-gray-50">
           {GameModesModalDescription}
@@ -26,16 +26,19 @@ export const GameModesModal = ({
           title="DAILY SHUFFLE"
           link={dailyShuffle}
           gameDetails={{ difficulty: "easy", numCards: 12, time: "Avg. 1-2 mins" }}
+          handleClose={handleClose}
         />
         <GameModeTile
           title="CLASSIC SHUFFLE"
           link={classicShuffle}
           gameDetails={{ difficulty: "hard", numCards: 26, time: "Avg. 2-3 mins" }}
+          handleClose={handleClose}
         />
         <GameModeTile
           title="LITE SHUFFLE"
           link={liteShuffle}
           gameDetails={{ difficulty: "easy", numCards: 12, time: "Avg. 1-2 mins" }}
+          handleClose={handleClose}
         />
       </div>
     </BaseModal>

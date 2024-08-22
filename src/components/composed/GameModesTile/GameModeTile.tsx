@@ -9,6 +9,7 @@ type GameModeTileProps = {
   title: string;
   link: string;
   gameDetails: GameDetails;
+  handleClose: () => void;
 };
 
 type GameDetails = {
@@ -21,7 +22,15 @@ export const GameModeTile = ({
   title,
   link,
   gameDetails,
+  handleClose
 }: GameModeTileProps) => {
+
+
+const handleClickLink = () => {
+  navigate(link)
+  handleClose()
+}
+
   return (
     <div className="flex rounded justify-between items-center bg-slate-50 dark:bg-gray-800 p-2 gap-2 dark:border-solid dark:border-white dark:border-[1px]">
       <div className="flex flex-col items-start">
@@ -45,7 +54,7 @@ export const GameModeTile = ({
       </div>
       <Button
         className="text-[10px] whitespace-nowrap min-w-28 sm:w-min sm:min-w-52 sm:text-sm  text-white dark:text-white bg-blue-500 dark:bg-blue-700"
-        onClick={() => navigate(link)}
+        onClick={handleClickLink}
       >
         {title}
       </Button>

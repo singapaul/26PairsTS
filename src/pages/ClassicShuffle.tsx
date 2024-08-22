@@ -3,12 +3,12 @@ import React from "react";
 import { CLASSICDECK } from "@/assets/data";
 import { Board } from "@/components/composed/Game/Board";
 import { ModalRegistry } from "@/components/Modals";
-import { CLASSIC_SHUFFLE} from "@/settings";
+import { CLASSIC_SHUFFLE } from "@/settings";
 import { assignIDToCards, shuffleArray } from "@/utils";
- 
+
 const ClassicShuffle = ({ path }: { path: string }) => {
-  const shuffledArray = shuffleArray(CLASSICDECK)
-  const IDArray = assignIDToCards(shuffledArray)
+  const shuffledArray = shuffleArray(CLASSICDECK);
+  const IDArray = assignIDToCards(shuffledArray);
   return (
     <>
       <Board duplicatedCards={IDArray} gameDifficulty={CLASSIC_SHUFFLE} />
@@ -22,6 +22,7 @@ export default ClassicShuffle;
 export function Head() {
   return (
     <>
+      <title>Classic Shuffle | 26Pairs</title>
       <meta property="og:title" content="26Pairs" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://www.26pairs.com" />

@@ -1,17 +1,15 @@
 import React from "react";
 
-import { CLASSICDECKLITE } from '@/assets/data';
+import { CLASSICDECKLITE } from "@/assets/data";
 import { Board } from "@/components/composed/Game/Board";
 import { ModalRegistry } from "@/components/Modals";
 import { LITE_SHUFFLE } from "@/settings";
 import { assignIDToCards, shuffleArray } from "@/utils";
 
 const LiteShuffle = ({ path }: { path: string }) => {
+  const shuffledArray = shuffleArray(CLASSICDECKLITE);
+  const IDArray = assignIDToCards(shuffledArray);
 
- 
-  const shuffledArray = shuffleArray(CLASSICDECKLITE)
-  const IDArray = assignIDToCards(shuffledArray)
- 
   return (
     <>
       <Board duplicatedCards={IDArray} gameDifficulty={LITE_SHUFFLE} />
@@ -22,10 +20,10 @@ const LiteShuffle = ({ path }: { path: string }) => {
 
 export default LiteShuffle;
 
-
 export function Head() {
   return (
     <>
+      <title>Lite Shuffle | 26Pairs</title>
       <meta property="og:title" content="26Pairs" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://www.26pairs.com" />

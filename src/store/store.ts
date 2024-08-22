@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import displayWelcomeMenuReducer from './slices/displayWelcomeMenu'
 import finishedGameStatsReducer from './slices/finishedGameStats'
 import historicStatsReducer from './slices/historicStats'
+import loadingReducer from './slices/loading'
 import openModalReducer from './slices/modals'
 import playedTodayReducer from './slices/playedToday'
 import timerReducer from './slices/timer'
@@ -13,7 +14,8 @@ export const store = configureStore({
     modal: openModalReducer,
     timer: timerReducer,
     stats: historicStatsReducer, 
-    playedToday: playedTodayReducer
+    playedToday: playedTodayReducer,
+    loading: loadingReducer
   },
 })
 
