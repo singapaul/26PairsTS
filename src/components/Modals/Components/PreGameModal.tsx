@@ -167,8 +167,6 @@ export const PreGameModal = ({
     handleRevealCards();
   };
 
-  // getGameStats(difficulty);
-
   return (
     <BaseModal
       title=""

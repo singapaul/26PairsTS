@@ -1,5 +1,7 @@
 ## Change log: 
 
+### 22nd Aug 
+
 1) flip cards button is dependant on global loading state set by redux to support sync with card fetching in daily shuffle
 2) Pre, Post game modals now moved to the board component to redux number of redux errors associated with passing functions through redux
 3) Small code improvements 
@@ -135,16 +137,10 @@ https://dev.to/arisa_dev/gatsby-tailwindcss-integrate-dark-mode-in-10-minutes-1p
 
 
 # to do 
-
-1) Create profile page
-1) global loading state
-2) rename the playedTodayModal
-5) integrate tooltip & countdown onto homescreen
-
-7) play around with suspense, maybe on the cards?
-8) refactor all slices with the the typedSelector 
-9) close modals on route change!
-11) probably need to refactor the historic facts section to make sure it caters for all game modes
+ 
+1) refactor all slices with the the typedSelector 
+2) close modals on route change
+3) probably need to refactor the historic facts section to make sure it caters for all game modes
 
 # future work
 
