@@ -134,10 +134,7 @@ export const PreGameModal = ({
   const isCardsLoading = useAppSelector(selectLoadingState);
   const currentStreak: number = getStreak(difficulty);
   const playedToday = useAppSelector(selectHasPlayedToday);
-  const [bestGame, setBestGame] = useState<GameRecord>(
-    getGameStats(difficulty)
-  );
-
+  const bestGame: GameRecord = getGameStats(difficulty);
   const handleHowToPlay = (): void => {
     dispatch(
       setModalConfig({

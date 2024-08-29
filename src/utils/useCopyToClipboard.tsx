@@ -13,8 +13,8 @@ export const useCopyToClipboard = ({
   mode,
   link = 'www.26pairs.com',
 }: {
-  time: number;
-  turns: string;
+  time: number| undefined;
+  turns: number | undefined;
   mode: typeof CLASSIC_SHUFFLE | typeof LITE_SHUFFLE | typeof DAILY_SHUFFLE;
   link?: string
 }) => {
@@ -23,7 +23,7 @@ export const useCopyToClipboard = ({
 
  
   const {gameID} = useFetchShuffledCards()
-  const score =  (time) + Number.parseInt(turns)
+  const score = (Number(time) +Number(turns)) || 0
 
   let modeDescription: string;
   switch (mode) {

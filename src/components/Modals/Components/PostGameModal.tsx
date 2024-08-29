@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Countdown from "react-countdown";
 import { FaLock } from "react-icons/fa";
 import { FaRegShareSquare } from "react-icons/fa";
@@ -9,11 +9,14 @@ import { Button } from "@/components/ui/button";
 import { CLASSIC_SHUFFLE, DAILY_SHUFFLE, LITE_SHUFFLE } from "@/settings";
 import { useAppSelector } from "@/store/hooks";
 import { selectHasPlayedToday } from "@/store/slices/playedToday";
-import { getLocalStorageKeyFromGameMode, useCopyToClipboard } from "@/utils";
+import { useCopyToClipboard } from "@/utils";
 import { timeUntilTomorrow } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
 import ScoreContainer from "./ModalComponents/ScoreContainer";
+import { getModalHeader } from "./prePostGameUtils";
+import { getGameStats } from "./prePostGameUtils";
+import { getTodaysGame } from "./prePostGameUtils";
 
 type GameRecord = {
   time: string;
@@ -25,15 +28,11 @@ type GameRecord = {
 export const PostGameModal = ({
   isOpen,
   handleClose,
-  time,
-  turns,
   difficulty,
   handlePlayAgain,
 }: {
   isOpen: boolean;
   handleClose: () => void;
-  time: number;
-  turns: string;
   handlePlayAgain: () => void;
   difficulty:
     | typeof CLASSIC_SHUFFLE
@@ -41,63 +40,15 @@ export const PostGameModal = ({
     | typeof LITE_SHUFFLE;
 }) => {
   const playedToday = useAppSelector(selectHasPlayedToday);
- 
-  const getLatest = (records: GameRecord[]): GameRecord => {
-    if (records.length === 0) {
-      return {
-        time: "-",
-        turns: "-",
-        score: "-",
-        date: "-",
-      };
-    }
 
-    return records[records.length - 1];
-  };
+  const bestGame: GameRecord = getGameStats(difficulty);
+  const todayGame = getTodaysGame(difficulty);
 
-  const getGameStats = (): GameRecord => {
-    if (typeof window !== "undefined") {
-      const key = getLocalStorageKeyFromGameMode(difficulty);
-      const storedValue = window.localStorage.getItem(key);
-      if (storedValue !== null) {
-        // storedValue will be an array of scores or null
-        const gameDataArray = JSON.parse(storedValue);
-        return getLatest(gameDataArray);
-      }
-      return {
-        time: "-",
-        turns: "-",
-        score: "-",
-        date: "-",
-      };
-    }
-    return {
-      time: "-",
-      turns: "-",
-      score: "-",
-      date: "-",
-    };
-  };
-  const [bestGame, setBestGame] = useState<GameRecord>(getGameStats());
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
-    time: time,
-    turns: turns,
+    time: todayGame?.timeToday,
+    turns: todayGame?.turnsToday,
     mode: difficulty,
   });
-  const getModalHeader = (gameMode: string): string => {
-    // Match the gameMode with its corresponding local storage key
-    switch (gameMode) {
-      case CLASSIC_SHUFFLE:
-        return "Classic Shuffle";
-      case DAILY_SHUFFLE:
-        return "Daily Shuffle";
-      case LITE_SHUFFLE:
-        return "Lite Shuffle";
-      default:
-        // Handle case where the gameMode does not match any known type
-        return "Lite Shuffle";
-    }
-  };
 
   const gameTitle = getModalHeader(difficulty);
 
@@ -106,24 +57,34 @@ export const PostGameModal = ({
   };
 
   const handleClickReplayDeck = () => {
+    handleClose();
     handlePlayAgain();
   };
 
   return (
-    <BaseModal title="" isOpen={isOpen} handleClose={handleClose} homeButton={true} >
+    <BaseModal
+      title=""
+      isOpen={isOpen}
+      handleClose={handleClose}
+      homeButton={true}
+    >
       <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-5">
         <div className="w-full flex flex-col items-start gap-3">
           <h3 className="text-xs text-indigo-600 dark:text-white font-normal">
             {gameTitle}
           </h3>
           <h2 className="text-xl font-bold ">Game Complete! 🎉</h2>
+          {/* @todo This is not correct! */}
           {playedToday && difficulty === DAILY_SHUFFLE ? (
             <ScoreContainer
               seconds={Number(bestGame.time)}
               turns={Number(bestGame.turns)}
             />
           ) : (
-            <ScoreContainer seconds={Number(time)} turns={Number(turns)} />
+            <ScoreContainer
+              seconds={Number(todayGame?.timeToday)}
+              turns={Number(todayGame?.turnsToday)}
+            />
           )}
 
           <div className="flex flex-col gap-3 w-full">

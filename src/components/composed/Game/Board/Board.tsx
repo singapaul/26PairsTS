@@ -43,8 +43,6 @@ export type BoardProps = {
   gameDifficulty: DifficultyKeys;
 };
 
- 
-
 export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   const dispatch = useAppDispatch();
   const [cardPair, setCardPair] = useState<string[]>([]);
@@ -126,7 +124,9 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       setFlippedCardList(currentFlippedCards);
       resetCardPair();
       if (duplicatedCards.length === currentFlippedCards.length) {
+        // State where the game is finished
         const finalScore = calculateGameScore(time, turnsCount + 1);
+
         dispatch(updateScore(finalScore));
         dispatch(stop());
         dispatch(updateFinalTime(time));
@@ -140,11 +140,8 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
           turns: turnsCount + 1,
         });
         dispatch(addToStats({ gameDifficulty }));
-        if (gameDifficulty === "DAILY_SHUFFLE") {
-          setTimeout(() => setIsOpenPostGameModal(true), 1000);
-        } else {
-          setTimeout(() => setIsOpenPostGameModal(true), 1000);
-        }
+
+        setTimeout(() => setIsOpenPostGameModal(true), 1000);
       }
     } else {
       cardFlipTimerRef.current = setTimeout(resetCardPair, 1000);
@@ -160,8 +157,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     dispatch(reset());
     setIsOpenPreGameModal(true);
   };
-
-
 
   // Make sure to clear the timeout when the component unmounts
   useEffect(() => {
@@ -212,8 +207,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       <PostGameModal
         isOpen={isOpenPostGameModal}
         handleClose={() => setIsOpenPostGameModal(false)}
-        time={time}
-        turns={JSON.stringify(turnsCount + 1)}
         handlePlayAgain={resetGame}
         difficulty={gameDifficulty}
       />
