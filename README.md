@@ -5,6 +5,8 @@
 1) fix bug resulting in incorrect copytoclipboard values
 2) track game difficulty using redux
 3) simplified score tracking
+4) Trialed fix for cards not loading propperly when rendered on Lite and Classic modes on hard page reload
+5) Small fix to reset disabled cards on game reset
 
 ### 22nd Aug 
 
