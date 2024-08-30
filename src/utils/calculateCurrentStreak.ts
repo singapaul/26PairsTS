@@ -48,12 +48,4 @@ export const calculateCurrentStreak = (games: GameData[]): number => {
   return currentStreak;
 };
 
-// Sample game data
-const gameData: GameData[] = [
-  { time: "22", turns: "11", score: "9670", date: "Wed Mar 27 2024 07:40:29 GMT+0000" },
-  { time: "35", turns: "16", score: "50", date: "Thu Mar 28 2024 22:16:51 GMT+0000" },
-  { time: "69", turns: "41", score: "109", date: "Mon Apr 15 2024 19:12:08 GMT+0100" },
-  { time: "28", turns: "12", score: "39", date: "Wed May 01 2024 17:08:21 GMT+0100" },
-];
-
  

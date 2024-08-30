@@ -1,5 +1,11 @@
 ## Change log: 
 
+
+### 29th/30th Aug 
+1) fix bug resulting in incorrect copytoclipboard values
+2) track game difficulty using redux
+3) simplified score tracking
+
 ### 22nd Aug 
 
 1) flip cards button is dependant on global loading state set by redux to support sync with card fetching in daily shuffle

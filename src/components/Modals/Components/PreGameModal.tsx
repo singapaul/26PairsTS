@@ -43,7 +43,7 @@ const getGameStats = (difficulty: string): GameRecord => {
   };
 };
 
-const getStreak = (difficulty: any): number => {
+const getStreak = (difficulty: DifficultyType): number => {
   if (typeof window !== "undefined") {
     const key = getLocalStorageKeyFromGameMode(difficulty);
     const storedValue = window.localStorage.getItem(key);
@@ -124,7 +124,7 @@ export const PreGameModal = ({
   handleClose: () => void;
   handleRevealCards: () => () => void;
 }) => {
-  const difficulty = useAppSelector(currentDifficulty)
+  const difficulty = useAppSelector(currentDifficulty);
   const dispatch = useAppDispatch();
   const gameTitle = getModalHeader(difficulty);
   const modalCopy = getModalCopy(difficulty);
@@ -200,10 +200,7 @@ export const PreGameModal = ({
             seconds={Number(bestGame.time)}
             turns={Number(bestGame.turns)}
           />
-          {/* @todo fix */}
-          {difficulty === "DAILY_SHUFFLE" && (
-            <StreakContainer streak={currentStreak} />
-          )}
+          <StreakContainer streak={currentStreak} />
           <Button
             disabled={
               (playedToday && difficulty === DAILY_SHUFFLE) || isCardsLoading
