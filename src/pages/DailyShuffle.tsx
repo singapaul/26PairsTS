@@ -5,11 +5,13 @@ import { ModalRegistry } from "@/components/Modals";
 import { useFetchShuffledCards } from "@/hooks";
 import { DAILY_SHUFFLE } from "@/settings";
 import { useAppDispatch } from "@/store/hooks";
+import { setDifficulty } from "@/store/slices/difficulty";
 import { setIsLoading, setIsNotLoading } from "@/store/slices/loading";
 const DailyShuffle = ({ path }: { path: string }) => {
   const { duplicatedCards, isLoading } = useFetchShuffledCards();
   const dispatch = useAppDispatch();
-
+ 
+  dispatch(setDifficulty('DAILY_SHUFFLE'))
   useEffect(() => {
     if (isLoading) {
       dispatch(setIsLoading());

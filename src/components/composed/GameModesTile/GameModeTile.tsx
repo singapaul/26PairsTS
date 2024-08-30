@@ -5,11 +5,18 @@ import { FaCalculator } from "react-icons/fa";
 import { navigate } from "gatsby";
 
 import { Button } from "@/components/ui/button";
+import { useAppDispatch } from "@/store/hooks";
+import { setDifficulty } from "@/store/slices/difficulty";
+
+import type { DifficultyType } from "@/store/slices/difficulty";
+
+
 type GameModeTileProps = {
   title: string;
   link: string;
   gameDetails: GameDetails;
   handleClose: () => void;
+  difficulty: DifficultyType;
 };
 
 type GameDetails = {
@@ -22,14 +29,16 @@ export const GameModeTile = ({
   title,
   link,
   gameDetails,
-  handleClose
+  handleClose,
+  difficulty,
 }: GameModeTileProps) => {
 
-
-const handleClickLink = () => {
-  navigate(link)
-  handleClose()
-}
+  const dispatch = useAppDispatch()
+  const handleClickLink = () => {
+    navigate(link);
+    dispatch(setDifficulty(difficulty))
+    handleClose();
+  };
 
   return (
     <div className="flex rounded justify-between items-center bg-slate-50 dark:bg-gray-800 p-2 gap-2 dark:border-solid dark:border-white dark:border-[1px]">

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import Countdown from "react-countdown";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -7,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CLASSIC_SHUFFLE, DAILY_SHUFFLE, LITE_SHUFFLE } from "@/settings";
 import { useAppDispatch } from "@/store/hooks";
 import { useAppSelector } from "@/store/hooks";
+import { currentDifficulty } from "@/store/slices/difficulty";
 import { selectLoadingState } from "@/store/slices/loading";
 import { setModalConfig } from "@/store/slices/modals";
 import { selectHasPlayedToday } from "@/store/slices/playedToday";
@@ -17,6 +17,7 @@ import { BaseModal } from "./BaseModal";
 import ScoreContainer from "./ModalComponents/ScoreContainer";
 import { StreakContainer } from "./ModalComponents/StreakContainer";
 
+import type { DifficultyType } from "@/store/slices/difficulty";
 // let's get from local
 const getGameStats = (difficulty: string): GameRecord => {
   if (typeof window !== "undefined") {
@@ -57,7 +58,7 @@ const getStreak = (difficulty: any): number => {
   return 0;
 };
 
-const getModalHeader = (gameMode: string): string => {
+const getModalHeader = (gameMode: DifficultyType): string => {
   // Match the gameMode with its corresponding local storage key
   switch (gameMode) {
     case CLASSIC_SHUFFLE:
@@ -99,7 +100,7 @@ const getLowestScore = (records: GameRecord[]): GameRecord => {
   });
 };
 
-const getModalCopy = (gameMode: string): string => {
+const getModalCopy = (gameMode: DifficultyType): string => {
   // Match the gameMode with its corresponding local storage key
   switch (gameMode) {
     case CLASSIC_SHUFFLE:
@@ -117,17 +118,13 @@ const getModalCopy = (gameMode: string): string => {
 export const PreGameModal = ({
   isOpen,
   handleClose,
-  difficulty,
   handleRevealCards,
 }: {
   isOpen: boolean;
   handleClose: () => void;
   handleRevealCards: () => () => void;
-  difficulty:
-    | typeof CLASSIC_SHUFFLE
-    | typeof DAILY_SHUFFLE
-    | typeof LITE_SHUFFLE;
 }) => {
+  const difficulty = useAppSelector(currentDifficulty)
   const dispatch = useAppDispatch();
   const gameTitle = getModalHeader(difficulty);
   const modalCopy = getModalCopy(difficulty);
@@ -135,6 +132,7 @@ export const PreGameModal = ({
   const currentStreak: number = getStreak(difficulty);
   const playedToday = useAppSelector(selectHasPlayedToday);
   const bestGame: GameRecord = getGameStats(difficulty);
+
   const handleHowToPlay = (): void => {
     dispatch(
       setModalConfig({
@@ -202,6 +200,7 @@ export const PreGameModal = ({
             seconds={Number(bestGame.time)}
             turns={Number(bestGame.turns)}
           />
+          {/* @todo fix */}
           {difficulty === "DAILY_SHUFFLE" && (
             <StreakContainer streak={currentStreak} />
           )}

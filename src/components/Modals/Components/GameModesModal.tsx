@@ -9,6 +9,7 @@ import {
 } from "@/routes/route_strings";
 
 import { BaseModal } from "./BaseModal";
+ 
 export const GameModesModal = ({
   isOpen,
   handleClose,
@@ -27,18 +28,21 @@ export const GameModesModal = ({
           link={dailyShuffle}
           gameDetails={{ difficulty: "easy", numCards: 12, time: "Avg. 1-2 mins" }}
           handleClose={handleClose}
+          difficulty="DAILY_SHUFFLE"
         />
         <GameModeTile
           title="CLASSIC SHUFFLE"
           link={classicShuffle}
           gameDetails={{ difficulty: "hard", numCards: 26, time: "Avg. 2-3 mins" }}
           handleClose={handleClose}
+          difficulty="CLASSIC_SHUFFLE"
         />
         <GameModeTile
           title="LITE SHUFFLE"
           link={liteShuffle}
           gameDetails={{ difficulty: "easy", numCards: 12, time: "Avg. 1-2 mins" }}
           handleClose={handleClose}
+          difficulty="LITE_SHUFFLE"
         />
       </div>
     </BaseModal>

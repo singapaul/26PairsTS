@@ -199,7 +199,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
         </>
       )}
       <PreGameModal
-        difficulty={gameDifficulty}
         handleRevealCards={handleRevealCards}
         isOpen={isOpenPreGameModal}
         handleClose={() => setIsOpenPreGameModal(false)}
@@ -208,7 +207,6 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
         isOpen={isOpenPostGameModal}
         handleClose={() => setIsOpenPostGameModal(false)}
         handlePlayAgain={resetGame}
-        difficulty={gameDifficulty}
       />
     </BoardContainer>
   );

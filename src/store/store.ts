@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 
+import difficultyReducer from './slices/difficulty'
 import displayWelcomeMenuReducer from './slices/displayWelcomeMenu'
 import finishedGameStatsReducer from './slices/finishedGameStats'
 import historicStatsReducer from './slices/historicStats'
@@ -15,7 +16,8 @@ export const store = configureStore({
     timer: timerReducer,
     stats: historicStatsReducer, 
     playedToday: playedTodayReducer,
-    loading: loadingReducer
+    loading: loadingReducer,
+    difficulty: difficultyReducer,
   },
 })
 

@@ -6,42 +6,29 @@ import { MdOutlineReplay } from "react-icons/md";
 import { navigate } from "gatsby";
 
 import { Button } from "@/components/ui/button";
-import { CLASSIC_SHUFFLE, DAILY_SHUFFLE, LITE_SHUFFLE } from "@/settings";
 import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
+import { currentDifficulty  } from "@/store/slices/difficulty";
+import { setDifficulty } from "@/store/slices/difficulty";
 import { selectHasPlayedToday } from "@/store/slices/playedToday";
 import { useCopyToClipboard } from "@/utils";
 import { timeUntilTomorrow } from "@/utils";
 
 import { BaseModal } from "./BaseModal";
 import ScoreContainer from "./ModalComponents/ScoreContainer";
-import { getModalHeader } from "./prePostGameUtils";
-import { getGameStats } from "./prePostGameUtils";
-import { getTodaysGame } from "./prePostGameUtils";
-
-type GameRecord = {
-  time: string;
-  turns: string;
-  score: string;
-  date: string;
-};
+import { getModalHeader, getTodaysGame } from "./prePostGameUtils";
 
 export const PostGameModal = ({
   isOpen,
   handleClose,
-  difficulty,
   handlePlayAgain,
 }: {
   isOpen: boolean;
   handleClose: () => void;
   handlePlayAgain: () => void;
-  difficulty:
-    | typeof CLASSIC_SHUFFLE
-    | typeof DAILY_SHUFFLE
-    | typeof LITE_SHUFFLE;
 }) => {
+  const difficulty = useAppSelector(currentDifficulty)
   const playedToday = useAppSelector(selectHasPlayedToday);
-
-  const bestGame: GameRecord = getGameStats(difficulty);
   const todayGame = getTodaysGame(difficulty);
 
   const { copySuccess, copyToClipboard } = useCopyToClipboard({
@@ -74,19 +61,10 @@ export const PostGameModal = ({
             {gameTitle}
           </h3>
           <h2 className="text-xl font-bold ">Game Complete! 🎉</h2>
-          {/* @todo This is not correct! */}
-          {playedToday && difficulty === DAILY_SHUFFLE ? (
-            <ScoreContainer
-              seconds={Number(bestGame.time)}
-              turns={Number(bestGame.turns)}
-            />
-          ) : (
-            <ScoreContainer
-              seconds={Number(todayGame?.timeToday)}
-              turns={Number(todayGame?.turnsToday)}
-            />
-          )}
-
+          <ScoreContainer
+            seconds={Number(todayGame?.timeToday)}
+            turns={Number(todayGame?.turnsToday)}
+          />
           <div className="flex flex-col gap-3 w-full">
             <Button className="w-full" onClick={handleClickChallengeFriend}>
               {copySuccess} <FaRegShareSquare className="ml-3" />
@@ -117,13 +95,16 @@ export const PostGameModal = ({
 };
 
 const DailyShuffleButtonArray = ({ playedToday }: { playedToday: boolean }) => {
+  const dispatch = useAppDispatch()
   const handleClickLiteShuffle = () => {
     const currentPath = window.location.pathname; // Get the current path
     if (currentPath === "/LiteShuffle") {
       // If the current path is the same as the target path, refresh the page
       window.location.reload(); // Refresh the page
+      dispatch(setDifficulty('LITE_SHUFFLE'))
     } else {
       navigate("/LiteShuffle"); // Navigate to the new path
+      dispatch(setDifficulty('LITE_SHUFFLE'))
     }
   };
 
@@ -132,8 +113,10 @@ const DailyShuffleButtonArray = ({ playedToday }: { playedToday: boolean }) => {
     if (currentPath === "/ClassicShuffle") {
       // If the current path is the same as the target path, refresh the page
       window.location.reload(); // Refresh the page
+      dispatch(setDifficulty('CLASSIC_SHUFFLE'))
     } else {
       navigate("/ClassicShuffle"); // Navigate to the new path
+      dispatch(setDifficulty('CLASSIC_SHUFFLE'))
     }
   };
 
@@ -172,13 +155,17 @@ const LiteClassicShuffleButtonArray = ({
 }: {
   playedToday: boolean;
 }) => {
+
+  const dispatch = useAppDispatch()
   const handleClickLiteShuffle = () => {
     const currentPath = window.location.pathname; // Get the current path
     if (currentPath === "/LiteShuffle/") {
       // If the current path is the same as the target path, refresh the page
       window.location.reload(); // Refresh the page
+      dispatch(setDifficulty('LITE_SHUFFLE'))
     } else {
       navigate("/LiteShuffle/"); // Navigate to the new path
+      dispatch(setDifficulty('LITE_SHUFFLE'))
     }
   };
 
@@ -187,13 +174,16 @@ const LiteClassicShuffleButtonArray = ({
     if (currentPath === "/ClassicShuffle/") {
       // If the current path is the same as the target path, refresh the page
       window.location.reload(); // Refresh the page
+      dispatch(setDifficulty('CLASSIC_SHUFFLE'))
     } else {
       navigate("/ClassicShuffle/"); // Navigate to the new path
+      dispatch(setDifficulty('CLASSIC_SHUFFLE'))
     }
   };
 
   const handleClickDailyShuffle = () => {
     navigate("/DailyShuffle/");
+    dispatch(setDifficulty('DAILY_SHUFFLE'))
   };
   return (
     <>
