@@ -1,20 +1,21 @@
 import React from "react";
 
-import { CLASSICDECKLITE } from "@/assets/data";
 import { Board } from "@/components/composed/Game/Board";
 import { ModalRegistry } from "@/components/Modals";
+import { useFetchLocalCardsLite } from "@/hooks";
 import { LITE_SHUFFLE } from "@/settings";
 import { useAppDispatch } from "@/store/hooks";
 import { setDifficulty } from "@/store/slices/difficulty";
-import { assignIDToCards, shuffleArray } from "@/utils";
+ 
 const LiteShuffle = ({ path }: { path: string }) => {
-  const shuffledArray = shuffleArray(CLASSICDECKLITE);
-  const IDArray = assignIDToCards(shuffledArray);
+ 
+  const {duplicatedCards} = useFetchLocalCardsLite()
   const dispatch = useAppDispatch( )
   dispatch(setDifficulty('LITE_SHUFFLE'))
+ 
   return (
     <>
-      <Board duplicatedCards={IDArray} gameDifficulty={LITE_SHUFFLE} />
+      <Board duplicatedCards={duplicatedCards} gameDifficulty={LITE_SHUFFLE} />
       <ModalRegistry />
     </>
   );

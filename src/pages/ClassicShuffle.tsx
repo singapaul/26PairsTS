@@ -1,21 +1,19 @@
 import React from "react";
 
-import { CLASSICDECK } from "@/assets/data";
 import { Board } from "@/components/composed/Game/Board";
 import { ModalRegistry } from "@/components/Modals";
+import { useFetchLocalCardsClassic } from "@/hooks";
 import { CLASSIC_SHUFFLE } from "@/settings";
 import { useAppDispatch } from "@/store/hooks";
 import { setDifficulty } from "@/store/slices/difficulty";
-import { assignIDToCards, shuffleArray } from "@/utils";
-
+ 
 const ClassicShuffle = ({ path }: { path: string }) => {
-  const shuffledArray = shuffleArray(CLASSICDECK);
-  const IDArray = assignIDToCards(shuffledArray);
+  const {duplicatedCards} = useFetchLocalCardsClassic()
   const dispatch = useAppDispatch( )
   dispatch(setDifficulty('CLASSIC_SHUFFLE'))
   return (
     <>
-      <Board duplicatedCards={IDArray} gameDifficulty={CLASSIC_SHUFFLE} />
+      <Board duplicatedCards={duplicatedCards} gameDifficulty={CLASSIC_SHUFFLE} />
       <ModalRegistry />
     </>
   );

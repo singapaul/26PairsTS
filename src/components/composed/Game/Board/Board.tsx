@@ -70,6 +70,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
   };
 
   // @todo refactor this case
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleShowCardsPerm = (): void => {
     const allCardIds = duplicatedCards.map((card: { id: string }) => card.id);
     setFlippedCardList(allCardIds);
@@ -86,7 +87,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
       setIsOpenPostGameModal(true);
       handleShowCardsPerm();
     }
-  }, [dispatch, duplicatedCards]);
+  }, [dispatch, duplicatedCards, gameDifficulty, handleShowCardsPerm, hasPlayedToday]);
 
   useEffect(() => {
     let intervalId: string | number | NodeJS.Timeout | undefined;
@@ -154,6 +155,7 @@ export const Board = ({ duplicatedCards, gameDifficulty }: BoardProps) => {
     dispatch(resetMoves());
     dispatch(updateScore(0));
     dispatch(stop());
+    setDisabledCardList([])
     dispatch(reset());
     setIsOpenPreGameModal(true);
   };
