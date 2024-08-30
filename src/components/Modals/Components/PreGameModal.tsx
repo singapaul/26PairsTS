@@ -200,7 +200,8 @@ export const PreGameModal = ({
             seconds={Number(bestGame.time)}
             turns={Number(bestGame.turns)}
           />
-          <StreakContainer streak={currentStreak} />
+          {/* @todo removing for now due to testing */}
+          {/* <StreakContainer streak={currentStreak} /> */}
           <Button
             disabled={
               (playedToday && difficulty === DAILY_SHUFFLE) || isCardsLoading
