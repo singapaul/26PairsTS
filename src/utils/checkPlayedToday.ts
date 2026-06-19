@@ -1,6 +1,9 @@
-import { isSameDay } from "date-fns";
-
 import type { gameDataObjectType } from "./saveGameStatsToLocalStorage";
+
+const isSameUtcDay = (a: Date, b: Date): boolean =>
+  a.getUTCFullYear() === b.getUTCFullYear() &&
+  a.getUTCMonth() === b.getUTCMonth() &&
+  a.getUTCDate() === b.getUTCDate();
 
 export const checkPlayedToday = (LOCAL_STORAGE_KEY_NAME: string): boolean => {
   if (typeof window !== "undefined") {
@@ -14,7 +17,9 @@ export const checkPlayedToday = (LOCAL_STORAGE_KEY_NAME: string): boolean => {
     }
     // Parse the JSON string back into an array
     const scoreArray: gameDataObjectType[] = JSON.parse(storedData);
-    return scoreArray.some((entry) => isSameDay(entry.date, new Date()));
+    return scoreArray.some((entry) =>
+      isSameUtcDay(new Date(entry.date), new Date())
+    );
   }
   return false
 };

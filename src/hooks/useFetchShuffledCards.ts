@@ -3,55 +3,27 @@ import { useEffect, useState } from "react";
 import { CLASSICDECK, CLASSICDECKLITE } from "@/assets/data";
 import {
   assignIDToCards,
-  reorderArrayAccordingToOrderArray,
+  getDailyGameId,
+  seededShuffle,
   shuffleArray,
 } from "@/utils";
 
-// Custom hook for fetching and processing data
+// Custom hook that produces the daily deck locally. The shuffle is seeded from
+// the current UTC date so every player worldwide gets the same daily puzzle,
+// with no backend dependency.
 export const useFetchShuffledCards = () => {
   const [duplicatedCards, setDuplicatedCards] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<any>(null);
   const [gameID, setGameId] = useState<number>(0);
+
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(
-          "https://getdailyshuffle-mpknwhehla-uc.a.run.app/",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const result = await response.json();
-        const { entryNumber, lite } = result;
-        setGameId(entryNumber);
-        const orderedArray = reorderArrayAccordingToOrderArray(
-          CLASSICDECKLITE,
-          lite
-        );
-        const IDArray = assignIDToCards(orderedArray);
-        setDuplicatedCards(IDArray);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
+    const id = getDailyGameId();
+    setGameId(id);
+    const shuffled = seededShuffle(CLASSICDECKLITE, id);
+    setDuplicatedCards(assignIDToCards(shuffled));
   }, []);
 
-  return { duplicatedCards, isLoading, error, gameID };
+  // isLoading/error kept for API compatibility with DailyShuffle.tsx
+  return { duplicatedCards, isLoading: false, error: null, gameID };
 };
 
 export const useFetchLocalCardsLite = () => {
